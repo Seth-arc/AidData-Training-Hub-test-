@@ -25,17 +25,18 @@ $env = static function ($key, $default = null) {
     return ($value !== false && $value !== '') ? $value : $default;
 };
 
+
 /** The name of the database for WordPress */
-define( 'DB_NAME', $env( 'DB_NAME', 'local' ) );
+define( 'DB_NAME', 'railway' );
 
 /** Database username */
-define( 'DB_USER', $env( 'DB_USER', 'root' ) );
+define( 'DB_USER', 'root' );
 
 /** Database password */
-define( 'DB_PASSWORD', $env( 'DB_PASSWORD', 'root' ) );
+define( 'DB_PASSWORD', 'mopzmAdFBAdfFWjwhNcznxdyZzNuoFNx' );
 
 /** Database hostname */
-define( 'DB_HOST', $env( 'DB_HOST', 'localhost' ) );
+define( 'DB_HOST', 'mysql.railway.internal' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

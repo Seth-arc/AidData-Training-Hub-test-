@@ -1,3 +1,4 @@
+ls -l /var/www/html/wp-admin
 #!/bin/sh
 set -e
 
@@ -11,3 +12,4 @@ mv /etc/nginx/conf.d/default.conf.tmp /etc/nginx/conf.d/default.conf
 
 php-fpm &
 nginx -g "daemon off;"
+ls -l /var/www/html
