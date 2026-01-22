@@ -32,8 +32,9 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     opcache \
     exif
 
-# Disable conflicting MPM modules and enable the correct one
-RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
+# Disable all MPM modules first, then enable only mpm_prefork
+RUN a2dismod mpm_event mpm_worker mpm_prefork 2>/dev/null || true
+RUN a2enmod mpm_prefork
 
 # Enable Apache modules
 RUN a2enmod rewrite expires headers
