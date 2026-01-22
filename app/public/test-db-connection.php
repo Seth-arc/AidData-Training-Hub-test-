@@ -26,25 +26,30 @@ header('Content-Type: text/html; charset=utf-8');
 
 <?php
 
-// Load wp-config.php to get database constants
-echo "<h2>Test 1: Loading wp-config.php</h2>";
-try {
-    require_once(__DIR__ . '/wp-config.php');
-    echo "<div class='test success'>✓ wp-config.php loaded</div>";
+// Extract database credentials from wp-config.php without loading WordPress
+echo "<h2>Test 1: Reading Database Credentials</h2>";
 
-    echo "<div class='test'>";
-    echo "Database Configuration:<br>";
-    echo "DB_NAME: " . DB_NAME . "<br>";
-    echo "DB_USER: " . DB_USER . "<br>";
-    echo "DB_HOST: " . DB_HOST . "<br>";
-    echo "DB_CHARSET: " . (defined('DB_CHARSET') ? DB_CHARSET : 'not defined') . "<br>";
-    echo "DB_COLLATE: " . (defined('DB_COLLATE') ? DB_COLLATE : 'not defined') . "<br>";
-    echo "</div>";
-} catch (Throwable $e) {
-    echo "<div class='test error'>✗ Failed to load wp-config.php: " . $e->getMessage() . "</div>";
-    echo "<pre>" . $e->getTraceAsString() . "</pre>";
-    exit;
-}
+$db_name = 'railway';
+$db_user = 'root';
+$db_password = 'mopzmAdFBAdfFWjwhNcznxdyZzNuoFNx';
+$db_host = 'mysql.railway.internal';
+$db_charset = 'utf8';
+
+echo "<div class='test success'>✓ Using hardcoded credentials to avoid wp-config loading</div>";
+echo "<div class='test'>";
+echo "Database Configuration:<br>";
+echo "DB_NAME: " . $db_name . "<br>";
+echo "DB_USER: " . $db_user . "<br>";
+echo "DB_HOST: " . $db_host . "<br>";
+echo "DB_CHARSET: " . $db_charset . "<br>";
+echo "</div>";
+
+// Now define them as constants for later tests
+define('DB_NAME', $db_name);
+define('DB_USER', $db_user);
+define('DB_PASSWORD', $db_password);
+define('DB_HOST', $db_host);
+define('DB_CHARSET', $db_charset);
 
 // Test 2: Direct mysqli connection (like phpinfo.php does)
 echo "<h2>Test 2: Direct mysqli Connection</h2>";
