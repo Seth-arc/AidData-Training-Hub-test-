@@ -18,7 +18,6 @@ yarn-error.log*
 
 # Local configuration
 conf/
-docker/
 nul
 
 # Database files
