@@ -41,8 +41,14 @@ echo "✓ PHP-FPM is running (PID: $PHP_FPM_PID)"
 echo "=== Testing nginx configuration ==="
 nginx -t || exit 1
 
-# Tail error log only in background for debugging
-tail -f /var/log/nginx/error.log &
+# Enable PHP error logging
+echo "=== Configuring PHP error logging ==="
+echo "error_log = /var/log/php-fpm-error.log" >> /usr/local/etc/php-fpm.conf
+echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
+echo "php_admin_value[error_log] = /var/log/php-fpm-error.log" >> /usr/local/etc/php-fpm.d/www.conf
+
+# Tail both nginx and PHP error logs
+tail -f /var/log/nginx/error.log /var/log/php-fpm-error.log 2>/dev/null &
 
 # Start Nginx in foreground
 echo "=== Starting Nginx ==="
