@@ -1,11 +1,13 @@
-# Use official PHP-FPM image with Apache
-FROM php:8.1-apache
+# Use official PHP-FPM image with Nginx
+FROM php:8.1-fpm
 
 # Set working directory
 WORKDIR /var/www/html
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    nginx \
+    gettext-base \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
@@ -32,13 +34,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     opcache \
     exif
 
-# Disable all MPM modules first, then enable only mpm_prefork
-RUN a2dismod mpm_event mpm_worker mpm_prefork 2>/dev/null || true
-RUN a2enmod mpm_prefork
-
-# Enable Apache modules
-RUN a2enmod rewrite expires headers
-
 # Set PHP memory limit and configuration
 RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/memory-limit.ini \
     && echo "upload_max_filesize = 64M" > /usr/local/etc/php/conf.d/upload-limit.ini \
@@ -60,10 +55,10 @@ RUN mkdir -p /var/www/html/wp-content/uploads \
     /var/www/html/wp-content/upgrade \
     && chown -R www-data:www-data /var/www/html/wp-content
 
-# Configure Apache DocumentRoot
-ENV APACHE_DOCUMENT_ROOT=/var/www/html
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Copy Nginx config and entrypoint
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Expose port
 EXPOSE 80
@@ -72,5 +67,5 @@ EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost/ || exit 1
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Start Nginx + PHP-FPM
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
