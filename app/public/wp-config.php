@@ -54,9 +54,9 @@ ini_set('max_execution_time', 300);
 define('WP_HTTP_BLOCK_EXTERNAL', false);
 define('WP_ACCESSIBLE_HOSTS', '*.wordpress.org,*.github.com,*.aiddata.org,*.wm.edu');
 
-$wp_home = $env( 'WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app');
-define( 'WP_HOME', $wp_home );
-define( 'WP_SITEURL', $env( 'https://aiddata-training-hub-test-production.up.railway.app', $wp_home ) );
+
+define( 'WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app' );
+define( 'WP_SITEURL', 'https://aiddata-training-hub-test-production.up.railway.app' );
 
 define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 
