@@ -34,11 +34,12 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     opcache \
     exif
 
-# Set PHP memory limit and configuration
+# Set PHP memory limit and configuration for large backup imports
 RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/memory-limit.ini \
-    && echo "upload_max_filesize = 64M" > /usr/local/etc/php/conf.d/upload-limit.ini \
-    && echo "post_max_size = 64M" >> /usr/local/etc/php/conf.d/upload-limit.ini \
-    && echo "max_execution_time = 300" > /usr/local/etc/php/conf.d/execution-time.ini \
+    && echo "upload_max_filesize = 500M" > /usr/local/etc/php/conf.d/upload-limit.ini \
+    && echo "post_max_size = 500M" >> /usr/local/etc/php/conf.d/upload-limit.ini \
+    && echo "max_execution_time = 600" > /usr/local/etc/php/conf.d/execution-time.ini \
+    && echo "max_input_time = 600" >> /usr/local/etc/php/conf.d/execution-time.ini \
     && echo "default_socket_timeout = 300" >> /usr/local/etc/php/conf.d/execution-time.ini
 
 # Copy WordPress files
