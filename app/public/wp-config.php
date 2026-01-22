@@ -128,14 +128,14 @@ define('WP_MAX_MEMORY_LIMIT', '512M');
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',          '~A2]C)*&&H[Ur2n(XV&Jj7~h`8H|/6]M(D{iC.QDjJvrY1xq-RDgL=-6F/NtNw7O' );
-define( 'SECURE_AUTH_KEY',   '9:=ocj141JVZ`llvt#Vh4*#wtku9HCOXH_#g&l6,UI+(]H7<Z`j5;GLe ~.<CN<r' );
-define( 'LOGGED_IN_KEY',     '4/ldzh_kqxAY-o10y197y@JG/e?J$>]hCK)~7-7r}u*!rx$4gf7VCY`%2h^Ba{y4' );
-define( 'NONCE_KEY',         'QNf`J{*xTOR!KdmKLniOfio?imUA<Q+yUEKFsjBBi+@BmHH,Bxy{U9&<D.7giT8<' );
-define( 'AUTH_SALT',         '(:wrOwIRgw}SJ0&DbDd?p<~RERbIA?]b?7Y(nFiaUmC}%V[@7&dTED=nS`LN=[}N' );
-define( 'SECURE_AUTH_SALT',  'Ds;L/>]PV.wnvbL$X2c.%Y^t|Ooq_yfQBbb;PG@F/i+P&JQS=]#fRgJ?=7<}{qr}' );
-define( 'LOGGED_IN_SALT',    'YGBE>g@DLY;e523c}RB_,l:VtaB@u Cfv1P7SvrPztKchvYaM-Q~(qZQ8Fj q]*2' );
-define( 'NONCE_SALT',        '>zL?Xz!FK<zi-WHc#27D&*/L4scepR,QyyM8 Q/gveX0ct>+v!wn0pdyH&`e)j6V' );
+define( 'AUTH_KEY',          '-|YPrWJ:${SSzHjUk3Ma+cUXLDG<cX_;r<^EP-46VxCK!).]ABOGGCdfiaHGf1{P' );
+define( 'SECURE_AUTH_KEY',   'S~|EHhRg03YX=lO;i|ZD?<SiSH5k>@:WiN}|t|FB*T%${/QNySzl5HGiWZ(}c~op' );
+define( 'LOGGED_IN_KEY',     'lD]v;Ps]Dw#reuPMt#7-}5w4yz[!eG0}5gQux$[%gg`+<zwS<L(|Kk4)^-qe=L86' );
+define( 'NONCE_KEY',         'nc4&1n}h.)ROMEm&X peIb^}/@lf:A|@J**i;:B-v[y9 ?z!=tv-!4IF{`v7zT5W' );
+define( 'AUTH_SALT',         'q_T,DQy!.XHe-6l!/S>S0*.I-=n^][lZ!A- cr`Y-`5.Z{kbmE[ctg?zJ)%,HC44' );
+define( 'SECURE_AUTH_SALT',  '6o#$*oC_1Mpo$x9o.J|N)EM2!_k7EwY3BLH]P5^l=+2.CI6|Zs|yWGLq&:OO60IV' );
+define( 'LOGGED_IN_SALT',    'jy|_Re+s/CK)F0PzP&L>)&Gii6E=J{5ykW%t<(?d|^fssrxK+]VT@lH-(m?qWh[|' );
+define( 'NONCE_SALT',        'b^^1*|c2H|2#}@|fM+@mGVJGfZPh>1V|!L6]:]cnWiTQu6>N-WCMOheyJv%5LS$(' );
 define( 'WP_CACHE_KEY_SALT', '/X5|LbgC`$z~cn)x8Z0/PokYQ_ Y-3<I&EaY@<t}E_C/X#kq=DI:7>_32<!`M{ed' );
 
 
@@ -148,6 +148,14 @@ $table_prefix = 'wp_';
 
 
 /* Add any custom values between this line and the "stop editing" line. */
+
+// Handle HTTPS and HTTP_HOST behind reverse proxy (Railway, Docker, etc.)
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+    $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+}
 
 
 
