@@ -51,8 +51,13 @@ echo "✓ PHP-FPM is running (PID: $PHP_FPM_PID)"
 echo "=== Testing nginx configuration ==="
 nginx -t || exit 1
 
-# Tail both nginx and PHP error logs
-tail -f /var/log/nginx/error.log /var/log/php-error.log 2>/dev/null &
+# Create WordPress debug.log if it doesn't exist
+mkdir -p /var/www/html/wp-content
+touch /var/www/html/wp-content/debug.log
+chown www-data:www-data /var/www/html/wp-content/debug.log
+
+# Tail nginx, PHP, and WordPress debug logs
+tail -f /var/log/nginx/error.log /var/log/php-error.log /var/www/html/wp-content/debug.log 2>/dev/null &
 
 # Start Nginx in foreground
 echo "=== Starting Nginx ==="
