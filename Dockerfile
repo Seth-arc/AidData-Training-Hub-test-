@@ -55,6 +55,9 @@ RUN mkdir -p /var/www/html/wp-content/uploads \
     /var/www/html/wp-content/upgrade \
     && chown -R www-data:www-data /var/www/html/wp-content
 
+# Remove default nginx site and copy custom config
+RUN rm -f /etc/nginx/sites-enabled/default
+
 # Copy Nginx config and entrypoint
 COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
