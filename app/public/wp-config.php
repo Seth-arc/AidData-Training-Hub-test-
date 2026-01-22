@@ -56,8 +56,20 @@ define('WP_HTTP_BLOCK_EXTERNAL', true);
 define('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org');
 
 
-define( 'WP_HOME', $env('WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app') );
-define( 'WP_SITEURL', $env('WP_SITEURL', 'https://aiddata-training-hub-test-production.up.railway.app') );
+// Fix Railway env vars that are missing https:// protocol
+$wp_home = $env('WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app');
+$wp_siteurl = $env('WP_SITEURL', 'https://aiddata-training-hub-test-production.up.railway.app');
+
+// Add https:// if the env vars are missing the protocol
+if (strpos($wp_home, 'http') !== 0) {
+    $wp_home = 'https://' . $wp_home;
+}
+if (strpos($wp_siteurl, 'http') !== 0) {
+    $wp_siteurl = 'https://' . $wp_siteurl;
+}
+
+define( 'WP_HOME', $wp_home );
+define( 'WP_SITEURL', $wp_siteurl );
 
 define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 
