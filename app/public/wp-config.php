@@ -54,9 +54,9 @@ ini_set('max_execution_time', 300);
 define('WP_HTTP_BLOCK_EXTERNAL', false);
 define('WP_ACCESSIBLE_HOSTS', '*.wordpress.org,*.github.com,*.aiddata.org,*.wm.edu');
 
-$wp_home = $env( 'WP_HOME', 'http://localhost:10016' );
+$wp_home = $env( 'WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app');
 define( 'WP_HOME', $wp_home );
-define( 'WP_SITEURL', $env( 'WP_SITEURL', $wp_home ) );
+define( 'WP_SITEURL', $env( 'https://aiddata-training-hub-test-production.up.railway.app', $wp_home ) );
 
 define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 
@@ -148,6 +148,11 @@ $table_prefix = 'wp_';
 
 
 /* Add any custom values between this line and the "stop editing" line. */
+// Debug output for Railway path issues
+if ( defined('WP_DEBUG') && WP_DEBUG ) {
+    error_log('REQUEST_URI: ' . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'unset'));
+    error_log('HTTP_HOST: ' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'unset'));
+}
 
 // Handle HTTPS and HTTP_HOST behind reverse proxy (Railway, Docker, etc.)
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
