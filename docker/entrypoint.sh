@@ -5,8 +5,8 @@ set -e
 echo "Nginx will listen on port: $PORT"
 
 # Substitute environment variables in Nginx config
-envsubst '$PORT' < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf.tmp
-mv /etc/nginx/conf.d/default.conf.tmp /etc/nginx/conf.d/default.conf
+envsubst '$PORT' < /etc/nginx/sites-available/wordpress.conf > /etc/nginx/sites-available/wordpress.conf.tmp
+mv /etc/nginx/sites-available/wordpress.conf.tmp /etc/nginx/sites-available/wordpress.conf
 
 php-fpm &
 ls -l /var/www/html
