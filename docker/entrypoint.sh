@@ -41,6 +41,14 @@ echo "✓ PHP-FPM is running (PID: $PHP_FPM_PID)"
 echo "=== Testing nginx configuration ==="
 nginx -t || exit 1
 
+# Enable detailed PHP-FPM logging
+echo "=== Enabling PHP-FPM debug logging ==="
+echo "log_level = debug" >> /usr/local/etc/php-fpm.conf
+
+# Tail logs in background for debugging
+tail -f /var/log/nginx/error.log &
+tail -f /var/log/nginx/access.log &
+
 # Start Nginx in foreground
 echo "=== Starting Nginx ==="
 exec nginx -g "daemon off;"
