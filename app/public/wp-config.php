@@ -56,19 +56,8 @@ define('WP_HTTP_BLOCK_EXTERNAL', false);
 define('WP_ACCESSIBLE_HOSTS', '*.wordpress.org,*.github.com,*.aiddata.org,*.wm.edu');
 
 
-// Dynamic URL configuration for healthchecks and production
-$is_healthcheck = (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] === '127.0.0.1');
-$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
-$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
-
-// Use dynamic URL for healthchecks, fallback to production URL
-if ($is_healthcheck) {
-    define( 'WP_HOME', $protocol . '://' . $host );
-    define( 'WP_SITEURL', $protocol . '://' . $host );
-} else {
-    define( 'WP_HOME', $env('WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app') );
-    define( 'WP_SITEURL', $env('WP_SITEURL', 'https://aiddata-training-hub-test-production.up.railway.app') );
-}
+define( 'WP_HOME', $env('WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app') );
+define( 'WP_SITEURL', $env('WP_SITEURL', 'https://aiddata-training-hub-test-production.up.railway.app') );
 
 define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 
