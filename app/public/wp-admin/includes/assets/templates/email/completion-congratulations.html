@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations on Completing {tutorial_title}</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f4;">
+    
+    <div style="background-color: #ffc107; color: #333; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+        <h1 style="margin: 0; font-size: 28px;">🎉 Congratulations! 🎉</h1>
+    </div>
+    
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <p style="margin-top: 0;">Hi {user_first_name},</p>
+        
+        <p>Amazing work! You've successfully completed <strong>{tutorial_title}</strong>.</p>
+        
+        <p style="font-size: 16px;">Completion Date: <strong>{completion_date}</strong></p>
+        
+        <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
+            <p style="margin: 0; color: #856404;"><strong>Your certificate is ready!</strong></p>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{certificate_url}" style="display: inline-block; background-color: #ffc107; color: #333; padding: 12px 30px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Download Certificate
+            </a>
+        </div>
+        
+        <p><strong>Share your achievement:</strong></p>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin: 10px 0;">
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={certificate_url}" style="color: #0073aa; text-decoration: none; font-size: 16px;">
+                    📱 Share on LinkedIn
+                </a>
+            </li>
+            <li style="margin: 10px 0;">
+                <a href="https://twitter.com/intent/tweet?text=I%20just%20completed%20{tutorial_title}%21&url={certificate_url}" style="color: #0073aa; text-decoration: none; font-size: 16px;">
+                    🐦 Share on Twitter
+                </a>
+            </li>
+        </ul>
+        
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+        
+        <p style="font-size: 14px; color: #666;">
+            Continue your learning journey! Check out more tutorials at <a href="{site_url}" style="color: #0073aa; text-decoration: none;">{site_name}</a>
+        </p>
+        
+        <p style="font-size: 12px; color: #999; text-align: center; margin-top: 30px; margin-bottom: 0;">
+            &copy; {current_year} {site_name}. All rights reserved.<br>
+            <a href="{site_url}" style="color: #0073aa; text-decoration: none;">{site_url}</a>
+        </p>
+    </div>
+    
+</body>
+</html>
+

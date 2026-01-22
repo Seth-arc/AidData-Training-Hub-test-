@@ -1,0 +1,267 @@
+/**
+ * LifterLMS Dashboard Styles
+ * Complementary styles for the dashboard page template
+ * 
+ * @package Twenty_Twenty_Four
+ */
+
+/* Additional LifterLMS Dashboard Refinements */
+.llms-dashboard-page .llms-student-dashboard {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Enhanced navigation responsiveness */
+@media (max-width: 480px) {
+    .llms-sd-items {
+        gap: 8px;
+    }
+    
+    .llms-sd-link {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        min-width: 180px;
+    }
+}
+
+/* Improved section spacing */
+.llms-sd-section + .llms-sd-section {
+    margin-top: 20px;
+}
+
+/* Enhanced course loop items */
+.llms-loop-item-footer {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Progress indicator improvements */
+.llms-progress-bar {
+    background: #e9ecef;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.llms-progress-bar .llms-progress-bar-complete {
+    background: linear-gradient(90deg, #026447, #04804f);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.6s ease;
+    position: relative;
+}
+
+.llms-progress-bar .llms-progress-bar-complete::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Achievement and certificate styling */
+.llms-achievement-loop,
+.llms-certificate-loop {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.llms-achievement,
+.llms-certificate {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.llms-achievement:hover,
+.llms-certificate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.llms-achievement .llms-achievement-title,
+.llms-certificate .llms-certificate-title {
+    color: #026447;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+/* Grade widgets styling */
+.llms-donut-chart {
+    margin: 0 auto;
+}
+
+.llms-widget-syllabus {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 6px;
+}
+
+/* Notification styling */
+.llms-notification {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-left: 4px solid #026447;
+    border-radius: 6px;
+    padding: 15px 20px;
+    margin: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.llms-notification .llms-notification-title {
+    color: #026447;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.llms-notification .llms-notification-body {
+    color: #495057;
+    margin: 0;
+}
+
+/* Enhanced form styling */
+.llms-form-wrapper {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.llms-form-field.llms-visually-hidden-field {
+    display: none;
+}
+
+/* Order history table improvements */
+.llms-table-orders .llms-table-orders-status {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #f8f9fa;
+    color: #495057;
+}
+
+.llms-table-orders .llms-table-orders-status.llms-status-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.llms-table-orders .llms-table-orders-status.llms-status-completed {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Loading states */
+.llms-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #026447;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+    .llms-dashboard-page {
+        --dashboard-bg: #1a1a1a;
+        --dashboard-text: #e0e0e0;
+        --dashboard-border: #333333;
+        --dashboard-accent: #04804f;
+    }
+}
+
+/* Print styles */
+@media print {
+    .llms-sd-nav,
+    .llms-sd-section-footer,
+    .dashboard-header .subtitle {
+        display: none;
+    }
+    
+    .llms-sd-section {
+        border: none;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+    
+    .llms-table {
+        border: 1px solid #000;
+    }
+    
+    .llms-table th,
+    .llms-table td {
+        border: 1px solid #000;
+    }
+}
+
+/* Accessibility improvements */
+.llms-sd-link:focus,
+.llms-button-primary:focus,
+.llms-button-secondary:focus {
+    outline: 2px solid #026447;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .llms-sd-section {
+        border: 2px solid #000;
+    }
+    
+    .llms-sd-link {
+        border: 2px solid #000;
+    }
+    
+    .llms-button-primary,
+    .llms-button-secondary {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .llms-loop-item,
+    .llms-achievement,
+    .llms-certificate,
+    .llms-sd-link,
+    .llms-button-primary,
+    .llms-button-secondary {
+        transition: none;
+    }
+    
+    .llms-progress-bar .llms-progress-bar-complete::after {
+        animation: none;
+    }
+    
+    .llms-spinner {
+        animation: none;
+        border-top-color: transparent;
+    }
+} 

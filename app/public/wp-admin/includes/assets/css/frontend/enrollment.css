@@ -1,0 +1,262 @@
+/**
+ * Enrollment Frontend Styles
+ *
+ * Styles for enrollment buttons, progress displays, and notifications
+ *
+ * @package    AidData_LMS
+ * @subpackage AidData_LMS/assets/css/frontend
+ * @since      2.0.0
+ */
+
+/* Enrollment Button Styles */
+.aiddata-lms-enroll-btn {
+	display: inline-block;
+	padding: 12px 24px;
+	background-color: #0073aa;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	text-decoration: none;
+}
+
+.aiddata-lms-enroll-btn:hover {
+	background-color: #005177;
+	color: #fff;
+}
+
+.aiddata-lms-enroll-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* Enrolled State */
+.aiddata-lms-enrolled-state {
+	display: none;
+	padding: 16px;
+	background-color: #f0f6fc;
+	border-left: 4px solid #0073aa;
+	margin-bottom: 20px;
+	border-radius: 4px;
+}
+
+.aiddata-lms-enrolled-state.visible {
+	display: block;
+}
+
+.aiddata-lms-enrolled-state p {
+	margin: 0 0 15px 0;
+}
+
+.aiddata-lms-enrolled-state p:last-child {
+	margin-bottom: 0;
+}
+
+/* Progress Display */
+.aiddata-lms-progress {
+	margin: 20px 0;
+}
+
+.aiddata-lms-progress .progress {
+	height: 24px;
+	background-color: #e9ecef;
+	border-radius: 4px;
+	overflow: hidden;
+	margin-bottom: 8px;
+}
+
+.aiddata-lms-progress .progress-bar {
+	height: 100%;
+	background-color: #28a745;
+	transition: width 0.6s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.aiddata-lms-progress .status-text {
+	margin-top: 8px;
+	font-size: 14px;
+	color: #6c757d;
+}
+
+/* Notification Styles */
+.aiddata-lms-notification {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	padding: 16px 24px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	z-index: 9999;
+	opacity: 0;
+	transform: translateX(100%);
+	transition: all 0.3s ease;
+	max-width: 400px;
+	word-wrap: break-word;
+}
+
+.aiddata-lms-notification.show {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.aiddata-lms-notification-success {
+	border-left: 4px solid #28a745;
+}
+
+.aiddata-lms-notification-error {
+	border-left: 4px solid #dc3545;
+}
+
+.aiddata-lms-notification-info {
+	border-left: 4px solid #17a2b8;
+}
+
+/* Continue Button */
+.aiddata-lms-continue-btn {
+	display: none;
+	padding: 10px 20px;
+	background-color: #28a745;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: background-color 0.3s ease;
+	margin-right: 10px;
+}
+
+.aiddata-lms-continue-btn.visible {
+	display: inline-block;
+}
+
+.aiddata-lms-continue-btn:hover {
+	background-color: #218838;
+	color: #fff;
+}
+
+/* Unenroll Button */
+.aiddata-lms-unenroll-btn {
+	padding: 8px 16px;
+	background-color: transparent;
+	color: #dc3545;
+	border: 1px solid #dc3545;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.aiddata-lms-unenroll-btn:hover {
+	background-color: #dc3545;
+	color: #fff;
+}
+
+.aiddata-lms-unenroll-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* Login Prompt */
+.aiddata-lms-login-prompt {
+	padding: 16px;
+	background-color: #fff3cd;
+	border-left: 4px solid #ffc107;
+	margin-bottom: 20px;
+	border-radius: 4px;
+}
+
+.aiddata-lms-login-prompt p {
+	margin: 0 0 10px 0;
+}
+
+.aiddata-lms-login-btn {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: #0073aa;
+	color: #fff;
+	border-radius: 4px;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.aiddata-lms-login-btn:hover {
+	background-color: #005177;
+	color: #fff;
+}
+
+/* Spinner */
+.spinner-border {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	vertical-align: text-bottom;
+	border: 2px solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+	animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+	to { transform: rotate(360deg); }
+}
+
+.spinner-border-sm {
+	width: 14px;
+	height: 14px;
+	border-width: 2px;
+}
+
+/* Enrollment Container */
+.aiddata-lms-enrollment-container {
+	margin: 20px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.aiddata-lms-notification {
+		right: 10px;
+		left: 10px;
+		max-width: none;
+	}
+	
+	.aiddata-lms-enroll-btn {
+		width: 100%;
+		text-align: center;
+	}
+	
+	.aiddata-lms-continue-btn,
+	.aiddata-lms-unenroll-btn {
+		display: block;
+		width: 100%;
+		margin: 5px 0;
+	}
+	
+	.aiddata-lms-continue-btn.visible {
+		display: block;
+	}
+}
+
+/* Accessibility */
+.aiddata-lms-enroll-btn:focus,
+.aiddata-lms-continue-btn:focus,
+.aiddata-lms-unenroll-btn:focus,
+.aiddata-lms-login-btn:focus {
+	outline: 2px solid #0073aa;
+	outline-offset: 2px;
+}
+
+/* Loading state for buttons */
+.aiddata-lms-enroll-btn:disabled,
+.aiddata-lms-unenroll-btn:disabled {
+	position: relative;
+}
+

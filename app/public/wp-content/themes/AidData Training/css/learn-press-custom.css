@@ -1,0 +1,508 @@
+/* ==========================================================================
+   LearnPress Popup Course — LMS Theme Alignment (override)
+   Paste at END of learnpress.css (or enqueue after LearnPress styles)
+   ========================================================================== */
+
+/* 1) Bridge LMS tokens -> LearnPress tokens (scoped to popup so we don't nuke all LP styling) */
+#popup-course {
+    /* LMS tokens (with fallbacks) */
+    --lms-primary: var(--primary-color, #004E38);
+    --lms-accent: var(--accent-color, #06a181);
+    --lms-bg: var(--bg-color, #ffffff);
+    --lms-card: var(--card-bg, #ffffff);
+    --lms-text: var(--text-color, #333333);
+    --lms-muted: var(--light-text, #6c757d);
+    --lms-border: var(--border-color, #e9ecef);
+    --lms-shadow: rgba(0, 0, 0, 0.12);
+
+    /* Map to LearnPress vars used inside popup */
+    --lp-primary-color: var(--lms-primary);
+    --lp-secondary-color: var(--lms-primary);
+    --lp-border-color: var(--lms-border);
+    --lp-color-base: var(--lms-text);
+    --lp-white-grey: color-mix(in srgb, var(--lms-primary) 3%, #ffffff 97%);
+    --lp-border-radius: 8px;
+}
+
+/* 2) Popup canvas */
+#popup-course {
+    background: var(--lms-bg);
+    /* LP uses --lp-bg-color-lesson; force align to LMS */
+    color: var(--lms-text);
+}
+
+/* 3) Header bar */
+#popup-header {
+    background: var(--lms-primary);
+    /* LP default uses --lp-secondary-color :contentReference[oaicite:5]{index=5} */
+    border-bottom: 1px solid color-mix(in srgb, var(--lms-primary) 12%, transparent);
+    box-shadow: none !important;
+}
+
+/* Header inner spacing stays, but make it feel like your UI */
+#popup-course .popup-header__inner {
+    width: min(1100px, 100%);
+}
+
+/* Course title link */
+#popup-header .course-title a {
+    color: #fff;
+    /* already white in LP :contentReference[oaicite:6]{index=6} */
+    font-weight: 600;
+}
+
+#popup-header .course-title a:hover {
+    color: color-mix(in srgb, #ffffff 85%, var(--lms-accent) 15%);
+}
+
+/* Back button styling (LP currently translucent white overlay :contentReference[oaicite:7]{index=7}) */
+#popup-course .back-course {
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+#popup-course .back-course:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+/* Header action buttons (Finish/Complete/etc.) */
+#popup-header .lp-button {
+    border-radius: 8px;
+    background: #fff;
+    color: var(--lms-primary);
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+#popup-header .lp-button:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* 4) Sidebar (curriculum) */
+#popup-sidebar {
+    background: var(--lms-card);
+    box-shadow: none !important;
+    /* shadow removed for AidData theme */
+    border-right: 1px solid color-mix(in srgb, var(--lms-primary) 10%, transparent);
+}
+
+/* Sidebar search row */
+#popup-sidebar .search-course {
+    background: white !important;
+    /* White background for AidData theme */
+    border-bottom: 1px solid color-mix(in srgb, var(--lms-primary) 10%, transparent);
+}
+
+#popup-sidebar .search-course input[name=s] {
+    color: var(--lms-text);
+}
+
+#popup-sidebar .search-course input[name=s]::placeholder {
+    color: color-mix(in srgb, var(--lms-muted) 80%, transparent);
+}
+
+/* Highlight current item indicator (LP uses --lp-primary-color :contentReference[oaicite:10]{index=10}) */
+#popup-sidebar .lp-course-curriculum .course-item.current:before {
+    background: var(--lms-accent);
+}
+
+/* 5) Content area */
+#popup-content {
+    background: var(--lms-bg);
+    color: var(--lms-text);
+}
+
+/* Content buttons (LP base button styles exist :contentReference[oaicite:11]{index=11}) */
+#popup-content .lp-button {
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--lms-primary) 18%, var(--lms-border));
+    color: var(--lms-primary);
+    background: transparent;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+#popup-content .lp-button:hover {
+    background: var(--lms-primary);
+    color: #fff;
+    border-color: var(--lms-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(17, 87, 64, 0.15);
+}
+
+/* Completed button in content (LP hardcodes green :contentReference[oaicite:12]{index=12}) -> use LMS accent */
+#popup-content .lp-button.completed {
+    background: var(--lms-accent);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 6px 16px rgba(6, 161, 129, 0.18);
+}
+
+/* 6) Make quiz inputs/cards feel consistent */
+#popup-course .quiz-questions .lp-fib-content {
+    border: 1px solid color-mix(in srgb, var(--lms-primary) 14%, var(--lms-border));
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--lms-primary) 2%, #ffffff 98%);
+}
+
+#popup-course .quiz-questions .lp-fib-input>input {
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--lms-primary) 16%, var(--lms-border));
+}
+
+#popup-course .quiz-questions .lp-fib-input>input:focus {
+    outline: none;
+    border-color: var(--lms-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--lms-accent) 18%, transparent);
+}
+
+/* 7) Scrollbars (subtle, like a modern app) */
+#popup-sidebar::-webkit-scrollbar,
+#popup-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+#popup-sidebar::-webkit-scrollbar-track,
+#popup-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#popup-sidebar::-webkit-scrollbar-thumb,
+#popup-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+#popup-sidebar::-webkit-scrollbar-thumb:hover,
+#popup-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.28);
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+/* 8) Dark mode alignment (your site toggles body.dark-mode :contentReference[oaicite:13]{index=13}) */
+body.dark-mode #popup-course {
+    --lms-bg: var(--dark-bg-color, #121212);
+    --lms-card: var(--dark-card-bg, #1e1e1e);
+    --lms-text: var(--dark-text-color, #e0e0e0);
+    --lms-muted: var(--dark-light-text, #a0a0a0);
+    --lms-border: var(--dark-border-color, #333333);
+    background: var(--lms-bg);
+    color: var(--lms-text);
+}
+
+body.dark-mode #popup-header {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode #popup-sidebar {
+    background: var(--lms-card);
+    border-right-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode #popup-sidebar .search-course {
+    background: rgba(255, 255, 255, 0.06);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode #popup-content .lp-button {
+    border-color: rgba(255, 255, 255, 0.10);
+    color: #fff;
+}
+
+body.dark-mode #popup-content .lp-button:hover {
+    background: var(--lms-primary);
+    border-color: var(--lms-primary);
+}
+
+body.dark-mode #popup-sidebar::-webkit-scrollbar-thumb,
+body.dark-mode #popup-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+body.dark-mode #popup-sidebar::-webkit-scrollbar-thumb:hover,
+body.dark-mode #popup-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.26);
+}
+
+/* 9) AidData Brand Colors - Primary Green Override */
+/* Update all LearnPress buttons to use AidData green (#026447) */
+.lp-button,
+button.lp-button,
+a.lp-button,
+.lp-button-complete-lesson,
+.lp-button-start-course,
+.lp-button.btn-finish-course {
+    background-color: #026447 !important;
+    border-color: #026447 !important;
+    color: #ffffff !important;
+}
+
+/* Success messages - green text only */
+.learn-press-message.success,
+.learn-press-message.success .message-content {
+    background-color: transparent !important;
+    color: #026447 !important;
+}
+
+/* Hover states for buttons */
+.lp-button:hover,
+button.lp-button:hover,
+a.lp-button:hover,
+.lp-button-complete-lesson:hover,
+.lp-button-start-course:hover,
+.lp-button.btn-finish-course:hover {
+    background-color: #004E38 !important;
+    border-color: #004E38 !important;
+    color: #ffffff !important;
+}
+
+/* Quiz result text */
+.lp-quiz-result .result-grade.passed {
+    color: #026447 !important;
+}
+
+/* Quiz failed message - change to "Try again" with light pink background */
+body .learn-press-message.error,
+body .learn-press-message.failed,
+body .lp-quiz-result .result-grade.failed,
+.learn-press-message.error,
+.learn-press-message.failed,
+.lp-quiz-result .result-grade.failed,
+#popup-content .learn-press-message.error,
+#learn-press-content-item .learn-press-message.error,
+div.learn-press-message.error,
+.content-item-wrap .learn-press-message.error {
+    background: #ffe6e6 !important;
+    background-color: #ffe6e6 !important;
+    border-color: #ffcccc !important;
+    color: #333333 !important;
+}
+
+.learn-press-message.error .message-content,
+.learn-press-message.failed .message-content,
+body .learn-press-message.error .message-content {
+    color: #333333 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Success message borders */
+.learn-press-message.success {
+    border-color: #026447 !important;
+}
+
+/* Completed status indicators */
+.course-item-status.item-completed,
+.lp-label.label-completed,
+.learn-press-course-results-progress .lp-course-progress .items-completed {
+    background-color: #026447 !important;
+}
+
+/* Remove shadow from completed button */
+#popup-content .lp-button.completed,
+.lp-button.completed,
+button.lp-button.completed {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+}
+
+/* Progress bars */
+.learn-press-progress .lp-progress-bar,
+.course-progress-bar .progress-bg .progress-active {
+    background-color: #026447 !important;
+}
+
+/* Links and accents */
+.learn-press-message.success a {
+    color: #026447 !important;
+}
+
+.learn-press-message.success a:hover {
+    color: #004E38 !important;
+}
+
+/* Course item icons - Lesson icon */
+.course-item-icon.lp_lesson,
+.course-item .course-item-icon.lp_lesson,
+#popup-sidebar .course-item-icon.lp_lesson,
+.lp-course-curriculum .course-item-icon.lp_lesson {
+    color: #026447 !important;
+    background-color: rgba(2, 100, 71, 0.1) !important;
+}
+
+/* Lesson icon SVG/paths */
+.course-item-icon.lp_lesson svg,
+.course-item-icon.lp_lesson path,
+.course-item-icon.lp_lesson .lp-icon {
+    fill: #026447 !important;
+    color: #026447 !important;
+}
+
+/* Sidebar toggle button */
+#sidebar-toggle,
+#popup-header #sidebar-toggle {
+    color: #026447 !important;
+    background-color: rgba(2, 100, 71, 0.1) !important;
+}
+
+#sidebar-toggle::before {
+    color: #026447 !important;
+}
+
+#sidebar-toggle:hover {
+    color: #004E38 !important;
+    background-color: rgba(2, 100, 71, 0.15) !important;
+}
+
+#sidebar-toggle:hover::before {
+    color: #004E38 !important;
+}
+
+/* Remove shadow from course curriculum and sidebar */
+#popup-sidebar,
+.lp-course-curriculum,
+#popup-sidebar .lp-course-curriculum,
+.course-curriculum,
+#sidebar,
+.lp-sidebar,
+#popup-course #popup-sidebar,
+.course-item-popup #popup-sidebar {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+/* Make section headers white */
+.course-section-header,
+.lp-course-curriculum .section-header,
+#popup-sidebar .course-section-header,
+.curriculum-sections .section-header {
+    background: white !important;
+    background-color: white !important;
+}
+
+/* Complete lesson modal - AidData green */
+body .lp-modal-dialog .lp-modal-header,
+body.learnpress .lp-modal-dialog .lp-modal-header,
+.lp-modal-dialog .lp-modal-header,
+.lp-modal-content .lp-modal-header,
+.lp-modal .lp-modal-header,
+#popup-course .lp-modal-header {
+    background: #026447 !important;
+    background-color: #026447 !important;
+}
+
+/* Modal Yes/Confirm button */
+body .lp-modal-dialog .btn-yes,
+body.learnpress .lp-modal-dialog .btn-yes,
+.lp-modal-dialog .btn-yes,
+.btn-yes,
+button.btn-yes,
+.lp-modal-content .lp-button-yes,
+.lp-modal-content button.lp-button-yes,
+.lp-modal .lp-button-yes,
+#popup-course .lp-modal .lp-button-yes {
+    background: #026447 !important;
+    background-color: #026447 !important;
+    border-color: #026447 !important;
+    color: #fff !important;
+}
+
+body .lp-modal-dialog .btn-yes:hover,
+body.learnpress .lp-modal-dialog .btn-yes:hover,
+.lp-modal-dialog .btn-yes:hover,
+.btn-yes:hover,
+.lp-modal-content .lp-button-yes:hover,
+.lp-modal .lp-button-yes:hover {
+    background: #004E38 !important;
+    background-color: #004E38 !important;
+    border-color: #004E38 !important;
+}
+
+/* Smooth content transitions */
+#popup-content {
+    transition: opacity 0.2s ease-in-out;
+}
+
+#popup-content.loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.content-item-scrollable {
+    transition: opacity 0.15s ease-in-out;
+}
+
+/* Smooth lesson switching */
+#learn-press-content-item {
+    min-height: 400px;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#learn-press-content-item.loading {
+    opacity: 0.3;
+}
+
+/* Prevent layout shift during loading */
+.content-item-wrap {
+    min-height: 300px;
+}
+
+/* Mobile responsive header */
+@media screen and (max-width: 768px) {
+    #popup-header {
+        flex-wrap: wrap !important;
+        padding: 0.5rem 0 !important;
+        min-height: auto !important;
+    }
+
+    #popup-header .popup-header__logo-toggle {
+        order: 1;
+        flex: 0 0 auto !important;
+    }
+
+    #popup-header .popup-header__logo-toggle img.aiddata-header-logo {
+        height: 24px !important;
+        margin-left: 10px !important;
+    }
+
+    #popup-header .back-course.exit-course-button {
+        order: 2;
+        margin-right: 12px !important;
+        margin-left: auto !important;
+        padding: 0.5rem 1rem !important;
+        font-size: 0.875rem !important;
+    }
+
+    #popup-header .back-course.exit-course-button svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    #popup-header .popup-header__inner {
+        order: 3;
+        flex: 1 1 100% !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        margin-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    #popup-header .course-title {
+        font-size: 1rem !important;
+    }
+
+    #sidebar-toggle {
+        padding: 0.5rem !important;
+    }
+}

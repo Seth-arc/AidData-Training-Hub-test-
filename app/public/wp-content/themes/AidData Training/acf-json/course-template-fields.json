@@ -1,0 +1,590 @@
+{
+    "key": "group_course_template",
+    "title": "Course Template Settings",
+    "fields": [
+        {
+            "key": "field_course_type",
+            "label": "Course Type",
+            "name": "course_type",
+            "type": "text",
+            "instructions": "Enter the course type (e.g., Course, Tutorial)",
+            "required": 0,
+            "default_value": "Course"
+        },
+        {
+            "key": "field_badge_type",
+            "label": "Badge Type",
+            "name": "badge_type",
+            "type": "text",
+            "instructions": "Enter the badge type (e.g., Digital Badge, Certificate)",
+            "required": 0,
+            "default_value": "Digital Badge"
+        },
+        {
+            "key": "field_course_duration",
+            "label": "Course Duration",
+            "name": "course_duration",
+            "type": "text",
+            "instructions": "Enter the course duration (e.g., 12-16 hours)",
+            "required": 0
+        },
+        {
+            "key": "field_course_level",
+            "label": "Course Level",
+            "name": "course_level",
+            "type": "text",
+            "instructions": "Enter the course level (e.g., Introductory, Intermediate, Advanced)",
+            "required": 0
+        },
+        {
+            "key": "field_course_video",
+            "label": "Course Video / Trailer URL",
+            "name": "course_video",
+            "type": "url",
+            "instructions": "Enter the video/trailer URL (Panopto embed URL or MP4 file URL)",
+            "required": 0,
+            "placeholder": "https://wmedu.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=..."
+        },
+        {
+            "key": "field_preview_button_enabled",
+            "label": "Enable Preview/Trailer Button",
+            "name": "preview_button_enabled",
+            "type": "true_false",
+            "instructions": "Show the Watch Preview/Trailer button in the sidebar",
+            "required": 0,
+            "ui": true,
+            "default_value": 0
+        },
+        {
+            "key": "field_course_poster",
+            "label": "Video Poster Image",
+            "name": "course_poster",
+            "type": "image",
+            "instructions": "Upload or select a poster image for the video",
+            "required": 0,
+            "return_format": "url",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_course_audience",
+            "label": "Course Audience",
+            "name": "course_audience",
+            "type": "repeater",
+            "instructions": "Add audience types for this course",
+            "required": 0,
+            "layout": "table",
+            "button_label": "Add Audience Type",
+            "sub_fields": [
+                {
+                    "key": "field_audience_item",
+                    "label": "Audience Item",
+                    "name": "audience_item",
+                    "type": "text",
+                    "instructions": ""
+                }
+            ]
+        },
+        {
+            "key": "field_course_modules",
+            "label": "Course Modules",
+            "name": "course_modules",
+            "type": "repeater",
+            "instructions": "Add modules for this course",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add Module",
+            "sub_fields": [
+                {
+                    "key": "field_module_title",
+                    "label": "Module Title",
+                    "name": "module_title",
+                    "type": "text",
+                    "instructions": "Enter the module title"
+                },
+                {
+                    "key": "field_module_description",
+                    "label": "Module Description",
+                    "name": "module_description",
+                    "type": "textarea",
+                    "instructions": "Enter the module description"
+                }
+            ]
+        },
+        {
+            "key": "field_course_instructors",
+            "label": "Course Instructors",
+            "name": "course_instructors",
+            "type": "repeater",
+            "instructions": "Add instructors for this course",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add Instructor",
+            "sub_fields": [
+                {
+                    "key": "field_instructor_name",
+                    "label": "Instructor Name",
+                    "name": "instructor_name",
+                    "type": "text",
+                    "instructions": "Enter the instructor name"
+                },
+                {
+                    "key": "field_instructor_title",
+                    "label": "Instructor Title",
+                    "name": "instructor_title",
+                    "type": "text",
+                    "instructions": "Enter the instructor title/position"
+                },
+                {
+                    "key": "field_instructor_image",
+                    "label": "Instructor Image",
+                    "name": "instructor_image",
+                    "type": "image",
+                    "instructions": "Upload or select the instructor image",
+                    "required": 0,
+                    "return_format": "url",
+                    "preview_size": "thumbnail",
+                    "library": "all"
+                }
+            ]
+        },
+        {
+            "key": "field_partnership_logo",
+            "label": "Partnership Logo",
+            "name": "partnership_logo",
+            "type": "image",
+            "instructions": "Upload or select the partnership logo",
+            "required": 0,
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all"
+        },
+        {
+            "key": "field_partnership_name",
+            "label": "Partnership Name",
+            "name": "partnership_name",
+            "type": "text",
+            "instructions": "Enter the partnership name"
+        },
+        {
+            "key": "field_partnership_text",
+            "label": "Partnership Text",
+            "name": "partnership_text",
+            "type": "text",
+            "instructions": "Enter the partnership description text"
+        },
+        {
+            "key": "field_course_price",
+            "label": "Course Price",
+            "name": "course_price",
+            "type": "text",
+            "instructions": "Enter the course price (numbers only, without currency symbol)",
+            "required": 0
+        },
+        {
+            "key": "field_price_features",
+            "label": "Price Features",
+            "name": "price_features",
+            "type": "repeater",
+            "instructions": "Add features included in the price",
+            "required": 0,
+            "layout": "table",
+            "button_label": "Add Feature",
+            "sub_fields": [
+                {
+                    "key": "field_feature",
+                    "label": "Feature",
+                    "name": "feature",
+                    "type": "text",
+                    "instructions": "Enter a feature included in the price"
+                }
+            ]
+        },
+        {
+            "key": "field_enroll_button_text",
+            "label": "Enroll Button Text",
+            "name": "enroll_button_text",
+            "type": "text",
+            "instructions": "Enter the text for the enrollment button",
+            "required": 0,
+            "default_value": "Start Learning"
+        },
+        {
+            "key": "field_enroll_button_url",
+            "label": "Enroll Button URL",
+            "name": "enroll_button_url",
+            "type": "url",
+            "instructions": "Enter the URL for the enrollment button",
+            "required": 0
+        },
+        {
+            "key": "field_scholarship_info",
+            "label": "Scholarship Information",
+            "name": "scholarship_info",
+            "type": "textarea",
+            "instructions": "Enter information about available scholarships"
+        },
+        {
+            "key": "field_scholarship_email",
+            "label": "Scholarship Contact Email",
+            "name": "scholarship_email",
+            "type": "email",
+            "instructions": "Enter the email address for scholarship inquiries"
+        },
+        {
+            "key": "field_contact_info_enabled",
+            "label": "Enable Contact Information",
+            "name": "contact_info_enabled",
+            "type": "true_false",
+            "instructions": "Enable the contact information section in the drawer",
+            "ui": true
+        },
+        {
+            "key": "field_contact_intro",
+            "label": "Contact Introduction",
+            "name": "contact_intro",
+            "type": "text",
+            "instructions": "Enter the introduction text for the contact section",
+            "conditional_logic": [
+                {
+                    "field": "field_contact_info_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_contact_name",
+            "label": "Contact Name",
+            "name": "contact_name",
+            "type": "text",
+            "instructions": "Enter the contact person's name",
+            "conditional_logic": [
+                {
+                    "field": "field_contact_info_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_contact_title",
+            "label": "Contact Title",
+            "name": "contact_title",
+            "type": "text",
+            "instructions": "Enter the contact person's title/position",
+            "conditional_logic": [
+                {
+                    "field": "field_contact_info_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_contact_avatar",
+            "label": "Contact Avatar",
+            "name": "contact_avatar",
+            "type": "image",
+            "instructions": "Upload or select the contact person's avatar",
+            "required": 0,
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "conditional_logic": [
+                {
+                    "field": "field_contact_info_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_contact_email",
+            "label": "Contact Email",
+            "name": "contact_email",
+            "type": "email",
+            "instructions": "Enter the contact person's email address",
+            "conditional_logic": [
+                {
+                    "field": "field_contact_info_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_related_news_enabled",
+            "label": "Enable Related News",
+            "name": "related_news_enabled",
+            "type": "true_false",
+            "instructions": "Enable the related news section in the drawer",
+            "ui": true
+        },
+        {
+            "key": "field_related_news_items",
+            "label": "Related News Items",
+            "name": "related_news_items",
+            "type": "repeater",
+            "instructions": "Add related news items",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add News Item",
+            "conditional_logic": [
+                {
+                    "field": "field_related_news_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ],
+            "sub_fields": [
+                {
+                    "key": "field_news_title",
+                    "label": "News Title",
+                    "name": "news_title",
+                    "type": "text",
+                    "instructions": "Enter the news title"
+                },
+                {
+                    "key": "field_news_excerpt",
+                    "label": "News Excerpt",
+                    "name": "news_excerpt",
+                    "type": "textarea",
+                    "instructions": "Enter the news excerpt"
+                },
+                {
+                    "key": "field_news_date",
+                    "label": "News Date",
+                    "name": "news_date",
+                    "type": "text",
+                    "instructions": "Enter the news date (e.g., January 30, 2023)"
+                },
+                {
+                    "key": "field_news_image",
+                    "label": "News Image",
+                    "name": "news_image",
+                    "type": "image",
+                    "instructions": "Upload or select the news image",
+                    "required": 0,
+                    "return_format": "url",
+                    "preview_size": "medium",
+                    "library": "all"
+                },
+                {
+                    "key": "field_news_url",
+                    "label": "News URL",
+                    "name": "news_url",
+                    "type": "url",
+                    "instructions": "Enter the URL for the news item"
+                }
+            ]
+        },
+        {
+            "key": "field_course_detailed_title",
+            "label": "Course Detailed Title",
+            "name": "course_detailed_title",
+            "type": "text",
+            "instructions": "Enter a detailed title for the course (for the drawer)"
+        },
+        {
+            "key": "field_course_detailed_description",
+            "label": "Course Detailed Description",
+            "name": "course_detailed_description",
+            "type": "textarea",
+            "instructions": "Enter a detailed description for the course (for the drawer)"
+        },
+        {
+            "key": "field_scenario_examples",
+            "label": "Scenario Examples",
+            "name": "scenario_examples",
+            "type": "repeater",
+            "instructions": "Add scenario examples for the course",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add Scenario",
+            "sub_fields": [
+                {
+                    "key": "field_scenario_title",
+                    "label": "Scenario Title",
+                    "name": "scenario_title",
+                    "type": "text",
+                    "instructions": "Enter the scenario title"
+                },
+                {
+                    "key": "field_scenario_description",
+                    "label": "Scenario Description",
+                    "name": "scenario_description",
+                    "type": "textarea",
+                    "instructions": "Enter the scenario description"
+                },
+                {
+                    "key": "field_scenario_image",
+                    "label": "Scenario Image",
+                    "name": "scenario_image",
+                    "type": "image",
+                    "instructions": "Upload or select the scenario image",
+                    "required": 0,
+                    "return_format": "url",
+                    "preview_size": "medium",
+                    "library": "all"
+                }
+            ]
+        },
+        {
+            "key": "field_learning_outcomes_title",
+            "label": "Learning Outcomes Title",
+            "name": "learning_outcomes_title",
+            "type": "text",
+            "instructions": "Enter the title for the learning outcomes section"
+        },
+        {
+            "key": "field_learning_outcomes",
+            "label": "Learning Outcomes",
+            "name": "learning_outcomes",
+            "type": "repeater",
+            "instructions": "Add learning outcomes for the course",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add Learning Outcome",
+            "sub_fields": [
+                {
+                    "key": "field_outcome_title",
+                    "label": "Outcome Title",
+                    "name": "outcome_title",
+                    "type": "text",
+                    "instructions": "Enter the outcome title"
+                },
+                {
+                    "key": "field_outcome_description",
+                    "label": "Outcome Description",
+                    "name": "outcome_description",
+                    "type": "textarea",
+                    "instructions": "Enter the outcome description"
+                }
+            ]
+        },
+        {
+            "key": "field_course_features_title",
+            "label": "Course Features Title",
+            "name": "course_features_title",
+            "type": "text",
+            "instructions": "Enter the title for the course features section"
+        },
+        {
+            "key": "field_course_features",
+            "label": "Course Features",
+            "name": "course_features",
+            "type": "repeater",
+            "instructions": "Add features for the course",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add Feature",
+            "sub_fields": [
+                {
+                    "key": "field_feature_title",
+                    "label": "Feature Title",
+                    "name": "feature_title",
+                    "type": "text",
+                    "instructions": "Enter the feature title"
+                },
+                {
+                    "key": "field_feature_description",
+                    "label": "Feature Description",
+                    "name": "feature_description",
+                    "type": "textarea",
+                    "instructions": "Enter the feature description"
+                }
+            ]
+        },
+        {
+            "key": "field_course_cta_enabled",
+            "label": "Enable Course CTA",
+            "name": "course_cta_enabled",
+            "type": "true_false",
+            "instructions": "Enable the call-to-action section in the drawer",
+            "ui": true
+        },
+        {
+            "key": "field_course_cta_title",
+            "label": "Course CTA Title",
+            "name": "course_cta_title",
+            "type": "text",
+            "instructions": "Enter the CTA title",
+            "conditional_logic": [
+                {
+                    "field": "field_course_cta_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_course_cta_description",
+            "label": "Course CTA Description",
+            "name": "course_cta_description",
+            "type": "textarea",
+            "instructions": "Enter the CTA description",
+            "conditional_logic": [
+                {
+                    "field": "field_course_cta_enabled",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_display_empty_section",
+            "label": "Display Empty Section",
+            "name": "display_empty_section",
+            "type": "true_false",
+            "instructions": "Display the empty section at the bottom of the page",
+            "ui": true
+        },
+        {
+            "key": "field_empty_section_message",
+            "label": "Empty Section Message",
+            "name": "empty_section_message",
+            "type": "text",
+            "instructions": "Enter the message for the empty section",
+            "conditional_logic": [
+                {
+                    "field": "field_display_empty_section",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "key": "field_empty_section_description",
+            "label": "Empty Section Description",
+            "name": "empty_section_description",
+            "type": "text",
+            "instructions": "Enter the description for the empty section",
+            "conditional_logic": [
+                {
+                    "field": "field_display_empty_section",
+                    "operator": "==",
+                    "value": "1"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/course-template.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Custom fields for the Course Template",
+    "show_in_rest": false
+} 

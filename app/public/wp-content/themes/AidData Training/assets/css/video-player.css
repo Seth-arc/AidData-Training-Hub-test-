@@ -1,0 +1,276 @@
+:root {
+    --video-player-bg: #000000;
+    --video-player-controls-bg: rgba(0, 0, 0, 0.8);
+    --video-player-hover-color: #ffffff;
+    --video-player-text: #ffffff;
+    --video-player-progress-bg: rgba(255, 255, 255, 0.3);
+    --video-player-progress-color: #026447;
+}
+
+.custom-video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000000;
+}
+
+.custom-video-player {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000000;
+    display: block;
+}
+
+.video-controls-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 15px;
+    background: var(--video-player-controls-bg);
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+}
+
+.video-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.video-timeline-container {
+    position: relative;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.video-timeline {
+    position: relative;
+    height: 100%;
+    width: 0;
+    background-color: var(--video-player-progress-color);
+}
+
+/* Timeline preview removed for simplicity */
+
+.video-left-controls, .video-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.video-control-button {
+    background: transparent;
+    border: none;
+    color: var(--video-player-text);
+    font-size: 22px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.video-control-button:hover {
+    opacity: 0.7;
+}
+
+.video-time {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: white;
+    position: relative;
+    margin-left: 5px;
+}
+
+/* Time tooltip removed for simplicity */
+
+.stop-btn {
+    margin-right: 8px;
+}
+
+.stop-btn .stop-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    background-color: var(--video-player-progress-bg);
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.volume-slider-progress {
+    height: 100%;
+    width: 50%;
+    background-color: var(--video-player-progress-color);
+}
+
+/* Play pause overlay removed for simplicity */
+
+.fullscreen-icon, .exit-fullscreen-icon,
+.mute-icon, .unmute-icon,
+.pause-icon, .play-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.exit-fullscreen-icon,
+.unmute-icon,
+.pause-icon {
+    display: none;
+}
+
+/* Video title and top controls removed for simplicity */
+
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+    z-index: 6;
+    display: none;
+}
+
+.custom-video-container.loading .loading-indicator {
+    display: block;
+}
+
+.custom-video-container.loading .loading-indicator:after {
+    content: 'Loading...';
+}
+
+@media (max-width: 768px) {
+    .video-time {
+        display: none;
+    }
+    
+    .video-control-button {
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+    }
+    
+    .volume-slider {
+        width: 50px;
+    }
+}
+
+/* Error Message Styling */
+.video-error-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: 2rem;
+    text-align: center;
+}
+
+.custom-video-container.error .video-error-message {
+    display: flex;
+}
+
+.video-error-message .error-icon {
+    width: 60px;
+    height: 60px;
+    color: #ff4d4f;
+    margin-bottom: 1rem;
+}
+
+.video-error-message .error-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.video-error-message p {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.video-error-message .retry-button {
+    background: var(--video-player-progress-color, #026447);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.video-error-message .retry-button:hover {
+    opacity: 0.8;
+}
+
+/* Dark mode styles removed for simplicity */
+
+.speed-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.speed-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.speed-dropdown {
+    position: absolute;
+    bottom: 30px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 8px 0;
+    display: none;
+    width: 90px;
+    z-index: 10;
+}
+
+.speed-dropdown.active {
+    display: block;
+}
+
+.speed-option {
+    color: white;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.speed-option:hover, .speed-option.active {
+    background-color: rgba(255, 255, 255, 0.2);
+} 

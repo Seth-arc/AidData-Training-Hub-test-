@@ -1,0 +1,271 @@
+/**
+ * Loading Screen Styles
+ */
+
+/* Prevent page jump by hiding body content initially - ONLY on home page */
+body.home:not(.loaded) {
+    overflow: hidden;
+}
+
+body.home:not(.loaded) .lms-main,
+body.home:not(.loaded) .lms-header {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Smooth fade-in for main content when loaded - ONLY on home page */
+body.home.loaded .lms-main,
+body.home.loaded .lms-header {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease 0.1s, visibility 0.4s ease 0.1s;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    will-change: opacity, visibility;
+}
+
+.loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+html.skip-loading-screen .loading-screen {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 9998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    will-change: opacity, visibility;
+}
+
+.page-transition-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.page-transition-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.loading-logo {
+    width: 180px;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.loading-spinner {
+    margin: 1.5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-ring {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(17, 87, 64, 0.15);
+    border-radius: 50%;
+    border-top: 3px solid #115740;
+    border-right: 3px solid #115740;
+    box-sizing: border-box;
+    animation: spinSmooth 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    will-change: transform;
+    transform-origin: center center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.loading-text {
+    font-size: 1.1rem;
+    color: #6c757d;
+    animation: pulseSmooth 2s ease-in-out infinite;
+    will-change: opacity;
+}
+
+@keyframes spinSmooth {
+    0% { 
+        transform: rotate(0deg); 
+    }
+    100% { 
+        transform: rotate(360deg); 
+    }
+}
+
+@keyframes pulseSmooth {
+    0%, 100% { 
+        opacity: 0.7; 
+    }
+    50% { 
+        opacity: 1; 
+    }
+}
+
+body.dark-mode .loading-screen {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .page-transition-overlay {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .loading-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .spinner-ring {
+    border-color: rgba(255, 255, 255, 0.15);
+    border-top-color: #1a805f;
+    border-right-color: #1a805f;
+}
+
+/* ===== STREAMLINED ANIMATED TRIANGLES FOR MAIN LOADING SCREEN ===== */
+
+.loading-triangles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.loading-triangle {
+    position: absolute;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    will-change: transform;
+}
+
+/* Triangle 1 - Gentle floating motion */
+.triangle-move-1 {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.15), rgba(26, 128, 95, 0.2));
+    left: 15%;
+    top: 25%;
+    animation: gentleFloat1 6s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+/* Triangle 2 - Subtle rotation and scale */
+.triangle-move-2 {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, rgba(26, 128, 95, 0.12), rgba(17, 87, 64, 0.18));
+    right: 20%;
+    top: 45%;
+    animation: gentleFloat2 8s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+/* Triangle 3 - Minimal movement */
+.triangle-move-3 {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.1), rgba(26, 128, 95, 0.15));
+    left: 50%;
+    bottom: 20%;
+    margin-left: -20px;
+    animation: gentleFloat3 7s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+/* Streamlined Animation Keyframes */
+@keyframes gentleFloat1 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-8px) rotate(15deg) scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes gentleFloat2 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(6px) rotate(-10deg) scale(1.03);
+        opacity: 0.7;
+    }
+}
+
+@keyframes gentleFloat3 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(-4px) rotate(8deg) scale(1.02);
+        opacity: 0.6;
+    }
+}
+
+/* Remove unused triangles from HTML */
+.triangle-move-4,
+.triangle-move-5,
+.triangle-move-6,
+.triangle-static-1,
+.triangle-static-2,
+.triangle-immediate {
+    display: none;
+}
+
+/* Dark mode styles for loading triangles */
+body.dark-mode .triangle-move-1 {
+    background: linear-gradient(135deg, rgba(26, 128, 95, 0.08), rgba(17, 87, 64, 0.12));
+}
+
+body.dark-mode .triangle-move-2 {
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.06), rgba(26, 128, 95, 0.09));
+}
+
+body.dark-mode .triangle-move-3 {
+    background: linear-gradient(135deg, rgba(26, 128, 95, 0.05), rgba(17, 87, 64, 0.08));
+}

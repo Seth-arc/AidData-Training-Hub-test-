@@ -1,0 +1,51 @@
+# Local development files
+.venv/
+.vscode/
+.claude/
+node_modules/
+*.log
+
+# Git
+.git/
+.gitignore
+
+# Docker files
+docker/
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# Local configuration
+conf/
+logs/
+assets/
+
+# Database files
+app/sql/
+*.sql
+*.sql.gz
+
+# Backup files
+*.bak
+*.backup
+
+# Cache and temporary files
+app/public/wp-content/cache/
+app/public/wp-content/upgrade/
+app/public/wp-content/updraft/
+app/public/wp-content/backups/
+
+# Development and debugging
+nul
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+*.md
+
+# Environment files (these should be set via Railway)
+.env
+.env.*
+!.env.example

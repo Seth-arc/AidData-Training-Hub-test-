@@ -1,0 +1,115 @@
+# AidData LMS - Git Ignore File
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Composer dependencies
+vendor/
+composer.lock
+
+# Build files
+*.min.js
+*.min.css
+*.map
+build/
+dist/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.phpintel/
+.phpstorm.meta.php
+_ide_helper.php
+
+# Editor backup files
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Log files
+*.log
+logs/
+error_log
+debug.log
+
+# Testing
+coverage/
+phpunit.xml
+.phpunit.result.cache
+tests/_output/*
+.env.testing
+
+# WordPress specific
+wp-config-local.php
+wp-content/uploads/*
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/backups/
+
+# Plugin specific
+languages/*.mo
+*.pot
+
+# Temporary files
+temp/
+tmp/
+*.cache
+
+# Asset source maps (keep source, ignore compiled maps)
+assets/css/*.css.map
+assets/js/*.js.map
+
+# Compiled assets (if using build process)
+assets/css/admin.css
+assets/css/frontend.css
+assets/js/admin.min.js
+assets/js/frontend.min.js
+
+# Documentation build files
+docs/_build/
+site/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Database dumps
+*.sql
+*.sqlite
+
+# Certificate files
+*.pem
+*.key
+*.crt
+
+# Webpack
+.webpack/
+
+# Other
+*.diff
+*.patch
+*.orig
+.sass-cache/
+

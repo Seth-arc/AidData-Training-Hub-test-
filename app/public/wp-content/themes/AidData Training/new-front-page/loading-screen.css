@@ -1,0 +1,893 @@
+/**
+ * Loading Screen Styles
+ */
+
+/* Prevent page jump by hiding body content initially - ONLY on home page */
+body.home:not(.loaded) {
+    overflow: hidden;
+}
+
+body.home:not(.loaded) .lms-main,
+body.home:not(.loaded) .lms-header {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Smooth fade-in for main content when loaded - ONLY on home page */
+body.home.loaded .lms-main,
+body.home.loaded .lms-header {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease 0.1s, visibility 0.4s ease 0.1s;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    will-change: opacity, visibility;
+}
+
+.loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 400px;
+    padding: 2rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.loading-logo {
+    width: 180px;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.loading-spinner {
+    margin: 1.5rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-ring {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(17, 87, 64, 0.15);
+    border-radius: 50%;
+    border-top: 3px solid #115740;
+    border-right: 3px solid #115740;
+    box-sizing: border-box;
+    animation: spinSmooth 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    will-change: transform;
+    transform-origin: center center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.loading-text {
+    font-size: 1.1rem;
+    color: #6c757d;
+    animation: pulseSmooth 2s ease-in-out infinite;
+    will-change: opacity;
+}
+
+@keyframes spinSmooth {
+    0% { 
+        transform: rotate(0deg); 
+    }
+    100% { 
+        transform: rotate(360deg); 
+    }
+}
+
+@keyframes pulseSmooth {
+    0%, 100% { 
+        opacity: 0.7; 
+    }
+    50% { 
+        opacity: 1; 
+    }
+}
+
+body.dark-mode .loading-screen {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .loading-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .spinner-ring {
+    border-color: rgba(255, 255, 255, 0.15);
+    border-top-color: #1a805f;
+    border-right-color: #1a805f;
+}
+
+/* ===== STREAMLINED ANIMATED TRIANGLES FOR MAIN LOADING SCREEN ===== */
+
+.loading-triangles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.loading-triangle {
+    position: absolute;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    will-change: transform;
+}
+
+/* Triangle 1 - Gentle floating motion */
+.triangle-move-1 {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.15), rgba(26, 128, 95, 0.2));
+    left: 15%;
+    top: 25%;
+    animation: gentleFloat1 6s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+/* Triangle 2 - Subtle rotation and scale */
+.triangle-move-2 {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, rgba(26, 128, 95, 0.12), rgba(17, 87, 64, 0.18));
+    right: 20%;
+    top: 45%;
+    animation: gentleFloat2 8s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+/* Triangle 3 - Minimal movement */
+.triangle-move-3 {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.1), rgba(26, 128, 95, 0.15));
+    left: 50%;
+    bottom: 20%;
+    margin-left: -20px;
+    animation: gentleFloat3 7s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+/* Streamlined Animation Keyframes */
+@keyframes gentleFloat1 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-8px) rotate(15deg) scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes gentleFloat2 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(6px) rotate(-10deg) scale(1.03);
+        opacity: 0.7;
+    }
+}
+
+@keyframes gentleFloat3 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(-4px) rotate(8deg) scale(1.02);
+        opacity: 0.6;
+    }
+}
+
+/* Remove unused triangles from HTML */
+.triangle-move-4,
+.triangle-move-5,
+.triangle-move-6,
+.triangle-static-1,
+.triangle-static-2,
+.triangle-immediate {
+    display: none;
+}
+
+/* Dark mode styles for loading triangles */
+body.dark-mode .triangle-move-1 {
+    background: linear-gradient(135deg, rgba(26, 128, 95, 0.08), rgba(17, 87, 64, 0.12));
+}
+
+body.dark-mode .triangle-move-2 {
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.06), rgba(26, 128, 95, 0.09));
+}
+
+body.dark-mode .triangle-move-3 {
+    background: linear-gradient(135deg, rgba(26, 128, 95, 0.05), rgba(17, 87, 64, 0.08));
+}
+
+/* ===== ENHANCED COURSE LOADING OVERLAY ===== */
+
+.course-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    z-index: 10000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+    will-change: opacity;
+}
+
+.course-loading-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.course-loading-overlay.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+.course-loading-content {
+    text-align: center;
+    max-width: 420px;
+    padding: 3rem 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    box-shadow: 
+        0 25px 70px rgba(17, 87, 64, 0.08),
+        0 10px 30px rgba(17, 87, 64, 0.04);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(17, 87, 64, 0.06);
+    position: relative;
+    transform: translateY(15px) scale(0.98);
+    opacity: 0;
+    animation: enhancedFadeIn 0.7s ease-out 0.1s forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes enhancedFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.course-loading-header {
+    margin-bottom: 2.5rem;
+}
+
+.course-hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.course-loading-logo {
+    width: 80px;
+    opacity: 0.95;
+    animation: logoGentle 6s ease-in-out infinite;
+    will-change: transform;
+}
+
+.course-preview-image {
+    display: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(17, 87, 64, 0.15);
+    border: 2px solid rgba(17, 87, 64, 0.1);
+}
+
+.course-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: imageGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes imageGlow {
+    0% { filter: brightness(1) saturate(1); }
+    100% { filter: brightness(1.05) saturate(1.1); }
+}
+
+.course-loading-title {
+    font-size: 1.6rem;
+    color: #115740;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+}
+
+.course-loading-subtitle {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Enhanced Transition Indicator */
+.transition-indicator {
+    margin: 2rem 0 1.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.loading-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #115740;
+    opacity: 0.3;
+    animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: 0s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+    0%, 100% { 
+        opacity: 0.3; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.2); 
+    }
+}
+
+/* Enhanced Progress Indicator */
+.course-loading-progress {
+    margin-top: 2rem;
+}
+
+.progress-line {
+    width: 100%;
+    height: 3px;
+    background: rgba(17, 87, 64, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #115740 0%, #1a805f 100%);
+    border-radius: 2px;
+    width: 0;
+    animation: progressSmooth 2.5s ease-out forwards;
+    will-change: width;
+    position: relative;
+}
+
+.progress-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    animation: progressGlow 2s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes progressGlow {
+    0% { opacity: 0; transform: translateX(-100%); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(100%); }
+}
+
+@keyframes progressSmooth {
+    0% { width: 0; }
+    60% { width: 75%; }
+    100% { width: 100%; }
+}
+
+.loading-message {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    min-height: 1.3rem;
+    will-change: opacity, transform;
+    margin-bottom: 0.8rem;
+}
+
+.loading-message.active {
+    opacity: 1;
+    color: #115740;
+    font-weight: 500;
+}
+
+.loading-details {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.loading-time {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 300;
+    opacity: 0.7;
+}
+
+/* Background Elements */
+.loading-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes logoGentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
+.course-loading-title {
+    font-size: 1.5rem;
+    color: #115740;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+.course-loading-subtitle {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Simplified Geometric Animation */
+.geometric-container {
+    position: relative;
+    height: 120px;
+    margin: 2.5rem 0;
+    overflow: hidden;
+}
+
+.floating-triangles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.triangle {
+    position: absolute;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    will-change: transform, opacity;
+}
+
+.triangle-1 {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.08), rgba(26, 128, 95, 0.12));
+    left: 25%;
+    top: 25%;
+    transform: rotate(15deg);
+    animation: float1 8s ease-in-out infinite;
+}
+
+.triangle-2 {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(26, 128, 95, 0.06), rgba(17, 87, 64, 0.09));
+    right: 25%;
+    bottom: 30%;
+    transform: rotate(195deg);
+    animation: float2 10s ease-in-out infinite reverse;
+}
+
+.triangle-3 {
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg, rgba(17, 87, 64, 0.04), rgba(26, 128, 95, 0.07));
+    left: 50%;
+    top: 50%;
+    margin-left: -12.5px;
+    margin-top: -12.5px;
+    transform: rotate(45deg);
+    animation: float3 12s ease-in-out infinite;
+}
+
+@keyframes float1 {
+    0%, 100% { 
+        transform: rotate(15deg) translateY(0) scale(1); 
+        opacity: 0.6; 
+    }
+    50% { 
+        transform: rotate(25deg) translateY(-8px) scale(1.05); 
+        opacity: 0.9; 
+    }
+}
+
+@keyframes float2 {
+    0%, 100% { 
+        transform: rotate(195deg) translateY(0) scale(1); 
+        opacity: 0.5; 
+    }
+    50% { 
+        transform: rotate(185deg) translateY(6px) scale(1.03); 
+        opacity: 0.8; 
+    }
+}
+
+@keyframes float3 {
+    0%, 100% { 
+        transform: rotate(45deg) translateY(0) scale(1); 
+        opacity: 0.4; 
+    }
+    50% { 
+        transform: rotate(55deg) translateY(-4px) scale(1.08); 
+        opacity: 0.7; 
+    }
+}
+
+/* Refined Progress Indicator */
+.course-loading-progress {
+    margin-top: 2.5rem;
+}
+
+.progress-line {
+    width: 100%;
+    height: 2px;
+    background: rgba(17, 87, 64, 0.1);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #115740;
+    border-radius: 1px;
+    width: 0;
+    animation: progressSmooth 2.8s ease-out forwards;
+    will-change: width;
+}
+
+@keyframes progressSmooth {
+    0% { width: 0; }
+    70% { width: 85%; }
+    100% { width: 100%; }
+}
+
+.loading-message {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    min-height: 1.2rem;
+    will-change: opacity;
+}
+
+.loading-message.active {
+    opacity: 1;
+    color: #115740;
+}
+
+/* Enhanced Button Interactions */
+.featured-course .start-learning,
+.featured-course .primary-button {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
+    overflow: hidden;
+}
+
+.featured-course .start-learning::before,
+.featured-course .primary-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.featured-course .start-learning:hover,
+.featured-course .primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(17, 87, 64, 0.15);
+}
+
+.featured-course .start-learning:hover::before,
+.featured-course .primary-button:hover::before {
+    left: 100%;
+}
+
+.featured-course .start-learning:active,
+.featured-course .primary-button:active {
+    transform: translateY(-1px);
+    transition: all 0.1s ease;
+}
+
+/* Loading State for Buttons */
+.featured-course .start-learning.loading,
+.featured-course .primary-button.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.featured-course .start-learning.loading::after,
+.featured-course .primary-button.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: buttonSpin 1s linear infinite;
+}
+
+@keyframes buttonSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .course-loading-content {
+        max-width: 90%;
+        padding: 2.5rem 2rem;
+        margin: 1rem;
+        border-radius: 20px;
+    }
+    
+    .course-loading-title {
+        font-size: 1.4rem;
+    }
+    
+    .course-loading-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .course-hero-section {
+        gap: 0.8rem;
+    }
+    
+    .course-loading-logo {
+        width: 70px;
+    }
+    
+    .course-preview-image {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .geometric-container {
+        height: 100px;
+        margin: 2rem 0;
+    }
+    
+    .triangle-1 { width: 50px; height: 50px; }
+    .triangle-2 { width: 35px; height: 35px; }
+    .triangle-3 { width: 20px; height: 20px; margin-left: -10px; margin-top: -10px; }
+    
+    /* Responsive loading triangles - streamlined */
+    .triangle-move-1 { width: 40px; height: 40px; }
+    .triangle-move-2 { width: 30px; height: 30px; }
+    .triangle-move-3 { width: 35px; height: 35px; }
+}
+
+@media (max-width: 480px) {
+    .course-loading-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .course-loading-header {
+        margin-bottom: 2rem;
+    }
+    
+    .course-hero-section {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .course-loading-logo {
+        width: 60px;
+    }
+    
+    .course-preview-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .geometric-container {
+        height: 80px;
+        margin: 1.5rem 0;
+    }
+    
+    .course-loading-progress {
+        margin-top: 2rem;
+    }
+    
+    .triangle-1 { width: 40px; height: 40px; }
+    .triangle-2 { width: 28px; height: 28px; }
+    .triangle-3 { width: 16px; height: 16px; margin-left: -8px; margin-top: -8px; }
+    
+    /* Small screen loading triangles - streamlined */
+    .triangle-move-1 { width: 35px; height: 35px; }
+    .triangle-move-2 { width: 25px; height: 25px; }
+    .triangle-move-3 { width: 30px; height: 30px; }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+    .triangle,
+    .loading-triangle,
+    .course-loading-logo,
+    .progress-fill,
+    .loading-message,
+    .loading-dots span,
+    .course-preview-img,
+    .progress-glow {
+        animation: none !important;
+    }
+    
+    .course-loading-content {
+        animation: none !important;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    
+    .loading-triangle {
+        opacity: 0.1 !important;
+        transform: none !important;
+    }
+    
+    .featured-course .start-learning:hover,
+    .featured-course .primary-button:hover {
+        transform: none;
+    }
+}
+
+/* Prevent layout shift */
+.course-loading-overlay * {
+    box-sizing: border-box;
+}
+
+/* Smooth font rendering */
+.course-loading-content {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Error Notification Styles */
+.course-error-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10001;
+    background: #ffffff;
+    border-left: 4px solid #dc3545;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.15);
+    padding: 0;
+    min-width: 300px;
+    max-width: 400px;
+    animation: slideInRight 0.3s ease-out forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.error-content {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #dc3545;
+}
+
+.error-content svg {
+    flex-shrink: 0;
+    color: #dc3545;
+}
+
+.error-content span {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #333;
+}
+
+.retry-button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.retry-button:hover {
+    background: #c82333;
+}
+
+@media (max-width: 480px) {
+    .course-error-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+        max-width: none;
+    }
+    
+    .error-content {
+        padding: 14px 16px;
+        font-size: 0.85rem;
+    }
+} 

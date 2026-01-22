@@ -1,0 +1,273 @@
+/**
+ * Admin Tutorial List Styles
+ *
+ * Styles for the enhanced tutorial list table in WordPress admin.
+ *
+ * @package AidData_LMS
+ * @since 2.0.0
+ */
+
+/* ============================================
+   Thumbnail Column
+   ============================================ */
+.column-thumbnail {
+	width: 80px;
+}
+
+.column-thumbnail img {
+	border-radius: 4px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	display: block;
+}
+
+.column-thumbnail .dashicons {
+	font-size: 48px;
+	color: #ddd;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+}
+
+/* ============================================
+   Step Count Badge
+   ============================================ */
+.column-steps {
+	text-align: center;
+	width: 80px;
+}
+
+.column-steps .step-count {
+	display: inline-block;
+	background: #2271b1;
+	color: #fff;
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: 500;
+	min-width: 24px;
+	text-align: center;
+}
+
+.column-steps .dashicons-minus {
+	color: #ddd;
+	font-size: 20px;
+}
+
+/* ============================================
+   Enrollment Columns
+   ============================================ */
+.column-enrollments,
+.column-active {
+	text-align: center;
+	width: 100px;
+}
+
+.column-enrollments a {
+	font-weight: 600;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.column-enrollments a:hover {
+	color: #2271b1;
+	text-decoration: underline;
+}
+
+.column-active .active-count {
+	font-weight: 600;
+	font-size: 14px;
+	color: #50575e;
+}
+
+/* ============================================
+   Completion Rate Column
+   ============================================ */
+.column-completion_rate {
+	text-align: center;
+	width: 100px;
+}
+
+.column-completion_rate .completion-rate {
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.column-completion_rate .dashicons-minus {
+	color: #ddd;
+	font-size: 20px;
+}
+
+/* ============================================
+   Difficulty Column
+   ============================================ */
+.column-difficulty {
+	width: 120px;
+}
+
+.column-difficulty a {
+	text-decoration: none;
+}
+
+.column-difficulty a:hover {
+	text-decoration: underline;
+}
+
+/* ============================================
+   Quick Edit Custom Fields
+   ============================================ */
+fieldset.inline-edit-col-right .inline-edit-col {
+	padding: 0 12px;
+}
+
+fieldset.inline-edit-col-right label {
+	display: block;
+	margin: 8px 0;
+}
+
+fieldset.inline-edit-col-right .title {
+	display: block;
+	margin-bottom: 4px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+fieldset.inline-edit-col-right input[type="number"] {
+	width: 100%;
+	max-width: 200px;
+}
+
+fieldset.inline-edit-col-right input[type="checkbox"] {
+	margin: 0 4px 0 0;
+	vertical-align: middle;
+}
+
+fieldset.inline-edit-col-right .checkbox-title {
+	vertical-align: middle;
+	font-weight: 400;
+}
+
+/* ============================================
+   Filter Dropdowns
+   ============================================ */
+.tablenav.top .actions {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.tablenav.top select {
+	max-width: 200px;
+}
+
+/* ============================================
+   Admin Notices for Bulk Actions
+   ============================================ */
+.notice.aiddata-lms-notice {
+	padding: 12px;
+	margin: 12px 0;
+}
+
+.notice.aiddata-lms-notice p {
+	margin: 0;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media screen and (max-width: 782px) {
+	.column-thumbnail {
+		display: none;
+	}
+	
+	.column-steps,
+	.column-enrollments,
+	.column-active,
+	.column-completion_rate {
+		text-align: left;
+		padding-left: 35%;
+	}
+	
+	.column-steps::before {
+		content: "Steps: ";
+		font-weight: 600;
+		position: absolute;
+		left: 10px;
+	}
+	
+	.column-enrollments::before {
+		content: "Enrollments: ";
+		font-weight: 600;
+		position: absolute;
+		left: 10px;
+	}
+	
+	.column-active::before {
+		content: "Active: ";
+		font-weight: 600;
+		position: absolute;
+		left: 10px;
+	}
+	
+	.column-completion_rate::before {
+		content: "Completion: ";
+		font-weight: 600;
+		position: absolute;
+		left: 10px;
+	}
+	
+	.column-difficulty::before {
+		content: "Difficulty: ";
+		font-weight: 600;
+		position: absolute;
+		left: 10px;
+	}
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+	.column-thumbnail {
+		display: none;
+	}
+	
+	.row-actions,
+	.check-column {
+		display: none;
+	}
+}
+
+/* ============================================
+   Accessibility Enhancements
+   ============================================ */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	word-wrap: normal !important;
+}
+
+/* Focus indicators for keyboard navigation */
+.column-enrollments a:focus,
+.column-difficulty a:focus {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+	box-shadow: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.column-steps .step-count {
+		border: 1px solid currentColor;
+	}
+	
+	.column-completion_rate .completion-rate {
+		font-weight: 700;
+	}
+}
+

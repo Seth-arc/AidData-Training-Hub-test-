@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continue Your Learning Journey</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f4;">
+    
+    <div style="background-color: #28a745; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+        <h1 style="margin: 0; font-size: 24px;">You're Making Great Progress!</h1>
+    </div>
+    
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <p style="margin-top: 0;">Hi {user_first_name},</p>
+        
+        <p>You're <strong>{progress_percent}%</strong> of the way through <strong>{tutorial_title}</strong>. Keep going!</p>
+        
+        <div style="background-color: #e9ecef; border-radius: 8px; padding: 3px; margin: 20px 0; height: 20px; position: relative;">
+            <div style="background-color: #28a745; height: 20px; border-radius: 6px; width: {progress_percent}%; transition: width 0.6s ease; line-height: 20px; text-align: center; color: white; font-size: 12px; font-weight: bold;">
+                {progress_percent}%
+            </div>
+        </div>
+        
+        <p>Continue where you left off:</p>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{tutorial_url}" style="display: inline-block; background-color: #28a745; color: white; padding: 12px 30px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Continue Learning
+            </a>
+        </div>
+        
+        <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
+            <p style="margin: 0; font-size: 14px; color: #856404;">
+                <strong>Tip:</strong> Consistent learning leads to better retention. Try to complete at least one step today!
+            </p>
+        </div>
+        
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+        
+        <p style="font-size: 12px; color: #999; text-align: center; margin-bottom: 0;">
+            &copy; {current_year} {site_name}. All rights reserved.<br>
+            <a href="{site_url}" style="color: #0073aa; text-decoration: none;">{site_url}</a>
+        </p>
+    </div>
+    
+</body>
+</html>
+

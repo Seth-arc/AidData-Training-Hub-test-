@@ -1,0 +1,417 @@
+/**
+ * Progress Persistence & Resume Functionality CSS
+ * Phase 2 - Prompt 6
+ * 
+ * @package AidData_LMS
+ * @since 2.0.0
+ */
+
+/* ========================================
+   Resume Banner
+   ======================================== */
+
+.tutorial-resume-banner {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: #fff;
+	padding: 2rem;
+	border-radius: 12px;
+	margin: 2rem 0;
+	box-shadow: 0 4px 20px rgba(102, 126, 234, 0.25);
+	position: relative;
+	overflow: hidden;
+}
+
+.tutorial-resume-banner::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+	background-size: 100px 100px;
+	opacity: 0.5;
+	z-index: 0;
+}
+
+.tutorial-resume-banner .resume-content {
+	position: relative;
+	z-index: 1;
+}
+
+.tutorial-resume-banner h3 {
+	margin: 0 0 0.5rem 0;
+	color: #fff;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.tutorial-resume-banner p {
+	margin: 0 0 1.5rem 0;
+	font-size: 1rem;
+	line-height: 1.6;
+	opacity: 0.95;
+}
+
+.resume-actions {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.resume-actions .button {
+	padding: 0.75rem 1.5rem;
+	border-radius: 6px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.resume-actions .button-primary {
+	background: #fff;
+	color: #667eea;
+}
+
+.resume-actions .button-primary:hover {
+	background: #f0f0f0;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.resume-actions .button-secondary {
+	background: transparent;
+	color: #fff;
+	border: 2px solid #fff;
+}
+
+.resume-actions .button-secondary:hover {
+	background: rgba(255, 255, 255, 0.1);
+	transform: translateY(-2px);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+	.tutorial-resume-banner {
+		padding: 1.5rem;
+	}
+	
+	.tutorial-resume-banner h3 {
+		font-size: 1.25rem;
+	}
+	
+	.resume-actions {
+		flex-direction: column;
+	}
+	
+	.resume-actions .button {
+		width: 100%;
+		text-align: center;
+	}
+}
+
+/* ========================================
+   Milestone Modal
+   ======================================== */
+
+.milestone-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.milestone-modal.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.milestone-modal.show .milestone-content {
+	transform: scale(1) translateY(0);
+}
+
+.milestone-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.75);
+	backdrop-filter: blur(4px);
+}
+
+.milestone-content {
+	position: relative;
+	background: #fff;
+	padding: 3rem 2.5rem;
+	border-radius: 16px;
+	text-align: center;
+	max-width: 500px;
+	width: 90%;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	transform: scale(0.9) translateY(20px);
+	transition: transform 0.3s ease;
+}
+
+.milestone-icon {
+	font-size: 5rem;
+	line-height: 1;
+	margin-bottom: 1rem;
+	animation: milestone-bounce 0.6s ease;
+}
+
+@keyframes milestone-bounce {
+	0% {
+		transform: scale(0) rotate(0deg);
+	}
+	50% {
+		transform: scale(1.2) rotate(10deg);
+	}
+	100% {
+		transform: scale(1) rotate(0deg);
+	}
+}
+
+.milestone-content h2 {
+	margin: 0 0 0.75rem 0;
+	font-size: 2rem;
+	font-weight: 700;
+	color: #2c3e50;
+}
+
+.milestone-message {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin: 0 0 0.5rem 0;
+	color: #34495e;
+}
+
+.milestone-description {
+	font-size: 1rem;
+	color: #7f8c8d;
+	margin: 0 0 2rem 0;
+	line-height: 1.6;
+}
+
+.milestone-progress {
+	margin: 2rem 0;
+}
+
+.milestone-progress-bar {
+	width: 100%;
+	height: 12px;
+	background: #ecf0f1;
+	border-radius: 6px;
+	overflow: hidden;
+	margin-bottom: 0.5rem;
+}
+
+.milestone-progress-fill {
+	height: 100%;
+	border-radius: 6px;
+	transition: width 1s ease;
+	background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+}
+
+.milestone-progress-text {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #34495e;
+}
+
+.milestone-content .close-milestone {
+	padding: 0.875rem 2rem;
+	font-size: 1rem;
+	font-weight: 600;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.milestone-content .close-milestone:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.milestone-content .close-milestone:active {
+	transform: translateY(0);
+}
+
+/* Milestone Confetti Animation (Optional Enhancement) */
+.milestone-modal.show::after {
+	content: '🎉 ⭐ 🏆 ✨';
+	position: absolute;
+	top: -50px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 2rem;
+	animation: confetti-fall 3s ease-out;
+	pointer-events: none;
+	opacity: 0;
+}
+
+@keyframes confetti-fall {
+	0% {
+		top: -50px;
+		opacity: 1;
+	}
+	100% {
+		top: 100%;
+		opacity: 0;
+	}
+}
+
+/* Mobile responsive for milestone modal */
+@media (max-width: 640px) {
+	.milestone-content {
+		padding: 2rem 1.5rem;
+		width: 95%;
+	}
+	
+	.milestone-icon {
+		font-size: 3.5rem;
+	}
+	
+	.milestone-content h2 {
+		font-size: 1.5rem;
+	}
+	
+	.milestone-message {
+		font-size: 1.125rem;
+	}
+	
+	.milestone-description {
+		font-size: 0.9375rem;
+	}
+	
+	.milestone-content .close-milestone {
+		width: 100%;
+		padding: 1rem;
+	}
+}
+
+/* ========================================
+   Accessibility Enhancements
+   ======================================== */
+
+/* Focus visible states */
+.resume-actions .button:focus-visible,
+.milestone-content .close-milestone:focus-visible {
+	outline: 3px solid #4A90E2;
+	outline-offset: 2px;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	.milestone-modal,
+	.milestone-content,
+	.milestone-icon,
+	.milestone-progress-fill,
+	.resume-actions .button,
+	.milestone-content .close-milestone {
+		transition: none;
+		animation: none;
+	}
+	
+	.milestone-modal.show::after {
+		display: none;
+	}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.tutorial-resume-banner {
+		border: 2px solid #fff;
+	}
+	
+	.milestone-content {
+		border: 2px solid #000;
+	}
+	
+	.resume-actions .button-secondary {
+		border-width: 3px;
+	}
+}
+
+/* Print styles */
+@media print {
+	.tutorial-resume-banner,
+	.milestone-modal {
+		display: none;
+	}
+}
+
+/* ========================================
+   Loading States
+   ======================================== */
+
+.resume-banner-loading {
+	position: relative;
+	overflow: hidden;
+}
+
+.resume-banner-loading::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.2),
+		transparent
+	);
+	animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+	100% {
+		left: 100%;
+	}
+}
+
+/* ========================================
+   Dark Mode Support
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+	.milestone-content {
+		background: #2c3e50;
+		color: #ecf0f1;
+	}
+	
+	.milestone-content h2 {
+		color: #ecf0f1;
+	}
+	
+	.milestone-message {
+		color: #bdc3c7;
+	}
+	
+	.milestone-description {
+		color: #95a5a6;
+	}
+	
+	.milestone-progress-text {
+		color: #ecf0f1;
+	}
+	
+	.milestone-progress-bar {
+		background: #34495e;
+	}
+}
+

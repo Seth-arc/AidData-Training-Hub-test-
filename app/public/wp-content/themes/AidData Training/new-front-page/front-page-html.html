@@ -1,0 +1,1188 @@
+<!--
+  FRONT PAGE HTML FOR WORDPRESS PAGE EDITOR
+  Copy everything below this comment and paste into WordPress page editor (Text/HTML mode)
+  Site URL: http://localhost:10016
+  Theme Path: http://localhost:10016/wp-content/themes/AidData%20Training
+-->
+
+<!-- Required CSS Files -->
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css/lms.css">
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css/loading-screen.css">
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css/auth-styles.css">
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css/modals.css">
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css/video-player.css">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Scrollbar Styling -->
+<style>
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #026447;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #004E38;
+    }
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #026447 #f1f1f1;
+    }
+</style>
+
+<!-- Loading Screen -->
+<div class="loading-screen">
+    <div class="loading-triangles-container">
+        <div class="loading-triangle triangle-move-1"></div>
+        <div class="loading-triangle triangle-move-2"></div>
+        <div class="loading-triangle triangle-move-3"></div>
+    </div>
+    <div class="loading-content">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logodark.png" alt="AidData Logo" class="loading-logo">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+        </div>
+        <p class="loading-text">Loading Training Hub</p>
+    </div>
+</div>
+
+<header class="lms-header">
+    <div class="header-content">
+        <div class="logo-section">
+            <a href="https://www.aiddata.org" target="_blank">
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logodark.png" alt="AidData Logo" class="logo">
+            </a>
+        </div>
+        <div class="header-actions">
+            <div class="auth-only" style="display: none;">
+                <div class="header-icons">
+                    <button class="header-button" id="notificationsButton" aria-label="Notifications">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <button class="header-button menu-button" aria-label="Menu" aria-haspopup="true">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12h18M3 6h18M3 18h18"/>
+                        </svg>
+                    </button>
+                    <div class="profile-dropdown">
+                        <div class="dropdown-header">
+                            <div class="dropdown-user-info">
+                                <span class="user-name">Your Name</span>
+                                <span class="user-email">your.email@example.com</span>
+                            </div>
+                        </div>
+                        <a href="<?php echo get_permalink(get_page_by_path('lp-profile')); ?>" class="dropdown-item">My Account</a>
+                        <a href="<?php echo get_permalink(get_page_by_path('help')); ?>" class="dropdown-item">Help</a>
+                        <button class="dropdown-item logout-button">Sign Out</button>
+                    </div>
+                </div>
+            </div>
+            <div class="guest-only" style="display: flex;">
+                <button class="header-button login-button">Log In</button>
+                <button class="header-button signup-button">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="lms-main">
+    <section class="welcome-section">
+        <div class="welcome-content">
+            <h2>Training Hub</h2>
+            <p>Aligned with AidData's commitment to actionable research and evidence-based insights, this interactive platform provides flexible learning pathways for data-driven professionals to engage with complex global development challenges, as well as earn completion certificates and digital badges through hands-on experiences.</p>
+            <button class="learn-more-btn">
+                <span>Learn More</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+        </div>
+        <div class="welcome-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- Info Drawer -->
+    <div class="info-drawer">
+        <div class="drawer-content">
+            <button class="close-drawer" aria-label="Close drawer">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="drawer-header">
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logodark.png" alt="AidData Logo" class="drawer-logo">
+                <h2 class="drawer-heading">Training and Professional Development</h2>
+            </div>
+            <div class="drawer-grid">
+                <div class="drawer-left">
+                    <div class="video-section">
+                        <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                            <video
+                                src="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/AidData Training Overview Video.mp4"
+                                poster="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/training_overview_thumbnail.png"
+                                controls
+                                preload="metadata"
+                                title="AidData Training Overview Video"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;"
+                                controlsList="nodownload"
+                                oncontextmenu="return false;">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+
+                    <div class="opportunities-section">
+                        <h4>Current Opportunities</h4>
+                        <div class="opportunities-list">
+                            <div class="opportunity-item">
+                                <div class="opportunity-badge">New</div>
+                                <h5>Pakistan Data Journalism Training</h5>
+                                <p>Join our upcoming data journalism training progam focused on development finance reporting. Perfect for journalists and media professionals looking to enhance their data analysis skills.</p>
+                                <div class="opportunity-meta">
+                                    <span class="opportunity-date">Starting July 2025</span>
+                                    <span class="opportunity-format">Hybrid Format</span>
+                                </div>
+                                <a href="#" class="opportunity-link">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-section">
+                        <h4>Contact Information</h4>
+                        <div class="contact-person">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="contact-avatar">
+                            <div class="contact-details">
+                                <p>Questions about the courses? Interested in partnering?</p>
+                                <p><strong>Sethu Nguna</strong>
+                                Manager, Training & Instructional Design<br>
+                                <a href="mailto:snguna@aiddata.org">snguna@aiddata.org</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drawer-right">
+                    <div class="info-block">
+                        <h4>Overview</h4>
+                        <p>Our training employs a hybrid (blended virtual and in-person) model that combines foundational online courses delivered through William & Mary's Studio for Teaching & Learning Innovation with in-person workshops and policy dialogues. In-person sessions are country- and region-specific for targeted professional development. The curriculum blends academic research with practical methodologies, providing a comprehensive skillset for meaningful engagement with data and development finance.</p>
+                    </div>
+
+                    <div class="info-block">
+                        <h4>Expertise that empowers</h4>
+                        <div class="expertise-grid">
+                            <div class="expertise-tile">
+                                <div class="expertise-image">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/data_journalism_pakistan.jpg" alt="Data journalism course in Pakistan">
+                                </div>
+                                <div class="expertise-content">
+                                    <h5>Data-to-policy curriculum</h5>
+                                    <p>AidData data and tools are incorporated to empower policymakers, analysts, and journalists with the skills to transform data into insights and actionable decisions in the Global South and Global North.</p>
+                                    <span class="expertise-caption">Journalists take a course on data journalism led by AidData and the Center for Excellence in Journalism in Pakistan.</span>
+                                </div>
+                            </div>
+
+                            <div class="expertise-tile">
+                                <div class="expertise-image">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/seth_goodman_workshop.jpg" alt="Dr. Seth Goodman leading a workshop">
+                                </div>
+                                <div class="expertise-content">
+                                    <h5>Experienced subject matter experts</h5>
+                                    <p>AidData researchers and educators bring intensive teaching experience at William & Mary, along with extensive real world experience applying learning in policy and civil society contexts.</p>
+                                    <span class="expertise-caption">AidData Research Scientist Dr. Seth Goodman leads a workshop on remote sensing and machine learning at the Green Climate Fund.</span>
+                                </div>
+                            </div>
+
+                            <div class="expertise-tile">
+                                <div class="expertise-image">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/sethu_nguna_training.jpeg" alt="Sethu Nguna leading a training session">
+                                </div>
+                                <div class="expertise-content">
+                                    <h5>Innovative strategies</h5>
+                                    <p>Hybrid and technology-based delivery is used to ensure learners can effectively interpret data and implement solutions in real-world scenarios.</p>
+                                    <span class="expertise-caption">Sethu Nguna, AidData's Manager, Training & Instructional Design at AidData, has developed institutional digital transformation strategies, courseware design and infrastructure, and academic curricula.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="featured-content">
+        <div class="filter-section" style="margin-bottom: 32px;">
+            <div class="filter-container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                <div class="filter-buttons" style="display: flex; justify-content: space-between; width: 100%;">
+                    <button class="filter-btn active" data-filter="all" style="flex: 1; margin: 0 8px; padding: 8px 12px; white-space: nowrap; font-size: 14px;">All</button>
+                    <button class="filter-btn" data-filter="course" style="flex: 1; margin: 0 8px; padding: 8px 12px; white-space: nowrap; font-size: 14px;">Courses</button>
+                    <button class="filter-btn" data-filter="simulation" style="flex: 1; margin: 0 8px; padding: 8px 12px; white-space: nowrap; font-size: 14px;">Simulations</button>
+                    <button class="filter-btn" data-filter="tutorial" style="flex: 1; margin: 0 8px; padding: 8px 12px; white-space: nowrap; font-size: 14px;">Tutorials</button>
+                    <button class="filter-btn" data-filter="interview" style="flex: 1; margin: 0 8px; padding: 8px 12px; white-space: nowrap; font-size: 14px;">Interviews</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-grid">
+            <!-- Empty State Template -->
+            <div class="empty-state">
+                <div class="empty-state-animation">
+                    <div class="thinking-animation">
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                        <div class="bubble"></div>
+                    </div>
+                    <svg class="hero-character" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="7"/>
+                        <path d="M12 15v6"/>
+                        <path d="M8 21h8"/>
+                        <circle cx="9" cy="7" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="7" r="1" fill="currentColor"/>
+                        <path d="M8 12s2 1 4 1 4-1 4-1"/>
+                    </svg>
+                </div>
+                <h3 class="empty-message">Hmm... This section is as empty as a developer's coffee cup at 9 AM!</h3>
+                <p class="empty-description">Don't worry, we're brewing up some amazing content for this category.</p>
+            </div>
+
+            <!-- Course 1: Navigating Global Development Finance -->
+            <div class="featured-course" data-type="course">
+                <div class="course-preview">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/global_finance.png" alt="Global Development Finance" class="preview-image">
+                    <div class="preview-overlay">
+                        <div class="preview-content">
+                            <h3>Navigating Global Development Finance</h3>
+                            <div class="course-categories">
+                                <span class="category-tag tutorial">Course</span>
+                                <span class="category-tag badge">Digital Badge</span>
+                                <span class="category-tag multimodal">Multimodal</span>
+                            </div>
+                            <p>Learn the fundamentals of development finance, from funding sources to implementation strategies</p>
+                            <div class="course-stats">
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        <polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    12-16 hours
+                                </span>
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    Introductory
+                                </span>
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <polygon points="12,2 22,20 2,20" fill="none" stroke="white" stroke-width="2"/>
+                                    </svg>
+                                    Data Journalism
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="primary-button start-learning" data-course="<?php echo home_url('/t-h/navigating-global-development-finance/'); ?>">Start Learning</button>
+                    <button class="trailer-button" data-video="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/data_journalism.mp4">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10 8 16 12 10 16" fill="currentColor"/>
+                        </svg>
+                        Watch Trailer
+                    </button>
+                    <button class="secondary-button" data-modal="navigatingGlobalDevelopmentFinanceInfo">Info</button>
+                </div>
+            </div>
+
+            <!-- Course 2: Global Chinese Development Finance -->
+            <div class="featured-course" data-type="tutorial">
+                <div class="course-preview">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/china_dashboard.png" alt="China Dashboard Tutorial" class="preview-image">
+                    <div class="preview-overlay">
+                        <div class="preview-content">
+                            <h3>Global Chinese Development Finance</h3>
+                            <div class="course-categories">
+                                <span class="category-tag tutorial">Tutorial</span>
+                                <span class="category-tag">Sovereign Finance</span>
+                                <span class="category-tag">Certificate</span>
+                            </div>
+                            <p>Learn how to effectively use the China.AidData.org dashboard to explore and analyze Chinese development finance data, track projects, and generate insights.</p>
+                            <div class="course-stats">
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        <polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    30-45 mins
+                                </span>
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    All Levels
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="primary-button start-learning" data-course="<?php echo home_url('/t-h/china-aiddata-dashboard/'); ?>">Start Tutorial</button>
+                    <button class="trailer-button" data-video="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/GLOBAL CHINESE DEVELOPMENT FINANCE_tutorial_preview.mp4">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10 8 16 12 10 16" fill="currentColor"/>
+                        </svg>
+                        Watch Preview
+                    </button>
+                    <button class="secondary-button" data-modal="chinaDashboardInfo">Info</button>
+                </div>
+            </div>
+
+            <!-- Course 7: Geospatial Impact Evaluations Tutorial -->
+            <div class="featured-course" data-type="tutorial">
+                <div class="course-preview">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/GIE_coursethumbnail.jpg" alt="Geospatial Impact Evaluations Tutorial" class="preview-image">
+                    <div class="preview-overlay">
+                        <div class="preview-content">
+                            <h3>Geospatial Impact Evaluations</h3>
+                            <div class="course-categories">
+                                <span class="category-tag tutorial">Tutorial</span>
+                                <span class="category-tag">Geospatial Data</span>
+                                <span class="category-tag">Certificate</span>
+                            </div>
+                            <p>An introduction to AidData's geospatial impact evaluation (GIE) methodology for evaluating development interventions using satellite data.</p>
+                            <div class="course-stats">
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        <polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    45-60 mins
+                                </span>
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    Intermediate
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="primary-button start-learning" data-course="<?php echo home_url('/geospatial-impact-evaluation/'); ?>">Start Tutorial</button>
+                    <button class="trailer-button" data-video="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/tut1.mp4">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10 8 16 12 10 16" fill="currentColor"/>
+                        </svg>
+                        Watch Preview
+                    </button>
+                    <button class="secondary-button" data-modal="geospatialImpactEvaluationsInfo">Info</button>
+                </div>
+            </div>
+
+            <!-- Course 5: Mapping China's Port Investments -->
+            <div class="featured-course" data-type="tutorial">
+                <div class="course-preview">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/harboring_global_ambitions.PNG" alt="Mapping China's Port Investments Tutorial" class="preview-image">
+                    <div class="preview-overlay">
+                        <div class="preview-content">
+                            <h3>Mapping China's Port Investments</h3>
+                            <div class="course-categories">
+                                <span class="category-tag tutorial">Tutorial</span>
+                                <span class="category-tag">National Security</span>
+                                <span class="category-tag">Certificate</span>
+                            </div>
+                            <p>Explore China's global port investments and their strategic implications for future overseas naval bases through comprehensive data analysis and geopolitical insights.</p>
+                            <div class="course-stats">
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        <polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    30-45 mins
+                                </span>
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    All Levels
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="primary-button start-learning" data-course="<?php echo home_url('/harboring-global-ambitions/'); ?>">Start Tutorial</button>
+                    <button class="trailer-button" data-video="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/tut1.mp4">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10 8 16 12 10 16" fill="currentColor"/>
+                        </svg>
+                        Watch Preview
+                    </button>
+                    <button class="secondary-button" data-modal="harboringGlobalAmbitionsInfo">Info</button>
+                </div>
+            </div>
+
+            <!-- Course 6: How China Lends Dashboard Tutorial -->
+            <div class="featured-course" data-type="tutorial">
+                <div class="course-preview">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/china_lends.png" alt="How China Lends Dashboard Tutorial" class="preview-image">
+                    <div class="preview-overlay">
+                        <div class="preview-content">
+                            <h3>How China Lends and Collateralizes</h3>
+                            <div class="course-categories">
+                                <span class="category-tag tutorial">Tutorial</span>
+                                <span class="category-tag">Sovereign Finance</span>
+                                <span class="category-tag">Certificate</span>
+                            </div>
+                            <p>Learn to navigate the How China Lends and Collateralizes Dashboard to analyze Chinese loan contract terms, conditions, and patterns across countries and sectors.</p>
+                            <div class="course-stats">
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        <polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    30-45 mins
+                                </span>
+                                <span class="stat">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    All Levels
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="primary-button start-learning" data-course="<?php echo home_url('/courses/how-china-lends-tutorial/'); ?>">Start Tutorial</button>
+                    <button class="trailer-button" data-video="<?php echo get_stylesheet_directory_uri(); ?>/assets/videos/china_lends_preview.mp4">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="10 8 16 12 10 16" fill="currentColor"/>
+                        </svg>
+                        Watch Preview
+                    </button>
+                    <button class="secondary-button" data-modal="howchinalendsInfo">Info</button>
+                </div>
+            </div>
+
+            <!-- Interview 4: Harboring Global Ambitions -->
+            <div class="featured-course" data-type="interview">
+                <div class="course-preview">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/harboring_global_ambitions_interview.png" alt="Harboring Global Ambitions" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="preview-overlay">
+                        <div class="preview-content">
+                            <h3>Harboring Global Ambitions</h3>
+                            <div class="course-categories">
+                                <span class="category-tag interview">Interview</span>
+                                <span class="category-tag">National Security</span>
+                            </div>
+                            <p>Using Development Finance Data to Analyze Military Expansion<br>with Alex Wooley</p><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="primary-button start-learning" data-course="<?php echo home_url('/t-h/harboring-global-ambitionss/'); ?>">Watch Interview</button>
+                </div>
+            </div>
+
+            <!-- Interview 5: Listening to Leaders -->
+            <div class="featured-course" data-type="interview">
+                <div class="course-preview">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/listening_to_leaders_interview.png" alt="Listening to Leaders" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="preview-overlay">
+                        <div class="preview-content">
+                            <h3>Listening to Leaders</h3>
+                            <div class="course-categories">
+                                <span class="category-tag interview">Interview</span>
+                                <span class="category-tag">Foreign Policy</span>
+                            </div>
+                            <p>Understanding How Leaders' Voices Shape Foreign Policy<br>with Divya Matthews and Ana Horigoshi</p><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-actions">
+                    <button class="primary-button start-learning" data-course="<?php echo home_url('/interviews/'); ?>">Watch Interview</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Modal for Mapping China's Port Investments -->
+    <div class="info-modal" id="harboringGlobalAmbitionsInfo">
+        <div class="info-container">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="info-content">
+                <div class="title-section">
+                    <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
+                    </div>
+                    <h3>Mapping China's Port Investments</h3>
+                </div>
+                <div class="course-instructors">
+                    <h4>Tutorial Authors</h4>
+                    <div class="instructor-avatars">
+                        <div class="instructor">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/alex_wooley.jpg" alt="Alex Wooley" class="instructor-avatar">
+                            <div class="instructor-info">
+                                <h5>Alex Wooley</h5>
+                                <p>Director, Partnerships & Communications</p>
+                            </div>
+                        </div>
+                        <div class="instructor">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="instructor-avatar">
+                            <div class="instructor-info">
+                                <h5>Sethu Nguna</h5>
+                                <p>Manager, Training & Instructional Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-partnership">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <p>Developed by the AidData Research Lab at William & Mary</p>
+                </div>
+                <div class="info-description">
+                    <h4>About this Tutorial</h4>
+                    <p>Explore China's strategic maritime expansion through an in-depth analysis of its $29.9 billion investment in 123 seaport projects across 78 ports in 46 countries.</p>
+                    <h4>What You'll Learn</h4>
+                    <ul class="learning-objectives">
+                        <li>Understanding China's global port investment strategy and financing patterns from 2000-2021</li>
+                        <li>Analysis of the top 8 potential locations for future Chinese naval bases</li>
+                        <li>Geospatial analysis techniques for assessing strategic maritime infrastructure</li>
+                        <li>Evaluation of geopolitical implications and national security considerations</li>
+                        <li>Methods for analyzing dual-use infrastructure and military potential</li>
+                        <li>Case studies of key ports including Hambantota, Gwadar, and Djibouti</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal for China.AidData.org Tutorial -->
+    <div class="info-modal" id="chinaDashboardInfo">
+        <div class="info-container">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="info-content">
+                <div class="title-section">
+                    <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
+                    </div>
+                    <h3>Global Chinese Development Finance</h3>
+                </div>
+                <div class="info-description">
+                    <h4>About this Tutorial</h4>
+                    <p>Get hands-on experience with AidData's premier tool for tracking Chinese development finance.</p>
+                    <h4>What You'll Learn</h4>
+                    <ul class="learning-objectives">
+                        <li>How to access and interpret project-level data on Chinese development finance</li>
+                        <li>Techniques for filtering and searching across 13,000+ projects</li>
+                        <li>Ways to analyze geographical distribution of Chinese development finance</li>
+                        <li>Methods for comparing projects across sectors and regions</li>
+                        <li>Steps to download and cite data for research</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal for How China Lends -->
+    <div class="info-modal" id="howchinalendsInfo">
+        <div class="info-container">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="info-content">
+                <div class="title-section">
+                    <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
+                    </div>
+                    <h3>How China Lends and Collateralizes</h3>
+                </div>
+                <div class="info-description">
+                    <h4>About this Tutorial</h4>
+                    <p>Learn to navigate the How China Lends and Collateralizes Dashboard to analyze Chinese loan contract terms, conditions, and patterns across countries and sectors.</p>
+                    <h4>What You'll Learn</h4>
+                    <ul class="learning-objectives">
+                        <li>How to use the dashboard interface to access detailed contract information</li>
+                        <li>Methods for analyzing and comparing key contract terms across countries</li>
+                        <li>Techniques for identifying patterns in lending terms and conditions</li>
+                        <li>Ways to visualize contract data for different sectors and regions</li>
+                        <li>Best practices for interpreting contract terms and their implications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal for Geospatial Impact Evaluations -->
+    <div class="info-modal" id="geospatialImpactEvaluationsInfo">
+        <div class="info-container">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="info-content">
+                <div class="title-section">
+                    <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
+                    </div>
+                    <h3>Geospatial Impact Evaluations</h3>
+                </div>
+                <div class="course-instructors">
+                    <h4>Tutorial Instructor</h4>
+                    <div class="instructor-avatars">
+                        <div class="instructor">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/seth_goodman.png" alt="Dr. Seth Goodman" class="instructor-avatar">
+                            <div class="instructor-info">
+                                <h5>Dr. Seth Goodman</h5>
+                                <p>Research Scientist, Geospatial Impact Evaluations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-partnership">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <p>Developed by the AidData Research Lab at William & Mary</p>
+                </div>
+                <div class="info-description">
+                    <h4>About this Tutorial</h4>
+                    <p>Discover AidData's pioneering geospatial impact evaluation (GIE) methodology that enables rigorous evaluation of development interventions using satellite observations and spatial analysis.</p>
+                    <h4>What You'll Learn</h4>
+                    <ul class="learning-objectives">
+                        <li>Understanding the fundamentals of geospatial impact evaluation methodology</li>
+                        <li>How to leverage satellite data and spatial analysis for impact measurement</li>
+                        <li>Techniques for establishing reliable counterfactuals using geographic data</li>
+                        <li>Methods for measuring development outcomes remotely and retrospectively</li>
+                        <li>Best practices for implementing GIEs in various development contexts</li>
+                        <li>Real-world case studies demonstrating GIE applications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal for Navigating Global Development Finance -->
+    <div class="info-modal" id="navigatingGlobalDevelopmentFinanceInfo">
+        <div class="info-container">
+            <button class="close-info" aria-label="Close">&times;</button>
+            <div class="info-content">
+                <div class="title-section">
+                    <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/data_journalism_badge.png" alt="Course Badge" style="width: 35px; height: 35px;">
+                    </div>
+                    <h3>Navigating Global Development Finance</h3>
+                </div>
+                <div class="course-instructors">
+                    <h4>Course Instructors</h4>
+                    <div class="instructor-avatars">
+                        <div class="instructor">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/alex_wooley.jpg" alt="Alex Wooley" class="instructor-avatar">
+                            <div class="instructor-info">
+                                <h5>Alex Wooley</h5>
+                                <p>Director, Partnerships & Communications</p>
+                            </div>
+                        </div>
+                        <div class="instructor">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
+                            <div class="instructor-info">
+                                <h5>John Custer</h5>
+                                <p>Deputy Director, Communications & Data Analytics</p>
+                            </div>
+                        </div>
+                        <div class="instructor">
+                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="instructor-avatar">
+                            <div class="instructor-info">
+                                <h5>Sethu Nguna</h5>
+                                <p>Manager, Training & Instructional Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-partnership">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <p>Delivered in partnership with the W&M Studio for Teaching and Learning Innovation</p>
+                </div>
+                <div class="info-description">
+                    <h4>About this Course</h4>
+                    <p>Learn the fundamentals of development finance, from funding sources to implementation strategies.</p>
+                    <h4>Who is this Course for?</h4>
+                    <ul class="learning-objectives">
+                        <li>Development finance professionals</li>
+                        <li>Government officials working in finance and development</li>
+                        <li>NGO staff involved in project funding</li>
+                        <li>Students pursuing careers in international development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal" role="dialog" aria-hidden="true" aria-labelledby="authModalTitle">
+        <div class="auth-container">
+            <button class="close-auth" aria-label="Close">&times;</button>
+            <div class="auth-header">
+                <h3 id="authModalTitle">Start Your Learning Journey</h3>
+                <p>Please log in or create an account to access this course</p>
+            </div>
+            <div class="auth-options">
+                <button class="auth-button login-button">Log In</button>
+                <button class="auth-button signup-button">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="signup-modal" id="signupModal" role="dialog" aria-hidden="true" aria-labelledby="signupModalTitle">
+        <div class="signup-container">
+            <button class="close-signup" aria-label="Close">&times;</button>
+            <div class="signup-header">
+                <h3 id="signupModalTitle">Create Your Account</h3>
+                <p>Join AidData Training Hub to access all courses and track your progress</p>
+            </div>
+            <form class="signup-form" id="signupForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <p class="password-requirements">Password must be at least 8 characters long and include a number and special character</p>
+                </div>
+                <div class="form-group">
+                    <label for="organization">Organization (Optional)</label>
+                    <input type="text" id="organization" name="organization">
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">Subscribe to the AidData newsletter</label>
+                </div>
+                <div class="form-message" style="display: none; margin: 10px 0; padding: 10px; border-radius: 4px; color: #fff; background-color: #d32f2f;"></div>
+                <div class="form-footer">
+                    <button type="submit" class="create-account-button">Create Account</button>
+                    <p>Already have an account? <a href="#" class="login-link">Log in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal" role="dialog" aria-hidden="true" aria-labelledby="loginModalTitle">
+        <div class="login-container">
+            <button class="close-login" aria-label="Close">&times;</button>
+            <div class="login-header">
+                <h3 id="loginModalTitle">Welcome Back</h3>
+                <p>Please log in to continue</p>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#" class="forgot-password-link">Forgot Password?</a>
+                </div>
+                <div class="form-message" style="display: none; margin: 10px 0; padding: 10px; border-radius: 4px; color: #fff; background-color: #d32f2f;"></div>
+                <button type="submit" class="login-button-submit">Log In</button>
+                <div class="form-footer">
+                    <p>Need an account? <a href="#" class="signup-link">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="forgot-password-modal" id="forgotPasswordModal" role="dialog" aria-hidden="true">
+        <div class="forgot-password-container">
+            <button class="close-forgot-password" aria-label="Close">&times;</button>
+            <div class="forgot-password-header">
+                <h3>Reset Your Password</h3>
+                <p>Enter your email address and we'll send you instructions to reset your password</p>
+            </div>
+            <form class="forgot-password-form" id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="resetEmail">Email Address</label>
+                    <input type="email" id="resetEmail" name="email" required>
+                </div>
+                <div class="form-message" style="display: none; margin: 10px 0; padding: 10px; border-radius: 4px;"></div>
+                <button type="submit" class="reset-password-button">Send Reset Link</button>
+                <div class="form-footer">
+                    <p>Remembered your password? <a href="#" class="login-link">Back to login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="courseTrailer" role="dialog" aria-hidden="true">
+        <button class="close-modal" aria-label="Close video">&times;</button>
+        <div class="video-container">
+            <iframe src="about:blank" allow="fullscreen; encrypted-media" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div class="notification-modal" id="notificationModal">
+        <div class="notification-container">
+            <button class="close-notifications" aria-label="Close">&times;</button>
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button class="mark-all-read">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+                <div class="notification-item unread">
+                    <div class="notification-content">
+                        <p>Your grade for "Data Analysis Fundamentals" has been updated</p>
+                        <span class="notification-time">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-content">
+                        <p>New course available: "Advanced Development Finance"</p>
+                        <span class="notification-time">1 day ago</span>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-content">
+                        <p>Your certificate for "Global Development Finance" is ready</p>
+                        <span class="notification-time">3 days ago</span>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-footer">
+                <a href="#" class="view-all-notifications">View all notifications</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logo.png" alt="AidData Logo" class="footer-logo">
+            <p> </p>
+            <div class="social-links">
+                <a href="https://twitter.com/AidData" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+                <a href="https://www.linkedin.com/company/aiddata" target="_blank" rel="noopener noreferrer" aria-label="Connect with us on LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="https://github.com/aiddata" target="_blank" rel="noopener noreferrer" aria-label="View our code on GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/aiddata" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+            </div>
+            <button onclick="window.open('https://www.aiddata.org/newsletter', '_blank')" class="newsletter-button" style="display: block; background-color: #026447; color: white; padding: 10px 18px; border-radius: 6px; border: none; cursor: pointer; margin-top: 20px; font-weight: 600; font-size: 13px; width: fit-content; text-transform: uppercase;">
+                <span>Subscribe to Newsletter</span>
+            </button>
+        </div>
+
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="https://www.aiddata.org/about" target="_blank">About Us</a></li>
+                <li><a href="https://www.aiddata.org/data" target="_blank">Data</a></li>
+                <li><a href="https://www.aiddata.org/publications" target="_blank">Publications</a></li>
+                <li><a href="https://www.aiddata.org/blog" target="_blank">Blog</a></li>
+                <li><a href="https://www.aiddata.org/careers" target="_blank">Careers</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Resources</h4>
+            <ul>
+                <li><a href="https://www.aiddata.org/methods" target="_blank">Methods</a></li>
+                <li><a href="https://www.aiddata.org/datasets" target="_blank">Datasets</a></li>
+                <li><a href="https://www.aiddata.org/geoquery" target="_blank">GeoQuery</a></li>
+                <li><a href="https://www.aiddata.org/china-research-lab" target="_blank">China Research Lab</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <address>
+                If you're looking to partner up for online, hybrid or in-person trainings, please reach out to<br>
+                <a href="mailto:training@aiddata.org" style="color: #ffffff;">training@aiddata.org</a>
+            </address>
+        </div>
+    </div>
+
+    <hr style="border: 0; height: 1px; background-color: white; width: 100%; margin: 20px 0;">
+
+    <div class="footer-bottom" style="background: transparent;">
+        <div class="footer-bottom-content">
+            <a href="https://www.wm.edu" target="_blank" rel="noopener noreferrer">
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo" class="footer-bottom-logo" style="max-height: 60px;">
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Required JavaScript Files -->
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/lms.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/modals.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/video-player.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/page-transitions.js"></script>
+
+<!-- Loading Screen Control Script -->
+<script>
+(function() {
+    function hideLoadingScreen() {
+        const loadingScreen = document.querySelector('.loading-screen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+            document.body.classList.add('loaded');
+            setTimeout(function() {
+                loadingScreen.remove();
+            }, 500);
+        }
+    }
+    if (document.readyState === 'complete') {
+        hideLoadingScreen();
+    } else {
+        window.addEventListener('load', hideLoadingScreen);
+    }
+    setTimeout(hideLoadingScreen, 3000);
+})();
+</script>
+
+<!-- Filter Buttons Functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filter buttons functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const featuredCourses = document.querySelectorAll('.featured-course');
+    const emptyState = document.querySelector('.empty-state');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            const filter = this.getAttribute('data-filter');
+            let visibleCount = 0;
+
+            featuredCourses.forEach(course => {
+                const type = course.getAttribute('data-type');
+                if (filter === 'all' || type === filter) {
+                    course.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    course.style.display = 'none';
+                }
+            });
+
+            // Show/hide empty state
+            if (emptyState) {
+                emptyState.style.display = visibleCount === 0 ? 'flex' : 'none';
+            }
+        });
+    });
+
+    // Info drawer toggle
+    const learnMoreBtn = document.querySelector('.learn-more-btn');
+    const infoDrawer = document.querySelector('.info-drawer');
+    const closeDrawer = document.querySelector('.close-drawer');
+
+    if (learnMoreBtn && infoDrawer) {
+        learnMoreBtn.addEventListener('click', function() {
+            infoDrawer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    if (closeDrawer && infoDrawer) {
+        closeDrawer.addEventListener('click', function() {
+            infoDrawer.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Info modals
+    const infoButtons = document.querySelectorAll('.secondary-button[data-modal]');
+    infoButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close info modals
+    const closeInfoButtons = document.querySelectorAll('.close-info');
+    closeInfoButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = this.closest('.info-modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // Close modals when clicking outside
+    document.querySelectorAll('.info-modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // Start Learning buttons
+    const startButtons = document.querySelectorAll('.start-learning');
+    startButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const courseUrl = this.getAttribute('data-course');
+            if (courseUrl) {
+                window.location.href = courseUrl;
+            }
+        });
+    });
+
+    // Trailer buttons
+    const trailerButtons = document.querySelectorAll('.trailer-button');
+    const videoModal = document.getElementById('courseTrailer');
+    const videoIframe = videoModal ? videoModal.querySelector('iframe') : null;
+
+    trailerButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const videoUrl = this.getAttribute('data-video');
+            if (videoUrl && videoModal && videoIframe) {
+                videoIframe.src = videoUrl;
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close video modal
+    const closeVideoBtn = videoModal ? videoModal.querySelector('.close-modal') : null;
+    if (closeVideoBtn) {
+        closeVideoBtn.addEventListener('click', function() {
+            videoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (videoIframe) videoIframe.src = 'about:blank';
+        });
+    }
+
+    // Auth modals
+    const loginButtons = document.querySelectorAll('.login-button');
+    const signupButtons = document.querySelectorAll('.signup-button');
+    const loginModal = document.getElementById('loginModal');
+    const signupModal = document.getElementById('signupModal');
+    const authModal = document.getElementById('authModal');
+
+    loginButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (authModal) authModal.classList.remove('active');
+            if (loginModal) {
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    signupButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (authModal) authModal.classList.remove('active');
+            if (signupModal) {
+                signupModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close auth modals
+    document.querySelectorAll('.close-auth, .close-login, .close-signup').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const modal = this.closest('.auth-modal, .login-modal, .signup-modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // Switch between login and signup
+    document.querySelectorAll('.login-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (signupModal) signupModal.classList.remove('active');
+            document.getElementById('forgotPasswordModal')?.classList.remove('active');
+            if (loginModal) loginModal.classList.add('active');
+        });
+    });
+
+    document.querySelectorAll('.signup-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (loginModal) loginModal.classList.remove('active');
+            if (signupModal) signupModal.classList.add('active');
+        });
+    });
+
+    // Notifications
+    const notificationsButton = document.getElementById('notificationsButton');
+    const notificationModal = document.getElementById('notificationModal');
+    const closeNotifications = document.querySelector('.close-notifications');
+
+    if (notificationsButton && notificationModal) {
+        notificationsButton.addEventListener('click', function() {
+            notificationModal.classList.toggle('active');
+        });
+    }
+
+    if (closeNotifications && notificationModal) {
+        closeNotifications.addEventListener('click', function() {
+            notificationModal.classList.remove('active');
+        });
+    }
+
+    // Profile dropdown
+    const menuButton = document.querySelector('.menu-button');
+    const profileDropdown = document.querySelector('.profile-dropdown');
+
+    if (menuButton && profileDropdown) {
+        menuButton.addEventListener('click', function() {
+            profileDropdown.classList.toggle('active');
+        });
+    }
+
+    console.log('Front page functionality loaded');
+});
+</script>

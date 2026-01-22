@@ -1,0 +1,801 @@
+/**
+ * Tutorial Meta Boxes Styles
+ *
+ * Styling for tutorial meta boxes in the WordPress admin.
+ *
+ * @package AidData_LMS
+ * @since 2.0.0
+ */
+
+/* ============================================================================
+   Basic Meta Box Styles
+   ========================================================================== */
+
+.aiddata-tutorial-meta-box,
+.aiddata-tutorial-settings {
+  padding: 0;
+}
+
+.aiddata-tutorial-meta-box .form-field,
+.aiddata-tutorial-settings .setting-field {
+  margin-bottom: 20px;
+}
+
+.aiddata-tutorial-meta-box .form-field:last-child,
+.aiddata-tutorial-settings .setting-field:last-child {
+  margin-bottom: 0;
+}
+
+.aiddata-tutorial-meta-box label,
+.aiddata-tutorial-settings label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.aiddata-tutorial-meta-box .required {
+  color: #dc3232;
+  font-weight: bold;
+}
+
+.aiddata-tutorial-meta-box .description,
+.aiddata-tutorial-settings .description {
+  color: #646970;
+  font-size: 13px;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.aiddata-tutorial-meta-box .description.error {
+  color: #dc3232;
+}
+
+/* Character Counter */
+#char-count {
+  font-weight: 600;
+}
+
+#char-count.over-limit {
+  color: #dc3232;
+  font-weight: bold;
+}
+
+/* ============================================================================
+   Prerequisites Selector
+   ========================================================================== */
+
+#prerequisites-selector {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#prerequisites-search {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #8c8f94;
+  border-radius: 4px;
+}
+
+#prerequisites-search:focus {
+  border-color: #2271b1;
+  outline: none;
+  box-shadow: 0 0 0 1px #2271b1;
+}
+
+.prerequisites-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #8c8f94;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.prerequisites-results .tutorial-result {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f1;
+  transition: background-color 0.15s ease;
+}
+
+.prerequisites-results .tutorial-result:last-child {
+  border-bottom: none;
+}
+
+.prerequisites-results .tutorial-result:hover {
+  background-color: #f6f7f7;
+}
+
+.prerequisites-results .tutorial-result strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.prerequisites-results .tutorial-excerpt {
+  display: block;
+  font-size: 12px;
+  color: #646970;
+}
+
+.prerequisites-results .loading,
+.prerequisites-results .no-results,
+.prerequisites-results .error {
+  padding: 10px;
+  text-align: center;
+  color: #646970;
+  font-style: italic;
+}
+
+.prerequisites-results .error {
+  color: #dc3232;
+}
+
+/* Selected Prerequisites */
+.selected-prerequisites {
+  min-height: 40px;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  padding: 8px;
+  background: #f9f9f9;
+}
+
+.selected-prerequisites:empty::before {
+  content: attr(data-empty-text);
+  color: #646970;
+  font-style: italic;
+}
+
+.prerequisite-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 5px;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  cursor: move;
+}
+
+.prerequisite-item:last-child {
+  margin-bottom: 0;
+}
+
+.prerequisite-item .dashicons-menu {
+  color: #8c8f94;
+  margin-right: 8px;
+  cursor: move;
+}
+
+.prerequisite-item .prerequisite-title {
+  flex: 1;
+  font-weight: 500;
+}
+
+.prerequisite-item .remove-prerequisite {
+  color: #dc3232;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.prerequisite-item .remove-prerequisite:hover {
+  opacity: 0.7;
+}
+
+.prerequisite-item .remove-prerequisite .dashicons {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.prerequisite-placeholder {
+  height: 40px;
+  background: #f0f0f1;
+  border: 2px dashed #8c8f94;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+/* ============================================================================
+   Learning Outcomes
+   ========================================================================== */
+
+#learning-outcomes-list {
+  margin-bottom: 10px;
+}
+
+.outcome-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.outcome-item:last-child {
+  margin-bottom: 0;
+}
+
+.outcome-item .dashicons-menu {
+  color: #8c8f94;
+  margin-right: 8px;
+  cursor: move;
+}
+
+.outcome-item input[type="text"] {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.outcome-item .remove-outcome {
+  color: #dc3232;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.outcome-item .remove-outcome:hover {
+  opacity: 0.7;
+}
+
+.outcome-item .remove-outcome .dashicons {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.outcome-placeholder {
+  height: 38px;
+  background: #f0f0f1;
+  border: 2px dashed #8c8f94;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+#add-outcome {
+  margin-top: 5px;
+}
+
+#add-outcome .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+/* ============================================================================
+   Settings Meta Box
+   ========================================================================== */
+
+.aiddata-tutorial-settings hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #dcdcde;
+}
+
+.aiddata-tutorial-settings .setting-field strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #50575e;
+}
+
+.aiddata-tutorial-settings input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.aiddata-tutorial-settings label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================================================
+   Responsive Styles
+   ========================================================================== */
+
+@media screen and (max-width: 782px) {
+  .aiddata-tutorial-meta-box .form-field,
+  .aiddata-tutorial-settings .setting-field {
+    margin-bottom: 15px;
+  }
+
+  .prerequisite-item,
+  .outcome-item {
+    font-size: 14px;
+  }
+
+  #prerequisites-search {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* ============================================================================
+   Accessibility
+   ========================================================================== */
+
+.prerequisite-item:focus-within,
+.outcome-item:focus-within {
+  outline: 2px solid #2271b1;
+  outline-offset: 2px;
+}
+
+.tutorial-result:focus {
+  outline: 2px solid #2271b1;
+  outline-offset: -2px;
+  background-color: #f6f7f7;
+}
+
+/* Screen reader text */
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  word-wrap: normal !important;
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   jQuery UI Date Picker Overrides
+   ========================================================================== */
+
+.ui-datepicker {
+  z-index: 99999 !important;
+}
+
+/* ============================================================================
+   Error States
+   ========================================================================== */
+
+.aiddata-tutorial-meta-box .notice {
+  margin: 0 0 15px 0;
+  padding: 10px;
+}
+
+.aiddata-tutorial-meta-box .notice ul {
+  margin: 5px 0 0 20px;
+}
+
+.aiddata-tutorial-meta-box .notice li {
+  list-style: disc;
+}
+
+/* ============================================================================
+   Step Builder Styles
+   ========================================================================== */
+
+/* Step Builder Header */
+.aiddata-step-builder {
+  margin: 0;
+  padding: 0;
+}
+
+.step-builder-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f9f9f9;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.step-templates {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.step-templates label {
+  margin: 0;
+  font-weight: 600;
+  color: #50575e;
+}
+
+.add-step-template {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px !important;
+  height: auto !important;
+}
+
+.add-step-template .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Step Builder Container */
+.step-builder-container {
+  min-height: 200px;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  padding: 15px;
+  background: #fff;
+}
+
+.no-steps-message {
+  text-align: center;
+  padding: 60px 20px;
+  color: #646970;
+}
+
+.no-steps-message p {
+  font-size: 15px;
+  margin: 0;
+}
+
+/* Steps List */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.step-item:hover {
+  border-color: #8c8f94;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.step-handle {
+  cursor: move;
+  color: #8c8f94;
+  transition: color 0.15s ease;
+}
+
+.step-handle:hover {
+  color: #2271b1;
+}
+
+.step-handle .dashicons {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #f0f6fc;
+  border-radius: 4px;
+  color: #2271b1;
+}
+
+.step-icon .dashicons {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.step-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1d2327;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-required-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #dc3232;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.step-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: #646970;
+}
+
+.step-type {
+  font-weight: 500;
+  color: #2271b1;
+}
+
+.step-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.step-time .dashicons {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
+.step-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.step-actions .button-small {
+  padding: 4px 8px !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.step-actions .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.step-actions .delete-step {
+  color: #dc3232;
+}
+
+.step-actions .delete-step:hover {
+  color: #a00;
+}
+
+.step-placeholder {
+  height: 70px;
+  background: #f0f0f1;
+  border: 2px dashed #8c8f94;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Modal Styles */
+.aiddata-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000;
+  display: none;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  position: relative;
+  max-width: 800px;
+  max-height: 90vh;
+  margin: 5vh auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #dcdcde;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #1d2327;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: #646970;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.modal-close:hover {
+  background: #f0f0f1;
+  color: #1d2327;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px 24px;
+  border-top: 1px solid #dcdcde;
+  background: #f9f9f9;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Step Editor Form */
+.step-editor-form {
+  max-width: 100%;
+}
+
+.step-editor-form .form-field {
+  margin-bottom: 20px;
+}
+
+.step-editor-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1d2327;
+}
+
+.step-editor-form .required {
+  color: #dc3232;
+  font-weight: bold;
+}
+
+.step-editor-form .description {
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+  color: #646970;
+  font-style: italic;
+}
+
+.step-editor-form h3 {
+  margin: 25px 0 15px;
+  padding-top: 20px;
+  border-top: 1px solid #dcdcde;
+  font-size: 15px;
+  color: #1d2327;
+}
+
+.step-editor-form h3:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.step-editor-form input[type="text"],
+.step-editor-form input[type="url"],
+.step-editor-form input[type="number"],
+.step-editor-form textarea,
+.step-editor-form select {
+  width: 100%;
+  max-width: 100%;
+}
+
+.step-editor-form input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+}
+
+.step-editor-form .small-text {
+  width: 80px;
+}
+
+/* Resource Management */
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+}
+
+.resource-item input {
+  flex: 1;
+}
+
+.resource-item .remove-resource {
+  flex-shrink: 0;
+}
+
+#resources-list {
+  margin-bottom: 10px;
+}
+
+/* ============================================================================
+   Responsive Styles
+   ========================================================================== */
+
+@media screen and (max-width: 782px) {
+  .step-builder-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .step-templates {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+
+  .step-item {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+
+  .step-actions {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .modal-content {
+    max-width: 95%;
+    margin: 2vh auto;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .step-icon {
+    display: none;
+  }
+
+  .step-handle {
+    margin-right: 5px;
+  }
+}
+

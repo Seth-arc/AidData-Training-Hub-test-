@@ -1,0 +1,448 @@
+/**
+ * AidData LMS Notifications CSS
+ *
+ * @package AidData_LMS
+ * @since 1.1.0
+ */
+
+/* Notification Panel */
+.aiddata-notification-panel {
+    position: fixed;
+    top: 32px;
+    right: 20px;
+    width: 400px;
+    max-height: 600px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    z-index: 999999;
+    transform: translateX(420px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.aiddata-notification-panel.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Header */
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.notification-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.notification-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.notification-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    color: #666;
+    transition: background-color 0.2s;
+}
+
+.notification-actions button:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+/* Content */
+.notification-content {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.notification-list {
+    padding: 0;
+}
+
+/* Individual Notification */
+.notification-item {
+    display: flex;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item.unread {
+    background: #f0f8ff;
+    border-left: 4px solid #004E38;
+}
+
+.notification-item.unread:hover {
+    background: #e6f3ff;
+}
+
+/* Notification Icon */
+.notification-icon {
+    flex-shrink: 0;
+    margin-right: 12px;
+    margin-top: 2px;
+}
+
+.notification-icon .dashicons {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+}
+
+.notification-success .notification-icon .dashicons {
+    color: #28a745;
+}
+
+.notification-info .notification-icon .dashicons {
+    color: #17a2b8;
+}
+
+.notification-warning .notification-icon .dashicons {
+    color: #ffc107;
+}
+
+.notification-error .notification-icon .dashicons {
+    color: #dc3545;
+}
+
+.notification-achievement .notification-icon .dashicons {
+    color: #fd7e14;
+}
+
+/* Notification Content */
+.notification-item .notification-content {
+    flex: 1;
+    max-height: none;
+    overflow: visible;
+}
+
+.notification-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.notification-message {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.notification-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.notification-time {
+    color: #999;
+}
+
+.notification-action {
+    background: #004E38;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.notification-action:hover {
+    background: #024d3a;
+    color: white;
+    text-decoration: none;
+}
+
+/* Notification Actions */
+.notification-item .notification-actions {
+    flex-shrink: 0;
+    margin-left: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.unread-indicator {
+    width: 8px;
+    height: 8px;
+    background: #004E38;
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+.delete-notification {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    color: #999;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.notification-item:hover .delete-notification {
+    opacity: 1;
+}
+
+.delete-notification:hover {
+    background: #f5f5f5;
+    color: #dc3545;
+}
+
+.delete-notification .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+/* Priority Indicators */
+.notification-item.priority-3 {
+    border-left-width: 6px;
+}
+
+.notification-item.priority-2 {
+    border-left-width: 4px;
+}
+
+.notification-item.priority-1 {
+    border-left-width: 2px;
+}
+
+/* Loading State */
+.notification-loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Load More */
+.notification-load-more {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.load-more-btn {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.load-more-btn:hover {
+    background: #e9ecef;
+    border-color: #ccc;
+}
+
+/* No Notifications */
+.no-notifications {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+}
+
+.no-notifications .dashicons {
+    font-size: 48px;
+    opacity: 0.3;
+    margin-bottom: 10px;
+}
+
+.no-notifications p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .aiddata-notification-panel {
+        right: 10px;
+        left: 10px;
+        width: auto;
+        top: 46px; /* Account for mobile admin bar */
+    }
+    
+    .aiddata-notification-panel.show {
+        transform: translateY(0);
+    }
+    
+    .aiddata-notification-panel {
+        transform: translateY(-100vh);
+    }
+}
+
+@media (max-width: 480px) {
+    .notification-item {
+        padding: 12px 15px;
+    }
+    
+    .notification-header {
+        padding: 12px 15px;
+    }
+    
+    .notification-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* Animation for new notifications */
+@keyframes slideInNotification {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-item.new-notification {
+    animation: slideInNotification 0.3s ease;
+}
+
+/* Scrollbar Styling */
+.notification-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notification-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.notification-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.notification-content::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* Notification Bell Enhancements */
+#wp-admin-bar-aiddata-notifications .ab-item {
+    position: relative;
+}
+
+#wp-admin-bar-aiddata-notifications .aiddata-notification-count {
+    position: absolute;
+    top: 3px;
+    right: 8px;
+    background: #dc3232;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: bold;
+    min-width: 16px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Notification Types - Enhanced Styling */
+.notification-success {
+    border-left-color: #28a745 !important;
+}
+
+.notification-info {
+    border-left-color: #17a2b8 !important;
+}
+
+.notification-warning {
+    border-left-color: #ffc107 !important;
+}
+
+.notification-error {
+    border-left-color: #dc3545 !important;
+}
+
+.notification-achievement {
+    border-left-color: #fd7e14 !important;
+    background: linear-gradient(135deg, #fff5e6 0%, #ffe0b3 100%);
+}
+
+.notification-achievement.unread {
+    background: linear-gradient(135deg, #fff5e6 0%, #ffcc80 100%);
+}
+
+/* Focus States for Accessibility */
+.notification-item:focus,
+.notification-actions button:focus,
+.load-more-btn:focus {
+    outline: 2px solid #004E38;
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .notification-item {
+        border-bottom-color: #000;
+    }
+    
+    .notification-item.unread {
+        border-left-color: #000;
+        background: #fff;
+    }
+    
+    .notification-title {
+        color: #000;
+    }
+    
+    .notification-message {
+        color: #333;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .aiddata-notification-panel,
+    .notification-item,
+    .notification-actions button,
+    .load-more-btn {
+        transition: none;
+    }
+    
+    .notification-item.new-notification {
+        animation: none;
+    }
+}

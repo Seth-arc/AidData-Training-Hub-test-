@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to {tutorial_title}</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f4;">
+    
+    <div style="background-color: #0073aa; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+        <h1 style="margin: 0; font-size: 24px;">Welcome to Your Tutorial!</h1>
+    </div>
+    
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <p style="margin-top: 0;">Hi {user_first_name},</p>
+        
+        <p>Congratulations! You've successfully enrolled in <strong>{tutorial_title}</strong>.</p>
+        
+        <p>You can start learning right away by clicking the button below:</p>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{tutorial_url}" style="display: inline-block; background-color: #0073aa; color: white; padding: 12px 30px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Start Learning
+            </a>
+        </div>
+        
+        <p>If the button doesn't work, copy and paste this link into your browser:</p>
+        <p style="word-break: break-all; color: #0073aa; font-size: 14px;">{tutorial_url}</p>
+        
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+        
+        <p style="font-size: 14px; color: #666; margin-bottom: 0;">
+            Questions? Contact us at <a href="mailto:{site_admin_email}" style="color: #0073aa; text-decoration: none;">{site_admin_email}</a>
+        </p>
+        
+        <p style="font-size: 12px; color: #999; text-align: center; margin-top: 30px; margin-bottom: 0;">
+            &copy; {current_year} {site_name}. All rights reserved.<br>
+            <a href="{site_url}" style="color: #0073aa; text-decoration: none;">{site_url}</a>
+        </p>
+    </div>
+    
+</body>
+</html>
+
