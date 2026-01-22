@@ -9,6 +9,6 @@ envsubst '$PORT' < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.co
 mv /etc/nginx/conf.d/default.conf.tmp /etc/nginx/conf.d/default.conf
 
 php-fpm &
-nginx -g "daemon off;"
 ls -l /var/www/html
 ls -l /var/www/html/wp-admin
+nginx -g "daemon off;"
