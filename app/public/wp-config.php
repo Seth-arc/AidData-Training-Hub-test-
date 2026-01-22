@@ -51,9 +51,9 @@ ini_set('memory_limit', '512M');
 ini_set('default_socket_timeout', 300);
 ini_set('max_execution_time', 300);
 
-// HTTP API timeout settings
-define('WP_HTTP_BLOCK_EXTERNAL', false);
-define('WP_ACCESSIBLE_HOSTS', '*.wordpress.org,*.github.com,*.aiddata.org,*.wm.edu');
+// HTTP API timeout settings - Block external requests to prevent admin timeouts
+define('WP_HTTP_BLOCK_EXTERNAL', true);
+define('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org');
 
 
 define( 'WP_HOME', $env('WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app') );
@@ -85,19 +85,9 @@ define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 //     curl_setopt($handle, CURLOPT_MAXREDIRS, 5);
 // }, 10);
 
-// Disable problematic WordPress API calls in local environment
-if (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local') {
-    // Disable WordPress.org update checks
-    // add_filter('pre_site_transient_update_core', '__return_null');
-    // add_filter('pre_site_transient_update_plugins', '__return_null');
-    // add_filter('pre_site_transient_update_themes', '__return_null');
-
-    // Disable automatic updates
-    define('AUTOMATIC_UPDATER_DISABLED', true);
-    define('WP_AUTO_UPDATE_CORE', false);
-
-    // Disable cron for external requests is handled via env config above.
-}
+// Disable automatic updates to prevent admin timeouts
+define('AUTOMATIC_UPDATER_DISABLED', true);
+define('WP_AUTO_UPDATE_CORE', false);
 
 // Enable WordPress debugging for memory issues
 $debug_enabled = filter_var( $env( 'WP_DEBUG', 'true' ), FILTER_VALIDATE_BOOLEAN );
