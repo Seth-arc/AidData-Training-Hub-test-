@@ -55,14 +55,11 @@ RUN mkdir -p /var/www/html/wp-content/uploads \
     /var/www/html/wp-content/upgrade \
     && chown -R www-data:www-data /var/www/html/wp-content
 
-# Remove default nginx configurations
-RUN rm -f /etc/nginx/sites-enabled/default \
-    && rm -f /etc/nginx/sites-available/default \
-    && rm -f /etc/nginx/conf.d/default.conf
+# Replace nginx main config and copy WordPress site config
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx/default.conf /etc/nginx/conf.d/wordpress.conf
 
-# Copy Nginx config to sites-available and enable it
-COPY docker/nginx/default.conf /etc/nginx/sites-available/wordpress.conf
-RUN ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/wordpress.conf
+# Copy entrypoint script
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
