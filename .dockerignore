@@ -10,10 +10,15 @@ node_modules/
 .gitignore
 
 # Docker files
-docker/
 docker-compose*.yml
-Dockerfile
 .dockerignore
+
+# Allow runtime assets used by the image build
+!docker/
+!docker/entrypoint.sh
+!docker/nginx/
+!docker/nginx/default.conf
+!Dockerfile
 
 # Local configuration
 conf/
