@@ -15,11 +15,32 @@ mv /etc/nginx/conf.d/wordpress.conf.tmp /etc/nginx/conf.d/wordpress.conf
 echo "=== Nginx configuration ==="
 cat /etc/nginx/conf.d/wordpress.conf
 
-# Start PHP-FPM in background
-php-fpm &
+# Verify WordPress files exist
+echo "=== Checking WordPress installation ==="
+ls -la /var/www/html/ | head -20
+test -f /var/www/html/index.php && echo "✓ index.php exists" || echo "✗ index.php missing!"
+test -f /var/www/html/wp-config.php && echo "✓ wp-config.php exists" || echo "✗ wp-config.php missing!"
 
-# Wait a moment for PHP-FPM to start
-sleep 2
+# Start PHP-FPM in background
+echo "=== Starting PHP-FPM ==="
+php-fpm &
+PHP_FPM_PID=$!
+
+# Wait for PHP-FPM to be ready
+echo "=== Waiting for PHP-FPM to start ==="
+sleep 3
+
+# Verify PHP-FPM is running
+if ! kill -0 $PHP_FPM_PID 2>/dev/null; then
+    echo "ERROR: PHP-FPM failed to start!"
+    exit 1
+fi
+echo "✓ PHP-FPM is running (PID: $PHP_FPM_PID)"
+
+# Test nginx configuration
+echo "=== Testing nginx configuration ==="
+nginx -t || exit 1
 
 # Start Nginx in foreground
+echo "=== Starting Nginx ==="
 exec nginx -g "daemon off;"
