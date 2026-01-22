@@ -1,7 +1,5 @@
-ls -l /var/www/html/wp-admin
 #!/bin/sh
 set -e
-
 
 : "${PORT:=80}"
 echo "Nginx will listen on port: $PORT"
@@ -13,3 +11,4 @@ mv /etc/nginx/conf.d/default.conf.tmp /etc/nginx/conf.d/default.conf
 php-fpm &
 nginx -g "daemon off;"
 ls -l /var/www/html
+ls -l /var/www/html/wp-admin
