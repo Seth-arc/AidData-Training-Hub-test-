@@ -1086,24 +1086,79 @@ function aiddata_enqueue_auth_scripts() {
 add_action('wp_enqueue_scripts', 'aiddata_enqueue_auth_scripts');
 
 /**
+ * Temporary login debug logger.
+ * Enable by setting env var AIDDATA_LOGIN_DEBUG=true on Railway.
+ */
+function aiddata_login_debug_log($event, $context = array()) {
+    static $enabled = null;
+
+    if ($enabled === null) {
+        $raw_value = getenv('AIDDATA_LOGIN_DEBUG');
+        $enabled = in_array(strtolower((string) $raw_value), array('1', 'true', 'yes', 'on'), true);
+    }
+
+    if (!$enabled) {
+        return;
+    }
+
+    if (!is_array($context)) {
+        $context = array('value' => $context);
+    }
+
+    unset($context['password'], $context['user_password'], $context['security']);
+
+    error_log('[aiddata-login-debug] ' . $event . ' ' . wp_json_encode($context));
+}
+
+/**
  * AJAX login handler
  */
 function aiddata_ajax_login() {
-    check_ajax_referer('custom-auth-nonce', 'security');
+    aiddata_login_debug_log('request_received', array(
+        'is_ssl' => is_ssl(),
+        'host' => isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '',
+        'forwarded_proto' => isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_X_FORWARDED_PROTO'])) : '',
+        'has_username' => isset($_POST['username']),
+        'has_password' => isset($_POST['password']),
+        'has_nonce' => isset($_POST['security']),
+    ));
+
+    $nonce_ok = check_ajax_referer('custom-auth-nonce', 'security', false);
+    if ($nonce_ok === false) {
+        aiddata_login_debug_log('nonce_failed');
+        wp_send_json_error(array('message' => 'Security check failed. Please refresh and try again.'));
+        wp_die();
+    }
 
     $login_input = isset($_POST['username']) ? sanitize_text_field(wp_unslash($_POST['username'])) : '';
     $password = isset($_POST['password']) ? wp_unslash($_POST['password']) : '';
 
     if ($login_input === '' || $password === '') {
+        aiddata_login_debug_log('validation_failed', array(
+            'reason' => 'missing_credentials',
+            'has_login_input' => $login_input !== '',
+            'has_password' => $password !== '',
+        ));
         wp_send_json_error(array('message' => 'Username/email and password are required.'));
         wp_die();
     }
+
+    $login_type = is_email($login_input) ? 'email' : 'username';
+    $login_hint = substr($login_input, 0, 3) . '***';
 
     // Support both username and email.
     if (is_email($login_input)) {
         $user_by_email = get_user_by('email', $login_input);
         if ($user_by_email instanceof WP_User) {
             $login_input = $user_by_email->user_login;
+            aiddata_login_debug_log('email_mapped_to_username', array(
+                'login_hint' => $login_hint,
+                'user_id' => (int) $user_by_email->ID,
+            ));
+        } else {
+            aiddata_login_debug_log('email_not_found', array(
+                'login_hint' => $login_hint,
+            ));
         }
     }
 
@@ -1116,8 +1171,20 @@ function aiddata_ajax_login() {
     $user = wp_signon($user_data, is_ssl());
     
     if(is_wp_error($user)) {
+        aiddata_login_debug_log('login_failed', array(
+            'login_type' => $login_type,
+            'login_hint' => $login_hint,
+            'error_codes' => $user->get_error_codes(),
+            'error_messages' => $user->get_error_messages(),
+        ));
         wp_send_json_error(array('message' => $user->get_error_message()));
     } else {
+        aiddata_login_debug_log('login_success', array(
+            'login_type' => $login_type,
+            'login_hint' => $login_hint,
+            'user_id' => (int) $user->ID,
+            'roles' => (array) $user->roles,
+        ));
         wp_send_json_success(array('message' => 'Login successful!'));
     }
     
@@ -1838,4 +1905,3 @@ function aiddata_add_favicon() {
 add_action('wp_head', 'aiddata_add_favicon');
 add_action('admin_head', 'aiddata_add_favicon');
 add_action('login_head', 'aiddata_add_favicon');
-
