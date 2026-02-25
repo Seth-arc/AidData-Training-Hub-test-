@@ -57,8 +57,17 @@ define('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org');
 
 
 // Fix Railway env vars that are missing https:// protocol
-$wp_home = $env('WP_HOME', 'https://aiddata-training-hub-test-production.up.railway.app');
-$wp_siteurl = $env('WP_SITEURL', 'https://aiddata-training-hub-test-production.up.railway.app');
+$railway_public_domain = $env('RAILWAY_PUBLIC_DOMAIN', '');
+$default_public_url = 'https://aiddata-training-hub-test-production.up.railway.app';
+
+if ($railway_public_domain) {
+    $default_public_url = (strpos($railway_public_domain, 'http') === 0)
+        ? $railway_public_domain
+        : 'https://' . $railway_public_domain;
+}
+
+$wp_home = $env('WP_HOME', $default_public_url);
+$wp_siteurl = $env('WP_SITEURL', $default_public_url);
 
 // Add https:// if the env vars are missing the protocol
 if (strpos($wp_home, 'http') !== 0) {
@@ -70,6 +79,8 @@ if (strpos($wp_siteurl, 'http') !== 0) {
 
 define( 'WP_HOME', $wp_home );
 define( 'WP_SITEURL', $wp_siteurl );
+define( 'COOKIE_DOMAIN', false );
+define( 'FORCE_SSL_ADMIN', true );
 
 define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 
@@ -158,11 +169,14 @@ if ( defined('WP_DEBUG') && WP_DEBUG ) {
 }
 
 // Handle HTTPS and HTTP_HOST behind reverse proxy (Railway, Docker, etc.)
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
-    $_SERVER['HTTPS'] = 'on';
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+    $forwarded_proto = trim(strtolower(explode(',', $_SERVER['HTTP_X_FORWARDED_PROTO'])[0]));
+    if ($forwarded_proto === 'https') {
+        $_SERVER['HTTPS'] = 'on';
+    }
 }
 if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-    $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+    $_SERVER['HTTP_HOST'] = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_HOST'])[0]);
 }
 
 

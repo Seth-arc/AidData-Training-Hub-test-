@@ -1090,14 +1090,30 @@ add_action('wp_enqueue_scripts', 'aiddata_enqueue_auth_scripts');
  */
 function aiddata_ajax_login() {
     check_ajax_referer('custom-auth-nonce', 'security');
-    
+
+    $login_input = isset($_POST['username']) ? sanitize_text_field(wp_unslash($_POST['username'])) : '';
+    $password = isset($_POST['password']) ? wp_unslash($_POST['password']) : '';
+
+    if ($login_input === '' || $password === '') {
+        wp_send_json_error(array('message' => 'Username/email and password are required.'));
+        wp_die();
+    }
+
+    // Support both username and email.
+    if (is_email($login_input)) {
+        $user_by_email = get_user_by('email', $login_input);
+        if ($user_by_email instanceof WP_User) {
+            $login_input = $user_by_email->user_login;
+        }
+    }
+
     $user_data = array(
-        'user_login' => sanitize_email($_POST['username']),
-        'user_password' => $_POST['password'],
+        'user_login' => $login_input,
+        'user_password' => $password,
         'remember' => true
     );
-    
-    $user = wp_signon($user_data, false);
+
+    $user = wp_signon($user_data, is_ssl());
     
     if(is_wp_error($user)) {
         wp_send_json_error(array('message' => $user->get_error_message()));
@@ -1822,5 +1838,4 @@ function aiddata_add_favicon() {
 add_action('wp_head', 'aiddata_add_favicon');
 add_action('admin_head', 'aiddata_add_favicon');
 add_action('login_head', 'aiddata_add_favicon');
-
 
