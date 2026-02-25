@@ -57,7 +57,7 @@ get_header('empty');
     </div>
     
     <div class="loading-content">
-        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logodark.png" alt="AidData Logo" class="loading-logo">
+        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logodark.png" alt="AidData Logo" class="loading-logo" loading="eager" decoding="async" fetchpriority="high">
         <div class="loading-spinner">
             <div class="spinner-ring"></div>
         </div>
@@ -69,7 +69,7 @@ get_header('empty');
     <div class="header-content">
         <div class="logo-section">
             <a href="https://www.aiddata.org" target="_blank">
-                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logodark.png" alt="AidData Logo" class="logo">
+                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logodark.png" alt="AidData Logo" class="logo" loading="eager" decoding="async" fetchpriority="high">
             </a>
         </div>
         
@@ -136,7 +136,7 @@ get_header('empty');
                 </svg>
             </button>
             <div class="drawer-header">
-                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logodark.png" alt="AidData Logo" class="drawer-logo">
+                <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logodark.png" alt="AidData Logo" class="drawer-logo">
                 <h2 class="drawer-heading">Training and Professional Development</h2>
             </div>
             <div class="drawer-grid">
@@ -166,7 +166,7 @@ get_header('empty');
                     <div class="contact-section">
                         <h4>Contact Information</h4>
                         <div class="contact-person">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="contact-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="contact-avatar">
                             <div class="contact-details">
                                 <p>Questions about the courses? Interested in partnering?</p>
                                 <p><strong>Sethu Nguna</strong>
@@ -188,7 +188,7 @@ get_header('empty');
                         <div class="expertise-grid">
                             <div class="expertise-tile">
                                 <div class="expertise-image">
-                                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/data_journalism_pakistan.jpg" alt="Data journalism course in Pakistan">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/data_journalism_pakistan.jpg" alt="Data journalism course in Pakistan">
                                 </div>
                                 <div class="expertise-content">
                                     <h5>Data-to-policy curriculum</h5>
@@ -199,7 +199,7 @@ get_header('empty');
 
                             <div class="expertise-tile">
                                 <div class="expertise-image">
-                                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/seth_goodman_workshop.jpg" alt="Dr. Seth Goodman leading a workshop">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/seth_goodman_workshop.jpg" alt="Dr. Seth Goodman leading a workshop">
                                 </div>
                                 <div class="expertise-content">
                                     <h5>Experienced subject matter experts</h5>
@@ -210,7 +210,7 @@ get_header('empty');
 
                             <div class="expertise-tile">
                                 <div class="expertise-image">
-                                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna_training.jpeg" alt="Sethu Nguna leading a training session">
+                                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna_training.jpeg" alt="Sethu Nguna leading a training session">
                                 </div>
                                 <div class="expertise-content">
                                     <h5>Innovative strategies</h5>
@@ -273,7 +273,7 @@ get_header('empty');
             <!-- Course 1: Navigating Global Development Finance -->
             <div class="featured-course" data-type="course">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/global_finance.png" alt="Global Development Finance" class="preview-image">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/global_finance.png" alt="Global Development Finance" class="preview-image">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Navigating Global Development Finance</h3>
@@ -323,7 +323,7 @@ get_header('empty');
             <!-- Course 2: Global Chinese Development Finance -->
             <div class="featured-course" data-type="tutorial">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/china_dashboard.png" alt="China Dashboard Tutorial" class="preview-image">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/china_dashboard.png" alt="China Dashboard Tutorial" class="preview-image">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Global Chinese Development Finance</h3>
@@ -369,7 +369,7 @@ get_header('empty');
             <!-- Course 7: Geospatial Impact Evaluations Tutorial -->
             <div class="featured-course" data-type="tutorial">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/GIE_coursethumbnail.jpg" alt="Geospatial Impact Evaluations Tutorial" class="preview-image">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/GIE_coursethumbnail.jpg" alt="Geospatial Impact Evaluations Tutorial" class="preview-image">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Geospatial Impact Evaluations</h3>
@@ -413,7 +413,7 @@ get_header('empty');
             <!-- Course 6: How China Lends Interview -->
             <div class="featured-course" data-type="interview">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/How_China_Lends&_Collateralizes_interview.png" alt="How China Lends Interview" class="preview-image">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/How_China_Lends&_Collateralizes_interview.png" alt="How China Lends Interview" class="preview-image">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Decoding China's Debt Contracts</h3>
@@ -433,7 +433,7 @@ get_header('empty');
             <!-- Tool: Credit Evaluation Tool -->
             <div class="featured-course" data-type="tools">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/credit_shopper.png" alt="Credit Evaluation Tool" class="preview-image">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/credit_shopper.png" alt="Credit Evaluation Tool" class="preview-image">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Credit Evaluation Tool</h3>
@@ -469,7 +469,7 @@ get_header('empty');
             <!-- Interview 1: Inside the Belt & Road Reboot - HIDDEN -->
             <?php /* <div class="featured-course" data-type="interview">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/inside_the_belt_and_road_initiative_reboot_interview.png?v=<?php echo time(); ?>" alt="Inside the Belt & Road Reboot" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/inside_the_belt_and_road_initiative_reboot_interview.png" alt="Inside the Belt & Road Reboot" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Inside the Belt & Road Reboot</h3>
@@ -503,7 +503,7 @@ get_header('empty');
             <!-- Interview 2: Seeing Development from Above - HIDDEN -->
             <?php /* <div class="featured-course" data-type="interview">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/seeing_development_from_above_interview.png?v=<?php echo time(); ?>" alt="Seeing Development from Above" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/seeing_development_from_above_interview.png" alt="Seeing Development from Above" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Seeing Development from Above</h3>
@@ -537,7 +537,7 @@ get_header('empty');
             <!-- Interview 3: Decoding China's Debt Contracts - HIDDEN -->
             <?php /* <div class="featured-course" data-type="interview">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/decoding_chinas_debt_contracts_interview.png?v=<?php echo time(); ?>" alt="Decoding China's Debt Contracts" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/decoding_chinas_debt_contracts_interview.png" alt="Decoding China's Debt Contracts" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Decoding China's Debt Contracts</h3>
@@ -571,7 +571,7 @@ get_header('empty');
             <!-- Interview 4: Harboring Global Ambitions -->
             <div class="featured-course" data-type="interview">
                 <div class="course-preview">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/harboring_global_ambitions_interview.png?v=<?php echo time(); ?>" alt="Harboring Global Ambitions" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/harboring_global_ambitions_interview.png" alt="Harboring Global Ambitions" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="preview-overlay">
                         <div class="preview-content">
                             <h3>Harboring Global Ambitions</h3>
@@ -598,7 +598,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                     <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
                     </div>
                     <h3>Global Chinese Development Finance</h3>
                 </div>
@@ -627,7 +627,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                     <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
                     </div>
                     <h3>How China Lends and Collateralizes</h3>
                 </div>
@@ -655,7 +655,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                     <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/game_controller.png" alt="Game Controller Icon" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/game_controller.png" alt="Game Controller Icon" style="width: 35px; height: 35px;">
                     </div>
                     <h3>Balancing the Scales</h3>
                 </div>
@@ -664,7 +664,7 @@ get_header('empty');
                     <h4>Learning Designer</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Sethu Nguna</h5>
                                 <p>Manager, Training & Instructional Design</p>
@@ -674,7 +674,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -713,14 +713,14 @@ get_header('empty');
                     <h4>Tool Developers</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>John Custer</h5>
                                 <p>Deputy Director, Communications & Data Analytics</p>
                             </div>
                         </div>
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Asad Sami</h5>
                                 <p>Senior Program Manager</p>
@@ -730,7 +730,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -769,14 +769,14 @@ get_header('empty');
                     <h4>Tool Developers</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>John Custer</h5>
                                 <p>Deputy Director, Communications & Data Analytics</p>
                             </div>
                         </div>
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Asad Sami</h5>
                                 <p>Senior Program Manager</p>
@@ -786,7 +786,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -823,7 +823,7 @@ get_header('empty');
                 </div>
                 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -842,7 +842,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                     <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="wp-content/themes/twentytwentyfour/assets/images/certificate.png" alt="Simulation Badge" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="wp-content/themes/twentytwentyfour/assets/images/certificate.png" alt="Simulation Badge" style="width: 35px; height: 35px;">
                     </div>
                     <h3>Securing Development Funding</h3>
                 </div>
@@ -851,14 +851,14 @@ get_header('empty');
                     <h4>Course Instructors</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/brooke_e.png" alt="Brooke Escobar" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/brooke_e.png" alt="Brooke Escobar" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Brooke Escobar</h5>
                                 <p>Interim Director, Chinese Development Finance Program</p>
                             </div>
                         </div>
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Asad Sami</h5>
                                 <p>Senior Program Manager</p>
@@ -868,7 +868,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -895,7 +895,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                     <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="wp-content/themes/twentytwentyfour/assets/images/certificate.png" alt="Simulation Badge" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="wp-content/themes/twentytwentyfour/assets/images/certificate.png" alt="Simulation Badge" style="width: 35px; height: 35px;">
                     </div>
                     <h3>Navigating Debt Distress</h3>
                 </div>
@@ -904,14 +904,14 @@ get_header('empty');
                     <h4>Course Instructors</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/brooke_e.png" alt="Brooke Escobar" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/brooke_e.png" alt="Brooke Escobar" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Brooke Escobar</h5>
                                 <p>Interim Director, Chinese Development Finance Program</p>
                             </div>
                         </div>
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/asad_sami.jpg" alt="Asad Sami" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Asad Sami</h5>
                                 <p>Senior Program Manager</p>
@@ -921,7 +921,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -948,7 +948,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                 <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/data_journalism_badge.png" alt="Course Badge" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/data_journalism_badge.png" alt="Course Badge" style="width: 35px; height: 35px;">
                     </div>
                     <h3>Navigating Global Development Finance</h3>
                 </div>
@@ -957,21 +957,21 @@ get_header('empty');
                     <h4>Course Instructors</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/alex_wooley.jpg" alt="Alex Wooley" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/alex_wooley.jpg" alt="Alex Wooley" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Alex Wooley</h5>
                                 <p>Director, Partnerships & Communications</p>
                             </div>
                         </div>
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>John Custer</h5>
                                 <p>Deputy Director, Communications & Data Analytics</p>
                             </div>
                         </div>
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/sethu_nguna.png" alt="Sethu Nguna" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Sethu Nguna</h5>
                                 <p>Manager, Training & Instructional Design</p>
@@ -981,7 +981,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Delivered in partnership with the W&M Studio for Teaching and Learning Innovation</p>
                 </div>
 
@@ -1008,7 +1008,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                     <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/data_analysis_badge.png" alt="Course Badge" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/data_analysis_badge.png" alt="Course Badge" style="width: 35px; height: 35px;">
                     </div>
                     <h3>Critical Data Analysis and Visualization</h3>
                 </div>
@@ -1017,7 +1017,7 @@ get_header('empty');
                     <h4>Course Instructors</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/john_custer.svg" alt="John Custer" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>John Custer</h5>
                                 <p>Deputy Director, Communications & Data Analytics</p>
@@ -1027,7 +1027,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Delivered in partnership with the W&M Studio for Teaching and Learning Innovation</p>
                 </div>
 
@@ -1054,7 +1054,7 @@ get_header('empty');
             <div class="info-content">
                 <div class="title-section">
                     <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
+                        <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" style="width: 35px; height: 35px;">
                     </div>
                     <h3>Geospatial Impact Evaluations</h3>
                 </div>
@@ -1063,7 +1063,7 @@ get_header('empty');
                     <h4>Tutorial Instructor</h4>
                     <div class="instructor-avatars">
                         <div class="instructor">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/seth_goodman.png" alt="Dr. Seth Goodman" class="instructor-avatar">
+                            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/seth_goodman.png" alt="Dr. Seth Goodman" class="instructor-avatar">
                             <div class="instructor-info">
                                 <h5>Dr. Seth Goodman</h5>
                                 <p>Research Scientist, Geospatial Impact Evaluations</p>
@@ -1073,7 +1073,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -1113,7 +1113,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -1152,7 +1152,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -1191,7 +1191,7 @@ get_header('empty');
                 </div>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -1231,7 +1231,7 @@ get_header('empty');
                 <p style="font-size: 1rem; margin: -0.5rem 0 1rem 0; color: #666; text-align: center;">A conversation with Alex Wooley, AidData's Director of Partnerships and Communications</p>
 
                 <div class="inline-partnership">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo">
                     <p>Developed by the AidData Research Lab at William & Mary</p>
                 </div>
 
@@ -1371,7 +1371,7 @@ get_header('empty');
             <button class="close-info" aria-label="Close">&times;</button>
             <div class="info-content">
                 <div class="title-section">
-                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" class="course-badge" style="width: 35px; height: 35px;">
+                    <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/certificate.png" alt="Tutorial Certificate" class="course-badge" style="width: 35px; height: 35px;">
                     <h3 id="courseInfoTitle">Course Information</h3>
                 </div>
                 <!-- Rest of info modal content will be dynamically populated -->
@@ -1401,7 +1401,7 @@ get_header('empty');
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-section">
-            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logo.png" alt="AidData Logo" class="footer-logo">
+            <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logo.png" alt="AidData Logo" class="footer-logo">
             <div class="social-links">
                 <a href="https://twitter.com/AidData" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
@@ -1458,7 +1458,7 @@ get_header('empty');
     <div class="footer-bottom" style="background: transparent;">
         <div class="footer-bottom-content">
             <a href="https://www.wm.edu" target="_blank" rel="noopener noreferrer">
-                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo" class="footer-bottom-logo" style="max-height: 60px;">
+                <img loading="lazy" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/wm_logo_white.png" alt="William & Mary Logo" class="footer-bottom-logo" style="max-height: 60px;">
             </a>
         </div>
     </div>
@@ -1578,3 +1578,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <?php get_footer(); ?>
+
