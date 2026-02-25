@@ -55,12 +55,30 @@ ini_set('max_execution_time', 300);
 define('WP_HTTP_BLOCK_EXTERNAL', true);
 define('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org');
 
+// Handle HTTPS and host behind reverse proxy before URL/cookie constants are set.
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+    $forwarded_proto = trim(strtolower(explode(',', $_SERVER['HTTP_X_FORWARDED_PROTO'])[0]));
+    if ($forwarded_proto === 'https') {
+        $_SERVER['HTTPS'] = 'on';
+        $_SERVER['SERVER_PORT'] = '443';
+    }
+}
+if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+    $_SERVER['HTTP_HOST'] = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_HOST'])[0]);
+}
+
+$request_host = isset($_SERVER['HTTP_HOST']) ? trim((string) $_SERVER['HTTP_HOST']) : '';
+$request_host = preg_replace('/:\d+$/', '', $request_host);
+$request_scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$request_public_url = $request_host ? ($request_scheme . '://' . $request_host) : '';
 
 // Fix Railway env vars that are missing https:// protocol
 $railway_public_domain = $env('RAILWAY_PUBLIC_DOMAIN', '');
 $default_public_url = 'https://aiddata-training-hub-test-production.up.railway.app';
 
-if ($railway_public_domain) {
+if ($request_public_url) {
+    $default_public_url = $request_public_url;
+} elseif ($railway_public_domain) {
     $default_public_url = (strpos($railway_public_domain, 'http') === 0)
         ? $railway_public_domain
         : 'https://' . $railway_public_domain;
@@ -81,6 +99,9 @@ define( 'WP_HOME', $wp_home );
 define( 'WP_SITEURL', $wp_siteurl );
 define( 'COOKIE_DOMAIN', false );
 define( 'FORCE_SSL_ADMIN', true );
+define( 'COOKIEPATH', '/' );
+define( 'SITECOOKIEPATH', '/' );
+define( 'ADMIN_COOKIE_PATH', '/' );
 
 define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 
@@ -167,19 +188,6 @@ if ( defined('WP_DEBUG') && WP_DEBUG ) {
     error_log('REQUEST_URI: ' . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'unset'));
     error_log('HTTP_HOST: ' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'unset'));
 }
-
-// Handle HTTPS and HTTP_HOST behind reverse proxy (Railway, Docker, etc.)
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
-    $forwarded_proto = trim(strtolower(explode(',', $_SERVER['HTTP_X_FORWARDED_PROTO'])[0]));
-    if ($forwarded_proto === 'https') {
-        $_SERVER['HTTPS'] = 'on';
-    }
-}
-if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-    $_SERVER['HTTP_HOST'] = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_HOST'])[0]);
-}
-
-
 
 /**
  * For developers: WordPress debugging mode.
