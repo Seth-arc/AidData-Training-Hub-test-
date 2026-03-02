@@ -2,6 +2,10 @@
  * Loading Screen Styles
  */
 
+html {
+    scrollbar-gutter: stable;
+}
+
 /* Prevent page jump by hiding body content initially - ONLY on home page */
 body.home:not(.loaded) {
     overflow: hidden;
@@ -40,6 +44,19 @@ body.home.loaded .lms-header {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+}
+
+html.skip-loading-screen .loading-screen {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+html.skip-loading-screen body.home:not(.loaded) .lms-main,
+html.skip-loading-screen body.home:not(.loaded) .lms-header {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
 }
 
 .loading-content {

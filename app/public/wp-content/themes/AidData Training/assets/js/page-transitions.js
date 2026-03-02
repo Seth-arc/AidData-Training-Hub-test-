@@ -9,7 +9,7 @@ if (!window.aiddataPageTransitionsInitialized) {
     class PageTransitions {
         constructor() {
             this.isTransitioning = false;
-            this.transitionDuration = 500;
+            this.transitionDuration = 420;
 
             this.init();
         }
@@ -79,18 +79,6 @@ if (!window.aiddataPageTransitionsInitialized) {
                 }
             });
 
-            window.addEventListener('beforeunload', () => {
-                if (!this.isTransitioning) {
-                    this.showTransition();
-                }
-            });
-
-            document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'visible' && this.isTransitioning) {
-                    this.hideTransition();
-                }
-            });
-
             window.addEventListener('pageshow', (event) => {
                 if (event.persisted) {
                     this.hideTransition();
@@ -113,6 +101,7 @@ if (!window.aiddataPageTransitionsInitialized) {
                 link.closest('#profile-nav') ||
                 link.closest('#profile-sidebar') ||
                 link.closest('.lp-profile-nav-tabs') ||
+                link.closest('.start-learning') ||
                 href.includes('wp-admin') ||
                 href.includes('wp-login')) {
                 return false;
@@ -138,22 +127,20 @@ if (!window.aiddataPageTransitionsInitialized) {
             return true;
         }
 
-    showTransition() {
-        if (this.isTransitioning || !this.overlay) return;
+        showTransition() {
+            if (this.isTransitioning || !this.overlay) return;
 
             this.isTransitioning = true;
             this.overlay.classList.remove('fade-out');
             this.overlay.classList.add('active');
             this.overlay.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
         }
 
         hideTransition() {
-            if (!this.isTransitioning || !this.overlay) return;
+            if (!this.overlay) return;
 
             this.overlay.classList.add('fade-out');
             this.overlay.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
 
             setTimeout(() => {
                 this.overlay.classList.remove('active', 'fade-out');
@@ -161,22 +148,22 @@ if (!window.aiddataPageTransitionsInitialized) {
             }, this.transitionDuration);
         }
 
-    transitionToPage(url) {
-        this.setSkipLoadingScreenFlag();
-        this.showTransition();
+        transitionToPage(url) {
+            this.setSkipLoadingScreenFlag();
+            this.showTransition();
 
-        setTimeout(() => {
-            window.location.href = url;
-        }, 200);
-    }
-
-    setSkipLoadingScreenFlag() {
-        try {
-            sessionStorage.setItem('aiddataSkipLoadingScreen', '1');
-        } catch (error) {
-            // Ignore storage errors in restricted environments.
+            setTimeout(() => {
+                window.location.assign(url);
+            }, 180);
         }
-    }
+
+        setSkipLoadingScreenFlag() {
+            try {
+                sessionStorage.setItem('aiddataSkipLoadingScreen', '1');
+            } catch (error) {
+                // Ignore storage errors in restricted environments.
+            }
+        }
 
         handlePageLoad() {
             if (this.shouldShowOnLoad()) {
