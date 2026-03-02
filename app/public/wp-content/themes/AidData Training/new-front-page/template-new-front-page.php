@@ -213,7 +213,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
                                     <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/seth_goodman_workshop.jpg" alt="Dr. Seth Goodman leading a workshop">
                                 </div>
                                 <div class="expertise-content">
-                                    <h5>Experienced subject matter experts</h5>
+                                    <h5>Subject matter experts</h5>
                                     <p>AidData researchers and educators bring intensive teaching experience at William & Mary, along with extensive real world experience applying learning in policy and civil society contexts.</p>
                                     <span class="expertise-caption">AidData Research Scientist Dr. Seth Goodman leads a workshop on remote sensing and machine learning at the Green Climate Fund.</span>
                                 </div>
