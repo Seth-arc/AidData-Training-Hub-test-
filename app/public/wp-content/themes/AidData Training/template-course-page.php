@@ -89,7 +89,7 @@ function course_get_sub_field($field_name, $default = '') {
     * {
         scrollbar-width: thin;
         scrollbar-color: #026447 #f1f1f1;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
 
     /* Force proper box sizing for all elements */
@@ -105,7 +105,7 @@ function course_get_sub_field($field_name, $default = '') {
         height: 100%;
         width: 100%;
         overflow-x: hidden;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         display: flex;
         flex-direction: column;
         min-height: 100vh;

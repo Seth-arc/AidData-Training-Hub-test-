@@ -524,6 +524,22 @@ function aiddata_enqueue_assets() {
     }
 }
 add_action('wp_enqueue_scripts', 'aiddata_enqueue_assets');
+/**
+ * Enforce Inter typography across front-end templates.
+ */
+function aiddata_enqueue_global_inter_font() {
+    if ( is_admin() ) {
+        return;
+    }
+
+    wp_enqueue_style(
+        'aiddata-inter-global',
+        get_template_directory_uri() . '/assets/css/inter-global.css',
+        array(),
+        '1.0.0'
+    );
+}
+add_action('wp_enqueue_scripts', 'aiddata_enqueue_global_inter_font', 0);
 
 /**
  * Enqueue shared loading and transition assets.

@@ -215,7 +215,7 @@ $is_included = isset($tutorial_id) && get_post_type($tutorial_id) === 'aiddata_t
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+        font-family: 'Inter' !important;
     }
 
     body {

@@ -71,7 +71,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
         --hover-bg: #f8fafc;
         
         /* Typography */
-        --font-family: 'Inter', sans-serif;
+        --font-family: 'Inter';
         --font-size-xs: 12px;
         --font-size-sm: 14px;
         --font-size-base: 16px;
@@ -150,7 +150,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     
     /* Force Inter font on all elements */
     *, *::before, *::after {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* Ensure all text elements use Inter */
@@ -160,7 +160,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     .course-title, .course-instructor, .module-title, .lesson-title,
     .tab-button, .video-placeholder, .lesson-duration,
     .progress-label, .progress-percentage, .contents-title {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* Hide default WordPress header */
@@ -960,7 +960,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
         color: white !important;
         border: none;
         border-radius: var(--radius-md);
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: 14px;
         font-weight: 600;
         display: flex;
@@ -984,7 +984,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     
     /* Quiz Info Text */
     .quiz-info-text {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: 12px;
         font-weight: 500;
         color: var(--text-secondary);
@@ -1010,7 +1010,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .objective-item p {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         color: var(--text-primary);
         margin: 0;
         line-height: 1.5;
@@ -1028,7 +1028,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .meta-item {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-sm);
         color: var(--text-secondary);
     }
@@ -1039,7 +1039,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .takeaway-section h3 {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-md);
         font-weight: 600;
         color: var(--text-primary);
@@ -1053,7 +1053,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .key-list li {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         padding: var(--spacing-xs) 0;
         border-bottom: 1px solid var(--border-color);
         line-height: 1.5;
@@ -1080,7 +1080,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .insight-card h4 {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-sm);
         font-weight: 600;
         color: var(--text-primary);
@@ -1088,7 +1088,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .insight-card p {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         color: var(--text-secondary);
         margin: 0;
         line-height: 1.4;
@@ -1107,7 +1107,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .exercise-intro p {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         margin: 0;
         font-size: var(--font-size-sm);
         color: var(--text-secondary);
@@ -1134,7 +1134,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-weight: 600;
         font-size: var(--font-size-sm);
         flex-shrink: 0;
@@ -1145,7 +1145,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .step-content h4 {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-md);
         font-weight: 600;
         color: var(--text-primary);
@@ -1153,7 +1153,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .step-content p {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         color: var(--text-secondary);
         line-height: 1.5;
         margin-bottom: var(--spacing-sm);
@@ -1167,7 +1167,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
         color: white !important;
         text-decoration: none;
         border-radius: var(--radius-sm);
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-sm);
         font-weight: 500;
     }
@@ -1184,7 +1184,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .practice-questions p {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-weight: 600;
         margin-bottom: var(--spacing-xs);
         font-size: var(--font-size-sm);
@@ -1196,7 +1196,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .practice-questions li {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         color: var(--text-secondary);
         margin-bottom: var(--spacing-xs);
         font-size: var(--font-size-sm);
@@ -1213,7 +1213,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
         padding: var(--spacing-xs);
         background: var(--border-light);
         border-radius: var(--radius-sm);
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-sm);
         color: var(--text-secondary);
     }
@@ -1227,7 +1227,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .note-content h4 {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-sm);
         font-weight: 600;
         color: var(--text-primary);
@@ -1235,7 +1235,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .note-content p {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         color: var(--text-secondary);
         margin: 0;
         line-height: 1.5;
@@ -1256,7 +1256,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .quiz-intro h3 {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-lg);
         font-weight: 600;
         color: var(--text-primary);
@@ -1264,7 +1264,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .quiz-intro p {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         color: var(--text-secondary);
         margin: 0 0 var(--spacing-md) 0;
         line-height: 1.5;
@@ -1288,7 +1288,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
         text-decoration: none;
         border: none;
         border-radius: var(--radius-sm);
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-md);
         font-weight: 600;
         cursor: pointer;
@@ -1300,7 +1300,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .quiz-note {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         font-size: var(--font-size-sm);
         color: var(--text-secondary);
         margin: 0;
@@ -1308,7 +1308,7 @@ wp_enqueue_style('auth-styles', get_template_directory_uri() . '/assets/css/auth
     }
     
     .enrollment-required {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         color: var(--text-secondary);
         text-align: center;
         font-style: italic;

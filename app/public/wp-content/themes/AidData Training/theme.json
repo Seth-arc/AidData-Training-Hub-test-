@@ -210,7 +210,7 @@
 							]
 						}
 					],
-					"fontFamily": "\"Inter\", sans-serif",
+					"fontFamily": "\"Inter\"",
 					"name": "Inter",
 					"slug": "body"
 				},
@@ -235,8 +235,8 @@
 							"src": ["file:./assets/fonts/cardo/cardo_normal_700.woff2"]
 						}
 					],
-					"fontFamily": "Cardo",
-					"name": "Cardo",
+					"fontFamily": "\"Inter\"",
+					"name": "Inter",
 					"slug": "heading"
 				},
 				{

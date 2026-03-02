@@ -46,7 +46,7 @@ $user = learn_press_get_current_user();
 $can_view_content = $course && ( $user->has_enrolled_or_finished( $course->get_id() ) || $user->is_admin() );
 
 // TYPOGRAPHY SYSTEM - Used consistently throughout
-$font_family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif";
+$font_family = "'Inter'";
 $section_heading = "font-size: 1.5rem; font-weight: 700; color: #004E38; margin-bottom: 1rem; font-family: {$font_family}; line-height: 1.3;";
 $card_heading = "font-size: 1.125rem; font-weight: 600; color: #004E38; margin-bottom: 0.75rem; font-family: {$font_family}; line-height: 1.4;";
 $body_text = "font-size: 1rem; color: #555; font-family: {$font_family}; line-height: 1.6;";

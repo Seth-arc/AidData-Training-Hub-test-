@@ -29,7 +29,7 @@
 
 /* Base Styles */
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
     box-sizing: border-box;
 }
 
@@ -40,7 +40,7 @@ html {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
     display: flex;
     flex-direction: column;
     min-height: 100vh;

@@ -104,7 +104,7 @@ function course_get_sub_field($field_name, $default = '') {
          --aiddata-accent: #789d4a;
          
          /* Font family */
-         --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+         --font-family: 'Inter';
      }
      
      /* Base Styles with Inter Font */

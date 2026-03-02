@@ -59,7 +59,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
     
     /* Set font family globally */
     * {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     /* Top-level elements */
@@ -69,7 +69,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         height: 100%;
         width: 100%;
         overflow-x: hidden; /* Prevent horizontal scrolling */
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         display: flex;
         flex-direction: column;
         min-height: 100vh; /* Use viewport height to ensure it takes full height */
@@ -172,7 +172,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 2.5rem;
         margin-bottom: 20px;
         color: #333;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     /* Hero image styles */
@@ -261,7 +261,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: white;
         max-width: 80%;
         font-weight: 400;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .course-hero-description {
@@ -271,12 +271,12 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         margin-bottom: 0;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         text-align: center;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .course-hero-description p {
         margin: 0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     @media (max-width: 992px) {
@@ -493,7 +493,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         position: relative;
         white-space: nowrap;
         transition: color 0.3s ease;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .tab-button:hover {
@@ -545,7 +545,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: #333;
         margin-top: 1.5em;
         margin-bottom: 0.75em;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .tab-content p, 
@@ -554,7 +554,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: #555;
         line-height: 1.6;
         margin-bottom: 1em;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     @keyframes fadeIn {
@@ -578,7 +578,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         margin: 30px 0 15px;
         padding-bottom: 10px;
         border-bottom: 1px solid #e0e0e0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .llms-lesson-preview {
@@ -604,7 +604,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 1.1rem;
         color: #333;
         margin-bottom: 5px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .llms-lesson-counter {
@@ -813,7 +813,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         display: flex;
         align-items: center;
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
 
     .header-button svg {
@@ -942,7 +942,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 1rem;
         margin-bottom: 1rem;
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         text-transform: uppercase;
         color: #d2bb93;
     }
@@ -955,14 +955,14 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
     
     .footer-section ul li {
         margin-bottom: 0.5rem;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .footer-section a {
         color: rgba(255, 255, 255, 0.8);
         text-decoration: none;
         transition: color 0.2s;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .footer-section a:hover {
@@ -980,7 +980,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0 0 1.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
     }
     
     .social-links {
@@ -1038,13 +1038,13 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     address {
         font-style: normal;
         line-height: 1.6;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
 
     /* Make sure images and media don't cause overflow */
@@ -1190,7 +1190,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         text-transform: uppercase;
         letter-spacing: 0.5px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     @media (max-width: 576px) {
@@ -1230,7 +1230,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         min-width: 160px;
         box-shadow: none;
         outline: none;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .why-course-button:hover {
@@ -1266,7 +1266,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         pointer-events: none;
         transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         overflow-y: auto;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     /* Ensure all elements in the info drawer use Inter font */
@@ -1284,7 +1284,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
     .news-content *,
     .scenario-examples *,
     .scenario-card * {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .info-drawer.active {
@@ -1326,7 +1326,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 28px;
         margin: 0;
         color: #333;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         text-align: center;
     }
     
@@ -1374,7 +1374,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         margin-top: 0;
         font-size: 20px;
         margin-bottom: 20px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         padding-bottom: 10px;
     }
@@ -1398,14 +1398,14 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 14px;
         line-height: 1.5;
         color: #555;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .contact-details a {
         color: #026447;
         text-decoration: none;
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .contact-details a:hover {
@@ -1426,7 +1426,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 20px;
         margin-top: 0;
         margin-bottom: 20px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         padding-bottom: 10px;
     }
@@ -1470,7 +1470,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 15px;
         font-weight: 600;
         color: #333;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         line-height: 1.4;
     }
     
@@ -1479,7 +1479,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 13px;
         color: #666;
         line-height: 1.5;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .news-date {
@@ -1487,7 +1487,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 12px;
         color: #026447;
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         margin-top: 5px;
     }
     
@@ -1505,7 +1505,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         margin-top: 0;
         margin-bottom: 20px;
         line-height: 1.3;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .info-block p {
@@ -1513,7 +1513,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 16px;
         line-height: 1.6;
         margin-bottom: 25px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .info-block h3 {
@@ -1521,7 +1521,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 22px;
         margin-top: 30px;
         margin-bottom: 20px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     /* Scenario examples styling */
@@ -1569,7 +1569,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 18px;
         margin-top: 0;
         margin-bottom: 10px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .scenario-card p {
@@ -1577,7 +1577,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: #555;
         line-height: 1.5;
         margin: 0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .drawer-footer {
@@ -1592,7 +1592,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: #026447;
         font-weight: 600;
         margin: 0 0 20px 0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .drawer-footer h4 {
@@ -1600,7 +1600,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: #333;
         font-weight: 600;
         margin: 15px 0 5px 0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .drawer-footer p {
@@ -1609,7 +1609,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-weight: 400;
         line-height: 1.5;
         margin: 0 0 15px 0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .drawer-footer section {
@@ -1791,7 +1791,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
 
                                             <div class="drawer-right">
                                                 <div class="info-block" style="padding: 25px;">
-                                                    <h2 style="font-size: 20px; color: #026447; font-weight: 600; margin: 0 0 20px 0; font-family: 'Inter', sans-serif; text-align: left;">About This Tool</h2>
+                                                    <h2 style="font-size: 20px; color: #026447; font-weight: 600; margin: 0 0 20px 0; font-family: 'Inter'; text-align: left;">About This Tool</h2>
                                                     <p style="font-size: 14px;">The Credit Shopper Tool is a sophisticated platform that leverages AidData's comprehensive development finance datasets to enable detailed comparison and analysis of financing options from various development finance institutions. This tool is designed to help development professionals make informed decisions by providing real-time comparisons, historical data analysis, and market trend insights.</p>
                                                     
 
@@ -1819,7 +1819,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
                                                         </li>
                                                     </ul>
 
-                                                    <h3 style="font-size: 18px; color: #026447; font-weight: 600; margin: 25px 0 15px 0; font-family: 'Inter', sans-serif;">Tool Components</h3>
+                                                    <h3 style="font-size: 18px; color: #026447; font-weight: 600; margin: 25px 0 15px 0; font-family: 'Inter';">Tool Components</h3>
                                                     <div class="scenario-examples" style="margin-bottom: 20px;">
                                                         <div class="scenario-card">
                                                             <h4 style="color: #026447; font-size: 16px; margin-bottom: 12px;">Credit Comparison Dashboard</h4>
@@ -1872,14 +1872,14 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
                                                 <!-- Video removed -->
                                                 
                                                                                 <!-- Research Description Container -->
-                                <div style="background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                                    <h3 style="color: #026447; font-size: 20px; margin-top: 0; margin-bottom: 15px; font-family: 'Inter', sans-serif; text-align: left;">Tool Description</h3>                                                    <p style="font-size: 14px; color: #333; line-height: 1.6; margin-bottom: 15px; font-family: 'Inter', sans-serif;">                                                        The AidData Credit Shopper Tool is an innovative platform designed to help government officials, development practitioners, and financial analysts compare financing options from various lenders. This interactive dashboard enables users to evaluate loan terms, interest rates, and repayment conditions across different creditors, facilitating more informed borrowing decisions.                                                    </p>                                                    <p style="font-size: 14px; color: #333; line-height: 1.6; margin-bottom: 0; font-family: 'Inter', sans-serif;">The tool combines data from multiple sources, including official development assistance records, commercial loan agreements, and export credit arrangements, providing comprehensive insights into the global development finance landscape.</p>
+                                <div style="background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                                    <h3 style="color: #026447; font-size: 20px; margin-top: 0; margin-bottom: 15px; font-family: 'Inter'; text-align: left;">Tool Description</h3>                                                    <p style="font-size: 14px; color: #333; line-height: 1.6; margin-bottom: 15px; font-family: 'Inter';">                                                        The AidData Credit Shopper Tool is an innovative platform designed to help government officials, development practitioners, and financial analysts compare financing options from various lenders. This interactive dashboard enables users to evaluate loan terms, interest rates, and repayment conditions across different creditors, facilitating more informed borrowing decisions.                                                    </p>                                                    <p style="font-size: 14px; color: #333; line-height: 1.6; margin-bottom: 0; font-family: 'Inter';">The tool combines data from multiple sources, including official development assistance records, commercial loan agreements, and export credit arrangements, providing comprehensive insights into the global development finance landscape.</p>
                                 </div>                                                
 
 
                                                 <div>
-                                                    <h3 style="color: #026447; font-size: 20px; margin-bottom: 20px; font-family: 'Inter', sans-serif; text-align: left;">Key Tool Benefits</h3>
+                                                    <h3 style="color: #026447; font-size: 20px; margin-bottom: 20px; font-family: 'Inter'; text-align: left;">Key Tool Benefits</h3>
                                                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
-                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>                                                <polyline points="14 2 14 8 20 8"></polyline>                                                <line x1="16" y1="13" x2="8" y2="13"></line>                                                <line x1="16" y1="17" x2="8" y2="17"></line>                                                <polyline points="10 9 9 9 8 9"></polyline>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter', sans-serif;">Comprehensive Data</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter', sans-serif;">Access a rich database of financing options from bilateral, multilateral, and commercial creditors with detailed terms and conditions.</p>                                            </div>                                        </div>                                    </div>                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter', sans-serif;">Side-by-Side Comparison</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter', sans-serif;">Easily compare financing packages across multiple dimensions including interest rates, grace periods, maturities, and hidden fees.</p>                                            </div>                                        </div>                                    </div>                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter', sans-serif;">Risk Assessment</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter', sans-serif;">Evaluate the long-term implications of different financing options with built-in analytical tools that highlight hidden risks and obligations.</p>                                            </div>                                        </div>                                    </div>                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <circle cx="12" cy="12" r="10"></circle>                                                <line x1="2" y1="12" x2="22" y2="12"></line>                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter', sans-serif;">Decision Support</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter', sans-serif;">Generate detailed reports and visualizations to support evidence-based decision-making and negotiations with potential creditors.</p>                                            </div>                                        </div>                                    </div>
+                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>                                                <polyline points="14 2 14 8 20 8"></polyline>                                                <line x1="16" y1="13" x2="8" y2="13"></line>                                                <line x1="16" y1="17" x2="8" y2="17"></line>                                                <polyline points="10 9 9 9 8 9"></polyline>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter';">Comprehensive Data</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter';">Access a rich database of financing options from bilateral, multilateral, and commercial creditors with detailed terms and conditions.</p>                                            </div>                                        </div>                                    </div>                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter';">Side-by-Side Comparison</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter';">Easily compare financing packages across multiple dimensions including interest rates, grace periods, maturities, and hidden fees.</p>                                            </div>                                        </div>                                    </div>                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter';">Risk Assessment</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter';">Evaluate the long-term implications of different financing options with built-in analytical tools that highlight hidden risks and obligations.</p>                                            </div>                                        </div>                                    </div>                                                                        <div style="background-color: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                        <div style="display: flex; align-items: flex-start; gap: 10px;">                                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#026447" stroke-width="2" style="min-width: 22px; margin-top: 3px;">                                                <circle cx="12" cy="12" r="10"></circle>                                                <line x1="2" y1="12" x2="22" y2="12"></line>                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>                                            </svg>                                            <div>                                                <h4 style="font-size: 16px; margin-top: 0; margin-bottom: 8px; color: #026447; font-family: 'Inter';">Decision Support</h4>                                                <p style="font-size: 14px; color: #555; line-height: 1.5; margin: 0; font-family: 'Inter';">Generate detailed reports and visualizations to support evidence-based decision-making and negotiations with potential creditors.</p>                                            </div>                                        </div>                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1893,7 +1893,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
                     <div class="tab-content" id="features" style="display: none;">
                         <div class="course-curriculum">
                             <div class="course-modules" style="margin-bottom: 40px;">
-                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">1</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter', sans-serif;">Loan Comparison Engine</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Core Feature</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter', sans-serif;">Advanced comparison functionality for detailed loan analysis:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Side-by-side financial term comparison across multiple lenders</li>                                        <li style="margin-bottom: 4px;">• Interactive visualizations of repayment schedules</li>                                        <li>• Total cost analysis including all fees and contingencies</li>                                    </ul>                                </div>                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">2</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter', sans-serif;">Risk Assessment Tools</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Analytics</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter', sans-serif;">Sophisticated risk analysis features:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Debt sustainability analysis with multiple scenarios</li>                                        <li style="margin-bottom: 4px;">• Automatic flagging of concerning contract terms</li>                                        <li>• Currency risk and commodity price volatility modeling</li>                                    </ul>                                </div>                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">3</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter', sans-serif;">Reporting & Export</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Documentation</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter', sans-serif;">Comprehensive reporting capabilities:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Customizable reports for stakeholder presentations</li>                                        <li style="margin-bottom: 4px;">• Data export in multiple formats (Excel, PDF, CSV)</li>                                        <li>• Detailed term sheets with highlighted differentiators</li>                                    </ul>                                </div>                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">4</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter', sans-serif;">Collaborative Platform</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Team Access</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter', sans-serif;">Seamless team collaboration features:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Multi-user access with customizable permissions</li>                                        <li style="margin-bottom: 4px;">• Shared comments and annotations on financing options</li>                                        <li>• Version history and decision tracking capabilities</li>                                    </ul>                                </div>
+                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">1</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter';">Loan Comparison Engine</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Core Feature</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter';">Advanced comparison functionality for detailed loan analysis:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Side-by-side financial term comparison across multiple lenders</li>                                        <li style="margin-bottom: 4px;">• Interactive visualizations of repayment schedules</li>                                        <li>• Total cost analysis including all fees and contingencies</li>                                    </ul>                                </div>                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">2</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter';">Risk Assessment Tools</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Analytics</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter';">Sophisticated risk analysis features:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Debt sustainability analysis with multiple scenarios</li>                                        <li style="margin-bottom: 4px;">• Automatic flagging of concerning contract terms</li>                                        <li>• Currency risk and commodity price volatility modeling</li>                                    </ul>                                </div>                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">3</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter';">Reporting & Export</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Documentation</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter';">Comprehensive reporting capabilities:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Customizable reports for stakeholder presentations</li>                                        <li style="margin-bottom: 4px;">• Data export in multiple formats (Excel, PDF, CSV)</li>                                        <li>• Detailed term sheets with highlighted differentiators</li>                                    </ul>                                </div>                                                                <div class="module-item" style="margin-bottom: 30px; background-color: rgba(248, 249, 250, 0.7); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05);">                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">                                        <div style="background: rgba(2, 100, 71, 0.1); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">                                            <span style="color: #026447; font-weight: 500;">4</span>                                        </div>                                        <h3 style="color: #026447; font-size: 20px; margin: 0; font-family: 'Inter';">Collaborative Platform</h3>                                        <span style="margin-left: auto; color: #666; font-size: 14px;">Team Access</span>                                    </div>                                    <p style="color: #555; line-height: 1.6; font-family: 'Inter';">Seamless team collaboration features:</p>                                    <ul style="list-style: none; padding-left: 0; margin-top: 8px; font-size: 14px; color: #555;">                                        <li style="margin-bottom: 4px;">• Multi-user access with customizable permissions</li>                                        <li style="margin-bottom: 4px;">• Shared comments and annotations on financing options</li>                                        <li>• Version history and decision tracking capabilities</li>                                    </ul>                                </div>
                             </div>
                             
                             <?php if ( function_exists( 'lifterlms_get_course_syllabus' ) ) : ?>
@@ -1967,9 +1967,9 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
                                         <?php endif; ?>
                                     </div>
                                     <div class="instructor-info" style="flex: 1;">
-                                        <h3 class="instructor-name" style="font-size: 18px; color: #026447; margin-top: 0; margin-bottom: 3px; font-family: 'Inter', sans-serif;"><?php echo esc_html($instructor['name']); ?></h3>
-                                        <h4 style="font-size: 14px; color: #666; margin-top: 0; margin-bottom: 8px; font-family: 'Inter', sans-serif; font-weight: 500;"><?php echo esc_html($instructor['title']); ?></h4>
-                                        <div class="instructor-bio" style="color: #555; line-height: 1.4; font-size: 14px; font-family: 'Inter', sans-serif;">
+                                        <h3 class="instructor-name" style="font-size: 18px; color: #026447; margin-top: 0; margin-bottom: 3px; font-family: 'Inter';"><?php echo esc_html($instructor['name']); ?></h3>
+                                        <h4 style="font-size: 14px; color: #666; margin-top: 0; margin-bottom: 8px; font-family: 'Inter'; font-weight: 500;"><?php echo esc_html($instructor['title']); ?></h4>
+                                        <div class="instructor-bio" style="color: #555; line-height: 1.4; font-size: 14px; font-family: 'Inter';">
                                             <?php 
                                             echo $instructor['bio'];
                                             ?>
@@ -1996,9 +1996,9 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
                                                     
                                                     <!-- Course features -->
                                                     <div style="padding: 30px;">
-                                                        <h4 style="margin: 0 0 20px 0; font-size: 18px; color: #333; font-family: 'Inter', sans-serif; font-weight: 600; border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 15px;">Tool Features</h4>
+                                                        <h4 style="margin: 0 0 20px 0; font-size: 18px; color: #333; font-family: 'Inter'; font-weight: 600; border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 15px;">Tool Features</h4>
                                                         
-                                                        <ul style="list-style-type: none; padding: 0; margin: 0 0 25px 0; font-family: 'Inter', sans-serif;">
+                                                        <ul style="list-style-type: none; padding: 0; margin: 0 0 25px 0; font-family: 'Inter';">
                                                             <li style="padding: 12px 0; display: flex; align-items: center; color: #444; font-size: 15px; border-bottom: 1px solid rgba(0, 0, 0, 0.04);">
                                                                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#026447" stroke-width="2" style="margin-right: 15px; min-width: 20px;">
                                                                     <polyline points="20 6 9 17 4 12"></polyline>
@@ -2029,7 +2029,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
 
                                                         </ul>
                                                         
-                                                                                                                 <a href="#" target="_blank" rel="noopener noreferrer" class="enroll-button" style="display: inline-block; background-color: #026447; color: #fff; padding: 16px 20px; font-size: 16px; font-weight: 600; text-align: center; border-radius: 6px; border: none; cursor: pointer; text-decoration: none; margin-top: 10px; margin-bottom: 5px; transition: all 0.3s ease; width: 100%; font-family: 'Inter', sans-serif; box-shadow: 0 4px 6px rgba(2, 100, 71, 0.2);">Subscribe Now</a>
+                                                                                                                 <a href="#" target="_blank" rel="noopener noreferrer" class="enroll-button" style="display: inline-block; background-color: #026447; color: #fff; padding: 16px 20px; font-size: 16px; font-weight: 600; text-align: center; border-radius: 6px; border: none; cursor: pointer; text-decoration: none; margin-top: 10px; margin-bottom: 5px; transition: all 0.3s ease; width: 100%; font-family: 'Inter'; box-shadow: 0 4px 6px rgba(2, 100, 71, 0.2);">Subscribe Now</a>
                                                         <!-- Enrollment note removed -->
                                                     </div>
                                                 </div>
@@ -2038,9 +2038,9 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
                                                 <div style="background-color: #f8f9fa; padding: 25px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.05); margin-top: 5px;">
                                                     <div style="display: flex; align-items: flex-start;">
                                                         <div>
-                                                            <h5 style="color: #026447; font-size: 16px; margin: 0 0 10px 0; font-family: 'Inter', sans-serif; font-weight: 600;">Institutional Access Available</h5>
-                                                            <p style="font-size: 15px; color: #555; line-height: 1.6; margin-bottom: 15px; font-family: 'Inter', sans-serif;">Organizations can request multi-user licenses with additional features including collaborative workspaces and advanced analytics for decision-making teams.</p>
-                                                            <a href="#" id="institutional-inquiry-btn" style="color: #026447; font-size: 15px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-family: 'Inter', sans-serif;">
+                                                            <h5 style="color: #026447; font-size: 16px; margin: 0 0 10px 0; font-family: 'Inter'; font-weight: 600;">Institutional Access Available</h5>
+                                                            <p style="font-size: 15px; color: #555; line-height: 1.6; margin-bottom: 15px; font-family: 'Inter';">Organizations can request multi-user licenses with additional features including collaborative workspaces and advanced analytics for decision-making teams.</p>
+                                                            <a href="#" id="institutional-inquiry-btn" style="color: #026447; font-size: 15px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-family: 'Inter';">
                                                                 Request institutional access
                                                                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                                                                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -2367,12 +2367,12 @@ footer.site-footer + * {
 <script src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/js/video-player.js"></script> 
 
 <!-- Scholarship Inquiry Modal -->
-<div id="scholarship-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+<div id="scholarship-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; font-family: 'Inter';">
     <div style="background-color: white; width: 90%; max-width: 550px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); position: relative; max-height: 90vh; overflow-y: auto;">
         <button id="close-modal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; font-size: 24px; color: #666;">&times;</button>
         
         <div style="padding: 30px;">
-            <h3 style="color: #026447; font-size: 22px; margin: 0 0 20px 0; font-family: 'Inter', sans-serif; font-weight: 600;">Scholarship Inquiry</h3>
+            <h3 style="color: #026447; font-size: 22px; margin: 0 0 20px 0; font-family: 'Inter'; font-weight: 600;">Scholarship Inquiry</h3>
             <p style="color: #555; margin-bottom: 25px; font-size: 15px; line-height: 1.5;">Please provide the following information to inquire about scholarship opportunities for this course. Priority is given to applicants from low and middle-income countries.</p>
             <p style="color: #026447; margin-bottom: 15px; font-size: 15px; line-height: 1.5; background-color: rgba(2, 100, 71, 0.1); padding: 12px; border-radius: 6px;"><strong>New:</strong> Group scholarships are now available! Select "Group Inquiry" if you're applying on behalf of multiple participants from the same organization.</p>
             
@@ -2434,33 +2434,33 @@ footer.site-footer + * {
                 
                 <div style="margin-bottom: 15px;">
                     <label for="full-name" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Full Name *</label>
-                    <input type="text" id="full-name" name="full-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="text" id="full-name" name="full-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Email Address *</label>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="country" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Country of Residence *</label>
-                    <input type="text" id="country" name="country" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="text" id="country" name="country" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="organization" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Organization</label>
-                    <input type="text" id="organization" name="organization" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="text" id="organization" name="organization" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div id="group-details" style="display: none; background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee;">
                     <h5 style="margin-top: 0; margin-bottom: 15px; color: #026447; font-size: 16px; font-weight: 600;">Group Details</h5>
                     <div style="margin-bottom: 15px;">
                         <label for="group-size" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Number of Participants *</label>
-                        <input type="number" id="group-size" name="group-size" min="2" placeholder="E.g., 5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                        <input type="number" id="group-size" name="group-size" min="2" placeholder="E.g., 5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                     </div>
                     <div style="margin-bottom: 15px;">
                         <label for="group-type" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Type of Group *</label>
-                        <select id="group-type" name="group-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif; background-color: white;">
+                        <select id="group-type" name="group-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter'; background-color: white;">
                             <option value="">Please select</option>
                             <option value="Journalism Team">Journalism Team</option>
                             <option value="Research Group">Research Group</option>
@@ -2552,10 +2552,10 @@ footer.site-footer + * {
                 
                 <div style="margin-bottom: 25px;">
                     <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Why are you interested in this course? *</label>
-                    <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;"></textarea>
+                    <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';"></textarea>
                 </div>
                 
-                <button type="submit" style="background-color: #026447; color: white; border: none; border-radius: 6px; padding: 12px 20px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; width: 100%;">Submit Inquiry</button>
+                <button type="submit" style="background-color: #026447; color: white; border: none; border-radius: 6px; padding: 12px 20px; font-family: 'Inter'; font-weight: 600; cursor: pointer; width: 100%;">Submit Inquiry</button>
             </form>
         </div>
     </div>
@@ -2841,43 +2841,43 @@ Interest: ${message}
 </script>
 
 <!-- Institutional Access Modal -->
-<div id="institutional-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; font-family: 'Inter', sans-serif;">
+<div id="institutional-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; font-family: 'Inter';">
     <div style="background-color: white; width: 90%; max-width: 550px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); position: relative; max-height: 90vh; overflow-y: auto;">
         <button id="close-institutional-modal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; cursor: pointer; font-size: 24px; color: #666;">&times;</button>
         
         <div style="padding: 30px;">
-            <h3 style="color: #026447; font-size: 22px; margin: 0 0 20px 0; font-family: 'Inter', sans-serif; font-weight: 600;">Request Institutional Access</h3>
+            <h3 style="color: #026447; font-size: 22px; margin: 0 0 20px 0; font-family: 'Inter'; font-weight: 600;">Request Institutional Access</h3>
             <p style="color: #555; margin-bottom: 25px; font-size: 15px; line-height: 1.5;">Complete the form below to request multi-user access for your organization. Institutional accounts include collaborative workspaces, advanced analytics, and team management features.</p>
             
             <form id="institutional-form">
                 <div style="margin-bottom: 15px;">
                     <label for="inst-organization-name" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Organization Name *</label>
-                    <input type="text" id="inst-organization-name" name="inst-organization-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="text" id="inst-organization-name" name="inst-organization-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="inst-contact-name" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Contact Person *</label>
-                    <input type="text" id="inst-contact-name" name="inst-contact-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="text" id="inst-contact-name" name="inst-contact-name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="inst-email" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Email Address *</label>
-                    <input type="email" id="inst-email" name="inst-email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="email" id="inst-email" name="inst-email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="inst-phone" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Phone Number</label>
-                    <input type="tel" id="inst-phone" name="inst-phone" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="tel" id="inst-phone" name="inst-phone" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="inst-number-users" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Number of Users *</label>
-                    <input type="number" id="inst-number-users" name="inst-number-users" min="2" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                    <input type="number" id="inst-number-users" name="inst-number-users" min="2" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';">
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <label for="inst-organization-type" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Organization Type *</label>
-                    <select id="inst-organization-type" name="inst-organization-type" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif; background-color: white;">
+                    <select id="inst-organization-type" name="inst-organization-type" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter'; background-color: white;">
                         <option value="">Please select</option>
                         <option value="Government Agency">Government Agency</option>
                         <option value="Central Bank">Central Bank</option>
@@ -2892,10 +2892,10 @@ Interest: ${message}
                 
                 <div style="margin-bottom: 25px;">
                     <label for="inst-requirements" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Specific Requirements *</label>
-                    <textarea id="inst-requirements" name="inst-requirements" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;" placeholder="Please describe your organization's needs and how you intend to use this tool."></textarea>
+                    <textarea id="inst-requirements" name="inst-requirements" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter';" placeholder="Please describe your organization's needs and how you intend to use this tool."></textarea>
                 </div>
                 
-                <button type="submit" style="background-color: #026447; color: white; border: none; border-radius: 6px; padding: 12px 20px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; width: 100%;">Submit Request</button>
+                <button type="submit" style="background-color: #026447; color: white; border: none; border-radius: 6px; padding: 12px 20px; font-family: 'Inter'; font-weight: 600; cursor: pointer; width: 100%;">Submit Request</button>
             </form>
         </div>
     </div>

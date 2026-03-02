@@ -103,18 +103,18 @@
     font-weight: 300;
     color: var(--primary-color);
     margin-bottom: 1.5rem;
-    font-family: "Inter", sans-serif;
+    font-family: "Inter";
 }
 
 /* Course Instructors Section */
 .course-instructors {
     margin-bottom: 2rem;
-    font-family: "Inter", sans-serif;
+    font-family: "Inter";
 }
 
 .course-instructors h4 {
     margin-bottom: 1rem;
-    font-family: "Inter", sans-serif;
+    font-family: "Inter";
 }
 
 .instructor-avatars {
@@ -149,7 +149,7 @@
     font-weight: 500;
     color: var(--primary-color);
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .instructor-info p {
@@ -193,7 +193,7 @@
     margin: 1.5rem 0 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: "Inter", sans-serif;
+    font-family: "Inter";
 }
 
 .learning-objectives {
@@ -328,7 +328,7 @@
     font-weight: 400;
     color: var(--primary-color, #115740);
     margin-bottom: 0.75rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .auth-header p {
@@ -439,7 +439,7 @@
     font-weight: 400;
     color: var(--primary-color, #115740);
     margin-bottom: 0.75rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .signup-header p {
@@ -541,7 +541,7 @@
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .login-modal.active {
@@ -568,7 +568,7 @@
 .login-header {
     text-align: center;
     margin-bottom: 2rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .login-header h3 {
@@ -576,7 +576,7 @@
     font-weight: 400;
     color: var(--primary-color, #115740);
     margin-bottom: 0.75rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .login-header p {
@@ -717,7 +717,7 @@
 .forgot-password-header {
     text-align: center;
     margin-bottom: 2rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .forgot-password-header h3 {
@@ -725,7 +725,7 @@
     font-weight: 400;
     color: var(--primary-color, #115740);
     margin-bottom: 0.75rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .forgot-password-header p {

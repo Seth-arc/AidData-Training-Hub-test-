@@ -47,7 +47,7 @@ if (!defined('ABSPATH')) exit;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter';
             background-color: #f5f5f5;
             display: flex;
             justify-content: center;
@@ -209,7 +209,7 @@ if (!defined('ABSPATH')) exit;
         }
 
         .certificate-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Inter';
             font-size: 40px;
             color: var(--primary-color);
             margin: 12px 0;
@@ -249,7 +249,7 @@ if (!defined('ABSPATH')) exit;
             letter-spacing: 1px;
             position: relative;
             display: inline-block;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Inter';
         }
 
         .recipient-name::after {

@@ -30,12 +30,12 @@ $current_user = wp_get_current_user();
     
     /* Global font family override for all elements */
     *, *::before, *::after {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* Additional specific overrides for common elements */
     body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, label {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* CSS Variables */
@@ -66,7 +66,7 @@ $current_user = wp_get_current_user();
     * {
         scrollbar-width: thin;
         scrollbar-color: #115740 #f1f1f1;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     body, html {
@@ -77,7 +77,7 @@ $current_user = wp_get_current_user();
         color: #1a1a1a;
         line-height: 1.5;
         letter-spacing: -0.01em;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
@@ -289,7 +289,7 @@ $current_user = wp_get_current_user();
             rgba(17, 87, 64, 0.02) 0%,
             rgba(26, 128, 95, 0.06) 100%
         );
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .dashboard-hero-content {
@@ -316,7 +316,7 @@ $current_user = wp_get_current_user();
     .user-info {
         flex: 1;
         min-width: 300px;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .user-info h1 {
@@ -326,7 +326,7 @@ $current_user = wp_get_current_user();
         letter-spacing: -0.03em;
         color: #1a1a1a;
         line-height: 1.2;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         transform: translateY(20px);
         opacity: 0;
         animation: fadeInUp 0.6s 0.2s ease forwards;
@@ -337,7 +337,7 @@ $current_user = wp_get_current_user();
         color: #666;
         margin: 0;
         font-weight: 300;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         letter-spacing: -0.01em;
         transform: translateY(20px);
         opacity: 0;
@@ -367,7 +367,7 @@ $current_user = wp_get_current_user();
         line-height: 1;
         color: #115740;
         margin-bottom: 0.5rem;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .stat-label {
@@ -377,7 +377,7 @@ $current_user = wp_get_current_user();
         text-transform: none;
         letter-spacing: 0;
         line-height: 1.3;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* Animated shapes matching front-page */
@@ -467,7 +467,7 @@ $current_user = wp_get_current_user();
         padding: 0;
         min-height: 100vh;
         padding-top: 0; /* Remove all top padding */
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* Main Dashboard Grid */
@@ -509,7 +509,7 @@ $current_user = wp_get_current_user();
         font-weight: 500;
         color: #1a1a1a;
         margin: 0;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .section-action {
@@ -721,7 +721,7 @@ $current_user = wp_get_current_user();
         font-size: 1rem;
         margin-bottom: 1rem;
         font-weight: 500;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         text-transform: uppercase;
         color: #d2bb93;
     }
@@ -734,14 +734,14 @@ $current_user = wp_get_current_user();
     
     .footer-section ul li {
         margin-bottom: 0.5rem;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .footer-section a {
         color: rgba(255, 255, 255, 0.8);
         text-decoration: none;
         transition: color 0.2s;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .footer-section a:hover {
@@ -759,7 +759,7 @@ $current_user = wp_get_current_user();
         font-size: 0.95rem;
         line-height: 1.5;
         margin: 0 0 1.5rem;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .social-links {

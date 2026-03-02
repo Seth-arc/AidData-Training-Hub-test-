@@ -177,7 +177,7 @@ wp_localize_script('tutorial-script', 'tutorialData', array(
     }
 
     body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        font-family: 'Inter';
         background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
         color: #2c3e50;
         line-height: 1.6;
@@ -392,7 +392,7 @@ wp_localize_script('tutorial-script', 'tutorialData', array(
     }
 
     .video-info h1 {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        font-family: 'Inter';
         font-size: 1.4rem;
         font-weight: 500;
         color: #2c3e50;
@@ -429,7 +429,7 @@ wp_localize_script('tutorial-script', 'tutorialData', array(
     }
 
     .sidebar h2 {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        font-family: 'Inter';
         font-size: 1.1rem;
         font-weight: 500;
         color: #2c3e50;

@@ -89,7 +89,7 @@ wp_enqueue_script('modals-script', get_template_directory_uri() . '/assets/js/mo
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        font-family: 'Inter' !important;
     }
 
     body {

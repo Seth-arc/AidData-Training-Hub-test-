@@ -46,12 +46,12 @@ $current_user = wp_get_current_user();
     
     /* Global font family override for all elements */
     *, *::before, *::after {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* Additional specific overrides for common elements */
     body, html, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, label {
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     /* Webkit browsers (Chrome, Safari, newer versions of Opera and Edge) */
@@ -77,7 +77,7 @@ $current_user = wp_get_current_user();
     * {
         scrollbar-width: thin;
         scrollbar-color: #115740 #f1f1f1;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     body, html {
@@ -88,7 +88,7 @@ $current_user = wp_get_current_user();
         color: #1a1a1a;
         line-height: 1.5;
         letter-spacing: -0.01em;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
@@ -282,14 +282,14 @@ $current_user = wp_get_current_user();
         padding: 0;
         min-height: 100vh;
         padding-top: 100px;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .payment-hero {
         background: #ffffff;
         color: #1a1a1a;
         padding: 2rem 0 3rem;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
     }
     
     .payment-hero-content {
@@ -306,7 +306,7 @@ $current_user = wp_get_current_user();
         letter-spacing: -0.03em;
         color: #1a1a1a;
         line-height: 1.2;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -318,7 +318,7 @@ $current_user = wp_get_current_user();
         color: #666;
         margin: 0;
         font-weight: 400;
-        font-family: 'Inter', sans-serif !important;
+        font-family: 'Inter' !important;
         max-width: 600px;
         margin: 0 auto;
         line-height: 1.6;

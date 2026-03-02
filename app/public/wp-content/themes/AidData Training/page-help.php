@@ -18,7 +18,7 @@ get_header();
                 max-width: 1200px;
                 margin: 0 auto;
                 padding: 40px 20px;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                font-family: 'Inter';
             }
             
             .help-header {

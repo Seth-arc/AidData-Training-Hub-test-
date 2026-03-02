@@ -107,11 +107,11 @@ wp_enqueue_style('lms-styles', get_template_directory_uri() . '/assets/css/lms.c
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+            font-family: 'Inter' !important;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+            font-family: 'Inter' !important;
             color: #333;
             line-height: 1.6;
             background-color: #f5f5f5;
@@ -119,7 +119,7 @@ wp_enqueue_style('lms-styles', get_template_directory_uri() . '/assets/css/lms.c
 
         /* Force Inter font on all text elements */
         h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label, li, td, th {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+            font-family: 'Inter' !important;
         }
 
         /* Header */

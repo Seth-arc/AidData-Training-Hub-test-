@@ -36,7 +36,7 @@
 
 /* Ensure all elements use only the Inter font family */
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 /* Dark Mode Styles */
@@ -330,7 +330,7 @@ body.dark-mode::-webkit-scrollbar-thumb:hover {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
     margin: 0;
     padding: 0;
     background-color: #f5f5f5;
@@ -959,7 +959,7 @@ body {
     opacity: 0;
     animation: fadeInUp 0.6s 0.2s ease forwards;
     z-index: 100;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .welcome-content p {
@@ -1307,7 +1307,7 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     letter-spacing: -0.02em;
     color: #fefefe;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .course-categories {
@@ -1733,7 +1733,7 @@ body {
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 @media (max-width: 768px) {
@@ -1841,7 +1841,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .contact-person {
@@ -1917,7 +1917,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .info-block p {
@@ -1980,7 +1980,7 @@ body {
     color: var(--primary-color);
     margin: 0 0 1rem;
     line-height: 1.3;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .expertise-content p {
@@ -2123,7 +2123,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .opportunities-section h5 {
@@ -2132,7 +2132,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 
@@ -2408,7 +2408,7 @@ body {
     font-size: 1rem;
     font-weight: 500;
     margin: 0 0 1.25rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
     text-transform: uppercase;
 }
 
@@ -2417,7 +2417,7 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0 0 1.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .footer-section ul {
@@ -2953,7 +2953,7 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     letter-spacing: -0.02em;
     color: #fefefe;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .course-categories {
@@ -3372,7 +3372,7 @@ body {
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 @media (max-width: 768px) {
@@ -3480,7 +3480,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .contact-person {
@@ -3556,7 +3556,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .info-block p {
@@ -3619,7 +3619,7 @@ body {
     color: var(--primary-color);
     margin: 0 0 1rem;
     line-height: 1.3;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .expertise-content p {
@@ -3762,7 +3762,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .opportunities-section h5 {
@@ -3771,7 +3771,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 
@@ -4047,7 +4047,7 @@ body {
     font-size: 1rem;
     font-weight: 500;
     margin: 0 0 1.25rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
     text-transform: uppercase;
 }
 
@@ -4056,7 +4056,7 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0 0 1.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .footer-section ul {
@@ -4592,7 +4592,7 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     letter-spacing: -0.02em;
     color: #fefefe;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .course-categories {
@@ -5011,7 +5011,7 @@ body {
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 @media (max-width: 768px) {
@@ -5119,7 +5119,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .contact-person {
@@ -5195,7 +5195,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .info-block p {
@@ -5258,7 +5258,7 @@ body {
     color: var(--primary-color);
     margin: 0 0 1rem;
     line-height: 1.3;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .expertise-content p {
@@ -5401,7 +5401,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .opportunities-section h5 {
@@ -5410,7 +5410,7 @@ body {
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid rgba(17, 87, 64, 0.1);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 
@@ -5686,7 +5686,7 @@ body {
     font-size: 1rem;
     font-weight: 500;
     margin: 0 0 1.25rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
     text-transform: uppercase;
 }
 
@@ -5695,7 +5695,7 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0 0 1.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter';
 }
 
 .footer-section ul {

@@ -32,7 +32,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
     
     /* Set font family globally */
     * {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     /* Top-level elements */
@@ -42,7 +42,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         height: 100%;
         width: 100%;
         overflow-x: hidden; /* Prevent horizontal scrolling */
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         display: flex;
         flex-direction: column;
         min-height: 100vh; /* Use viewport height to ensure it takes full height */
@@ -145,7 +145,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 2.5rem;
         margin-bottom: 20px;
         color: #333;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     /* Hero image styles */
@@ -214,7 +214,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: white;
         max-width: 80%;
         font-weight: 400;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .page-hero-description {
@@ -224,12 +224,12 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         margin-bottom: 0;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         text-align: center;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .page-hero-description p {
         margin: 0;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     @media (max-width: 992px) {
@@ -315,7 +315,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         display: flex;
         align-items: center;
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
 
     .header-button svg {
@@ -444,7 +444,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 1rem;
         margin-bottom: 1rem;
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
         text-transform: uppercase;
         color: #d2bb93;
     }
@@ -457,14 +457,14 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
     
     .footer-section ul li {
         margin-bottom: 0.5rem;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .footer-section a {
         color: rgba(255, 255, 255, 0.8);
         text-decoration: none;
         transition: color 0.2s;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .footer-section a:hover {
@@ -482,7 +482,7 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         font-size: 0.95rem;
         line-height: 1.5;
         margin: 0 0 1.5rem;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .social-links {
@@ -540,13 +540,13 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     address {
         font-style: normal;
         line-height: 1.6;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
 
     /* Make sure images and media don't cause overflow */
@@ -577,14 +577,14 @@ wp_enqueue_style('loading-screen', get_template_directory_uri() . '/assets/css/l
         color: #026447;
         font-size: 1.8rem;
         margin-bottom: 20px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .main-content p {
         color: #333;
         line-height: 1.6;
         margin-bottom: 20px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter';
     }
     
     .main-content ul, 

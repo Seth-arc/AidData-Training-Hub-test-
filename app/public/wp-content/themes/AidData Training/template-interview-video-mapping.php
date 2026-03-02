@@ -45,7 +45,7 @@ if (empty($video_url)) {
     p, span, div, a, button,
     input, textarea, select, label,
     li, td, th {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+        font-family: 'Inter' !important;
     }
 
     .hero-interview {
