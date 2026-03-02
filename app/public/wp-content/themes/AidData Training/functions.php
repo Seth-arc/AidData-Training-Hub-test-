@@ -542,6 +542,40 @@ function aiddata_enqueue_global_inter_font() {
 add_action('wp_enqueue_scripts', 'aiddata_enqueue_global_inter_font', 0);
 
 /**
+ * Hide the default block-theme header when a template renders the custom LMS header.
+ *
+ * Several custom templates output their own `.lms-header` but still call `get_header()`.
+ * This suppresses the default WordPress header/title so it cannot appear under the fixed nav on scroll.
+ */
+function aiddata_hide_default_header_when_lms_header_exists() {
+    if ( is_admin() ) {
+        return;
+    }
+    ?>
+    <style id="aiddata-lms-header-guard">
+        body:has(.lms-header) .site-header,
+        body:has(.lms-header) #masthead,
+        body:has(.lms-header) header.wp-block-template-part,
+        body:has(.lms-header) .wp-block-template-part > header,
+        body.aiddata-has-lms-header .site-header,
+        body.aiddata-has-lms-header #masthead,
+        body.aiddata-has-lms-header header.wp-block-template-part,
+        body.aiddata-has-lms-header .wp-block-template-part > header {
+            display: none !important;
+        }
+    </style>
+    <script id="aiddata-lms-header-guard-fallback">
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.querySelector('.lms-header')) {
+                document.body.classList.add('aiddata-has-lms-header');
+            }
+        });
+    </script>
+    <?php
+}
+add_action( 'wp_head', 'aiddata_hide_default_header_when_lms_header_exists', 2 );
+
+/**
  * Enqueue shared loading and transition assets.
  */
 function aiddata_enqueue_page_transitions() {
