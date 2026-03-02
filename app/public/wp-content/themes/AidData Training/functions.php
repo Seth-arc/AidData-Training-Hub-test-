@@ -542,10 +542,54 @@ function aiddata_enqueue_global_inter_font() {
 add_action('wp_enqueue_scripts', 'aiddata_enqueue_global_inter_font', 0);
 
 /**
+ * Determine whether the currently loaded template outputs the custom LMS header.
+ */
+function aiddata_current_template_has_lms_header() {
+    if ( is_admin() ) {
+        return false;
+    }
+
+    global $template;
+
+    if ( empty( $template ) || ! is_string( $template ) || ! is_readable( $template ) ) {
+        return false;
+    }
+
+    static $cache = array();
+
+    if ( array_key_exists( $template, $cache ) ) {
+        return $cache[ $template ];
+    }
+
+    $template_source = file_get_contents( $template );
+
+    if ( false === $template_source ) {
+        $cache[ $template ] = false;
+        return false;
+    }
+
+    $cache[ $template ] = (
+        false !== strpos( $template_source, 'class="lms-header"' ) ||
+        false !== strpos( $template_source, "class='lms-header'" )
+    );
+
+    return $cache[ $template ];
+}
+
+/**
+ * Add a deterministic body class when a template renders the LMS header.
+ */
+function aiddata_add_lms_header_body_class( $classes ) {
+    if ( aiddata_current_template_has_lms_header() ) {
+        $classes[] = 'aiddata-has-lms-header';
+    }
+
+    return $classes;
+}
+add_filter( 'body_class', 'aiddata_add_lms_header_body_class' );
+
+/**
  * Hide the default block-theme header when a template renders the custom LMS header.
- *
- * Several custom templates output their own `.lms-header` but still call `get_header()`.
- * This suppresses the default WordPress header/title so it cannot appear under the fixed nav on scroll.
  */
 function aiddata_hide_default_header_when_lms_header_exists() {
     if ( is_admin() ) {
@@ -553,10 +597,6 @@ function aiddata_hide_default_header_when_lms_header_exists() {
     }
     ?>
     <style id="aiddata-lms-header-guard">
-        body:has(.lms-header) .site-header,
-        body:has(.lms-header) #masthead,
-        body:has(.lms-header) header.wp-block-template-part,
-        body:has(.lms-header) .wp-block-template-part > header,
         body.aiddata-has-lms-header .site-header,
         body.aiddata-has-lms-header #masthead,
         body.aiddata-has-lms-header header.wp-block-template-part,
@@ -564,13 +604,6 @@ function aiddata_hide_default_header_when_lms_header_exists() {
             display: none !important;
         }
     </style>
-    <script id="aiddata-lms-header-guard-fallback">
-        document.addEventListener('DOMContentLoaded', function () {
-            if (document.querySelector('.lms-header')) {
-                document.body.classList.add('aiddata-has-lms-header');
-            }
-        });
-    </script>
     <?php
 }
 add_action( 'wp_head', 'aiddata_hide_default_header_when_lms_header_exists', 2 );
