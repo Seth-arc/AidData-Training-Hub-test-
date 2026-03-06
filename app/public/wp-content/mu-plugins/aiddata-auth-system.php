@@ -165,18 +165,21 @@ function aiddata_auth_mail_config_context() {
 	$smtp_pass = aiddata_auth_env( 'AIDDATA_SMTP_PASS', '' );
 
 	return array(
-		'mail_transport'       => aiddata_auth_env( 'AIDDATA_MAIL_TRANSPORT', 'wp_mail' ),
-		'smtp_host'            => aiddata_auth_env( 'AIDDATA_SMTP_HOST', '' ),
-		'smtp_port'            => aiddata_auth_env( 'AIDDATA_SMTP_PORT', '' ),
-		'smtp_user'            => aiddata_auth_env( 'AIDDATA_SMTP_USER', '' ),
-		'smtp_secure'          => aiddata_auth_env( 'AIDDATA_SMTP_SECURE', '' ),
-		'smtp_from_email'      => aiddata_auth_env( 'AIDDATA_SMTP_FROM_EMAIL', '' ),
-		'smtp_from_name'       => aiddata_auth_env( 'AIDDATA_SMTP_FROM_NAME', '' ),
-		'smtp_pass_len'        => strlen( trim( str_replace( ' ', '', (string) $smtp_pass ) ) ),
-		'smtp_host_configured' => '' !== trim( aiddata_auth_env( 'AIDDATA_SMTP_HOST', '' ) ),
-		'resend_from_email'    => aiddata_auth_env( 'AIDDATA_RESEND_FROM_EMAIL', '' ),
-		'resend_from_name'     => aiddata_auth_env( 'AIDDATA_RESEND_FROM_NAME', '' ),
-		'resend_key_len'       => strlen( trim( (string) aiddata_auth_env( 'AIDDATA_RESEND_API_KEY', '' ) ) ),
+		'mail_transport'         => aiddata_auth_env( 'AIDDATA_MAIL_TRANSPORT', 'wp_mail' ),
+		'smtp_host'              => aiddata_auth_env( 'AIDDATA_SMTP_HOST', '' ),
+		'smtp_port'              => aiddata_auth_env( 'AIDDATA_SMTP_PORT', '' ),
+		'smtp_user'              => aiddata_auth_env( 'AIDDATA_SMTP_USER', '' ),
+		'smtp_secure'            => aiddata_auth_env( 'AIDDATA_SMTP_SECURE', '' ),
+		'smtp_from_email'        => aiddata_auth_env( 'AIDDATA_SMTP_FROM_EMAIL', '' ),
+		'smtp_from_name'         => aiddata_auth_env( 'AIDDATA_SMTP_FROM_NAME', '' ),
+		'smtp_pass_len'          => strlen( trim( str_replace( ' ', '', (string) $smtp_pass ) ) ),
+		'smtp_host_configured'   => '' !== trim( aiddata_auth_env( 'AIDDATA_SMTP_HOST', '' ) ),
+		'resend_from_email'      => aiddata_auth_env( 'AIDDATA_RESEND_FROM_EMAIL', '' ),
+		'resend_from_name'       => aiddata_auth_env( 'AIDDATA_RESEND_FROM_NAME', '' ),
+		'resend_key_len'         => strlen( trim( (string) aiddata_auth_env( 'AIDDATA_RESEND_API_KEY', '' ) ) ),
+		'sendgrid_from_email'    => aiddata_auth_env( 'AIDDATA_SENDGRID_FROM_EMAIL', '' ),
+		'sendgrid_from_name'     => aiddata_auth_env( 'AIDDATA_SENDGRID_FROM_NAME', '' ),
+		'sendgrid_api_key_len'   => strlen( trim( (string) aiddata_auth_env( 'AIDDATA_SENDGRID_API_KEY', '' ) ) ),
 	);
 }
 
@@ -331,6 +334,160 @@ function aiddata_auth_send_mail_via_resend( $to_email, $subject, $text_body ) {
 }
 
 /**
+ * Send email via SendGrid API over HTTPS.
+ */
+function aiddata_auth_send_mail_via_sendgrid( $to_email, $subject, $text_body ) {
+	$api_key = trim( aiddata_auth_env( 'AIDDATA_SENDGRID_API_KEY', '' ) );
+	if ( '' === $api_key ) {
+		return array(
+			'success' => false,
+			'error'   => 'SendGrid API key is missing.',
+		);
+	}
+
+	$from_email = trim( aiddata_auth_env( 'AIDDATA_SENDGRID_FROM_EMAIL', '' ) );
+	if ( '' === $from_email ) {
+		$from_email = trim( aiddata_auth_env( 'AIDDATA_SMTP_FROM_EMAIL', '' ) );
+	}
+
+	if ( ! is_email( $from_email ) ) {
+		return array(
+			'success' => false,
+			'error'   => 'SendGrid from email is missing or invalid.',
+		);
+	}
+
+	$from_name = trim( aiddata_auth_env( 'AIDDATA_SENDGRID_FROM_NAME', '' ) );
+	if ( '' === $from_name ) {
+		$from_name = trim( aiddata_auth_env( 'AIDDATA_SMTP_FROM_NAME', '' ) );
+	}
+	if ( '' === $from_name ) {
+		$from_name = 'AidData Training Hub';
+	}
+
+	$payload = wp_json_encode(
+		array(
+			'personalizations' => array(
+				array(
+					'to' => array(
+						array(
+							'email' => $to_email,
+						),
+					),
+				),
+			),
+			'from'             => array(
+				'email' => $from_email,
+				'name'  => $from_name,
+			),
+			'subject'          => $subject,
+			'content'          => array(
+				array(
+					'type'  => 'text/plain',
+					'value' => $text_body,
+				),
+			),
+		)
+	);
+
+	if ( ! is_string( $payload ) || '' === $payload ) {
+		return array(
+			'success' => false,
+			'error'   => 'Could not encode SendGrid payload.',
+		);
+	}
+
+	$endpoint = 'https://api.sendgrid.com/v3/mail/send';
+
+	if ( function_exists( 'curl_init' ) ) {
+		$ch = curl_init( $endpoint );
+		curl_setopt_array(
+			$ch,
+			array(
+				CURLOPT_POST           => true,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_TIMEOUT        => 20,
+				CURLOPT_HTTPHEADER     => array(
+					'Authorization: Bearer ' . $api_key,
+					'Content-Type: application/json',
+					'Accept: application/json',
+				),
+				CURLOPT_POSTFIELDS     => $payload,
+			)
+		);
+
+		$response_body = curl_exec( $ch );
+		$curl_error    = curl_error( $ch );
+		$status_code   = (int) curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+		curl_close( $ch );
+
+		if ( $response_body === false ) {
+			return array(
+				'success' => false,
+				'error'   => 'SendGrid cURL error: ' . $curl_error,
+			);
+		}
+
+		if ( $status_code < 200 || $status_code >= 300 ) {
+			return array(
+				'success' => false,
+				'error'   => 'SendGrid HTTP ' . $status_code . ': ' . substr( (string) $response_body, 0, 500 ),
+			);
+		}
+
+		return array(
+			'success' => true,
+			'error'   => '',
+		);
+	}
+
+	$context = stream_context_create(
+		array(
+			'http' => array(
+				'method'  => 'POST',
+				'timeout' => 20,
+				'header'  => implode(
+					"\r\n",
+					array(
+						'Authorization: Bearer ' . $api_key,
+						'Content-Type: application/json',
+						'Accept: application/json',
+					)
+				),
+				'content' => $payload,
+			),
+		)
+	);
+
+	$response_body = @file_get_contents( $endpoint, false, $context );
+	$status_code   = 0;
+	if ( isset( $http_response_header ) && is_array( $http_response_header ) && ! empty( $http_response_header[0] ) ) {
+		if ( preg_match( '#\s(\d{3})\s#', $http_response_header[0], $matches ) ) {
+			$status_code = (int) $matches[1];
+		}
+	}
+
+	if ( false === $response_body ) {
+		return array(
+			'success' => false,
+			'error'   => 'SendGrid stream transport failed.',
+		);
+	}
+
+	if ( $status_code < 200 || $status_code >= 300 ) {
+		return array(
+			'success' => false,
+			'error'   => 'SendGrid HTTP ' . $status_code . ': ' . substr( (string) $response_body, 0, 500 ),
+		);
+	}
+
+	return array(
+		'success' => true,
+		'error'   => '',
+	);
+}
+
+/**
  * Send an email via configured transport.
  */
 function aiddata_auth_send_mail( $to_email, $subject, $text_body ) {
@@ -338,6 +495,9 @@ function aiddata_auth_send_mail( $to_email, $subject, $text_body ) {
 
 	if ( 'resend' === $transport ) {
 		return aiddata_auth_send_mail_via_resend( $to_email, $subject, $text_body );
+	}
+	if ( 'sendgrid' === $transport ) {
+		return aiddata_auth_send_mail_via_sendgrid( $to_email, $subject, $text_body );
 	}
 
 	$mail_error_message = '';
