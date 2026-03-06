@@ -219,28 +219,6 @@ class ModalManager {
             }
         });
         
-        // Handle forgot password form submission
-        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-        if (forgotPasswordForm) {
-            forgotPasswordForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = forgotPasswordForm.querySelector('input[name="email"]').value;
-                
-                if (email) {
-                    // Here you would typically call your password reset API
-                    // For demo purposes, we'll just show a success message
-                    this.closeModal(this.forgotPasswordModal);
-                    
-                    // Show success toast message
-                    const toastManager = new ToastManager();
-                    toastManager.show('Password reset link sent to your email', 'success');
-                    
-                    // Clear the form
-                    forgotPasswordForm.reset();
-                }
-            });
-        }
-
         // Info Modal Buttons
         document.querySelectorAll('.secondary-button').forEach(button => {
             button.addEventListener('click', (e) => {
@@ -335,74 +313,7 @@ class ModalManager {
             });
         });
 
-        // Handle form submissions for login and signup
-        const loginForm = document.getElementById('loginForm');
-        const signupForm = document.getElementById('signupForm');
-
-        if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                // For demo purposes, show success toast
-                const toastManager = new ToastManager();
-                toastManager.show('Login successful', 'success');
-                
-                // Close the modal
-                this.closeModal(this.loginModal);
-                
-                // Clear the form
-                loginForm.reset();
-                
-                // Update UI state to show logged in state
-                this.updateAuthState(true);
-                
-                // Simulate successful auth
-                document.querySelector('.guest-only').style.display = 'none';
-                document.querySelector('.auth-only').style.display = 'flex';
-                
-                // Update user info (for demo)
-                document.querySelector('.user-name').textContent = 'Demo User';
-                document.querySelector('.user-email').textContent = loginForm.querySelector('input[name="email"]').value || 'demo@example.com';
-            });
-        }
-
-        if (signupForm) {
-            signupForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                // Validate password (simple check for demo)
-                const password = signupForm.querySelector('input[name="password"]').value;
-                if (password.length < 8) {
-                    const toastManager = new ToastManager();
-                    toastManager.show('Password must be at least 8 characters long', 'error');
-                    return;
-                }
-                
-                // For demo purposes, show success toast
-                const toastManager = new ToastManager();
-                toastManager.show('Account created successfully', 'success');
-                
-                // Close the modal
-                this.closeModal(this.signupModal);
-                
-                // Update UI state to show logged in state
-                this.updateAuthState(true);
-                
-                // Set user info (for demo)
-                const fullName = signupForm.querySelector('input[name="fullName"]').value;
-                const email = signupForm.querySelector('input[name="email"]').value;
-                
-                document.querySelector('.user-name').textContent = fullName || 'New User';
-                document.querySelector('.user-email').textContent = email || 'user@example.com';
-                
-                // Clear the form
-                signupForm.reset();
-                
-                // Simulate successful auth
-                document.querySelector('.guest-only').style.display = 'none';
-                document.querySelector('.auth-only').style.display = 'flex';
-            });
-        }
+        // Login, signup, and password reset submissions are handled by auth-integration.js.
 
         // Logout functionality
         document.querySelectorAll('.logout-button').forEach(button => {
