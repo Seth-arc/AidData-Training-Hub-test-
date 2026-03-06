@@ -165,6 +165,7 @@ function aiddata_auth_mail_config_context() {
 	$smtp_pass = aiddata_auth_env( 'AIDDATA_SMTP_PASS', '' );
 
 	return array(
+		'mail_transport'       => aiddata_auth_env( 'AIDDATA_MAIL_TRANSPORT', 'wp_mail' ),
 		'smtp_host'            => aiddata_auth_env( 'AIDDATA_SMTP_HOST', '' ),
 		'smtp_port'            => aiddata_auth_env( 'AIDDATA_SMTP_PORT', '' ),
 		'smtp_user'            => aiddata_auth_env( 'AIDDATA_SMTP_USER', '' ),
@@ -173,6 +174,197 @@ function aiddata_auth_mail_config_context() {
 		'smtp_from_name'       => aiddata_auth_env( 'AIDDATA_SMTP_FROM_NAME', '' ),
 		'smtp_pass_len'        => strlen( trim( str_replace( ' ', '', (string) $smtp_pass ) ) ),
 		'smtp_host_configured' => '' !== trim( aiddata_auth_env( 'AIDDATA_SMTP_HOST', '' ) ),
+		'resend_from_email'    => aiddata_auth_env( 'AIDDATA_RESEND_FROM_EMAIL', '' ),
+		'resend_from_name'     => aiddata_auth_env( 'AIDDATA_RESEND_FROM_NAME', '' ),
+		'resend_key_len'       => strlen( trim( (string) aiddata_auth_env( 'AIDDATA_RESEND_API_KEY', '' ) ) ),
+	);
+}
+
+/**
+ * Return active outbound mail transport.
+ */
+function aiddata_auth_mail_transport() {
+	$transport = strtolower( trim( aiddata_auth_env( 'AIDDATA_MAIL_TRANSPORT', 'wp_mail' ) ) );
+	if ( '' === $transport ) {
+		$transport = 'wp_mail';
+	}
+	return $transport;
+}
+
+/**
+ * Send email via Resend API using direct HTTPS (no WP HTTP API dependency).
+ */
+function aiddata_auth_send_mail_via_resend( $to_email, $subject, $text_body ) {
+	$api_key = trim( aiddata_auth_env( 'AIDDATA_RESEND_API_KEY', '' ) );
+	if ( '' === $api_key ) {
+		return array(
+			'success' => false,
+			'error'   => 'Resend API key is missing.',
+		);
+	}
+
+	$from_email = trim( aiddata_auth_env( 'AIDDATA_RESEND_FROM_EMAIL', '' ) );
+	if ( '' === $from_email ) {
+		$from_email = trim( aiddata_auth_env( 'AIDDATA_SMTP_FROM_EMAIL', '' ) );
+	}
+
+	if ( ! is_email( $from_email ) ) {
+		return array(
+			'success' => false,
+			'error'   => 'Resend from email is missing or invalid.',
+		);
+	}
+
+	$from_name = trim( aiddata_auth_env( 'AIDDATA_RESEND_FROM_NAME', '' ) );
+	if ( '' === $from_name ) {
+		$from_name = trim( aiddata_auth_env( 'AIDDATA_SMTP_FROM_NAME', '' ) );
+	}
+	if ( '' === $from_name ) {
+		$from_name = 'AidData Training Hub';
+	}
+
+	$payload = wp_json_encode(
+		array(
+			'from'    => sprintf( '%s <%s>', $from_name, $from_email ),
+			'to'      => array( $to_email ),
+			'subject' => $subject,
+			'text'    => $text_body,
+		)
+	);
+
+	if ( ! is_string( $payload ) || '' === $payload ) {
+		return array(
+			'success' => false,
+			'error'   => 'Could not encode Resend payload.',
+		);
+	}
+
+	$endpoint = 'https://api.resend.com/emails';
+
+	// Prefer cURL and fall back to stream transport if cURL is unavailable.
+	if ( function_exists( 'curl_init' ) ) {
+		$ch = curl_init( $endpoint );
+		curl_setopt_array(
+			$ch,
+			array(
+				CURLOPT_POST           => true,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_TIMEOUT        => 20,
+				CURLOPT_HTTPHEADER     => array(
+					'Authorization: Bearer ' . $api_key,
+					'Content-Type: application/json',
+					'Accept: application/json',
+				),
+				CURLOPT_POSTFIELDS     => $payload,
+			)
+		);
+
+		$response_body = curl_exec( $ch );
+		$curl_error    = curl_error( $ch );
+		$status_code   = (int) curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+		curl_close( $ch );
+
+		if ( $response_body === false ) {
+			return array(
+				'success' => false,
+				'error'   => 'Resend cURL error: ' . $curl_error,
+			);
+		}
+
+		if ( $status_code < 200 || $status_code >= 300 ) {
+			return array(
+				'success' => false,
+				'error'   => 'Resend HTTP ' . $status_code . ': ' . substr( (string) $response_body, 0, 500 ),
+			);
+		}
+
+		return array(
+			'success' => true,
+			'error'   => '',
+		);
+	}
+
+	$context = stream_context_create(
+		array(
+			'http' => array(
+				'method'  => 'POST',
+				'timeout' => 20,
+				'header'  => implode(
+					"\r\n",
+					array(
+						'Authorization: Bearer ' . $api_key,
+						'Content-Type: application/json',
+						'Accept: application/json',
+					)
+				),
+				'content' => $payload,
+			),
+		)
+	);
+
+	$response_body = @file_get_contents( $endpoint, false, $context );
+	$status_code   = 0;
+	if ( isset( $http_response_header ) && is_array( $http_response_header ) && ! empty( $http_response_header[0] ) ) {
+		if ( preg_match( '#\s(\d{3})\s#', $http_response_header[0], $matches ) ) {
+			$status_code = (int) $matches[1];
+		}
+	}
+
+	if ( false === $response_body ) {
+		return array(
+			'success' => false,
+			'error'   => 'Resend stream transport failed.',
+		);
+	}
+
+	if ( $status_code < 200 || $status_code >= 300 ) {
+		return array(
+			'success' => false,
+			'error'   => 'Resend HTTP ' . $status_code . ': ' . substr( (string) $response_body, 0, 500 ),
+		);
+	}
+
+	return array(
+		'success' => true,
+		'error'   => '',
+	);
+}
+
+/**
+ * Send an email via configured transport.
+ */
+function aiddata_auth_send_mail( $to_email, $subject, $text_body ) {
+	$transport = aiddata_auth_mail_transport();
+
+	if ( 'resend' === $transport ) {
+		return aiddata_auth_send_mail_via_resend( $to_email, $subject, $text_body );
+	}
+
+	$mail_error_message = '';
+	$mail_failed_hook   = static function( $wp_error ) use ( &$mail_error_message ) {
+		if ( $wp_error instanceof WP_Error ) {
+			$mail_error_message = $wp_error->get_error_message();
+		}
+	};
+
+	add_action( 'wp_mail_failed', $mail_failed_hook );
+	$sent = wp_mail( $to_email, $subject, $text_body );
+	remove_action( 'wp_mail_failed', $mail_failed_hook );
+
+	if ( $sent ) {
+		return array(
+			'success' => true,
+			'error'   => '',
+		);
+	}
+
+	if ( '' === $mail_error_message ) {
+		$mail_error_message = 'wp_mail returned false';
+	}
+
+	return array(
+		'success' => false,
+		'error'   => $mail_error_message,
 	);
 }
 
@@ -229,16 +421,9 @@ function aiddata_auth_send_welcome_email( $user_id ) {
 		'[aiddata-auth-email] welcome_email_attempt user_id=' . (int) $user_id . ' to=' . $user->user_email . ' context=' . wp_json_encode( $mail_context )
 	);
 
-	$mail_error_message = '';
-	$mail_failed_hook   = static function( $wp_error ) use ( &$mail_error_message ) {
-		if ( $wp_error instanceof WP_Error ) {
-			$mail_error_message = $wp_error->get_error_message();
-		}
-	};
-
-	add_action( 'wp_mail_failed', $mail_failed_hook );
-	$sent = wp_mail( $user->user_email, $subject, $message );
-	remove_action( 'wp_mail_failed', $mail_failed_hook );
+	$result             = aiddata_auth_send_mail( $user->user_email, $subject, $message );
+	$sent               = ! empty( $result['success'] );
+	$mail_error_message = isset( $result['error'] ) ? (string) $result['error'] : '';
 
 	if ( $sent ) {
 		update_user_meta( $user_id, 'aiddata_welcome_email_sent', gmdate( 'c' ) );
@@ -481,10 +666,14 @@ function aiddata_ajax_reset_password() {
 	$message   .= "If you didn't request this, please ignore this email.\n\n";
 	$message   .= "Thanks,\nAidData Training Hub Team";
 
-	$sent = wp_mail( $email, $subject, $message );
-
-	if ( $sent ) {
+	$result = aiddata_auth_send_mail( $email, $subject, $message );
+	if ( ! empty( $result['success'] ) ) {
 		wp_send_json_success( array( 'message' => 'Password reset link has been sent to your email address.' ) );
+	}
+
+	$error_message = isset( $result['error'] ) ? (string) $result['error'] : '';
+	if ( '' !== $error_message ) {
+		error_log( '[aiddata-auth-email] reset_email_failed email=' . $email . ' error=' . $error_message );
 	}
 
 	wp_send_json_error( array( 'message' => 'There was an error sending the email. Please try again later.' ) );
