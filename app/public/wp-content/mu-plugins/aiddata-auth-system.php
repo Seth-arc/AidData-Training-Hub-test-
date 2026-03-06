@@ -60,6 +60,26 @@ function aiddata_auth_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'aiddata_auth_enqueue_scripts' );
 
 /**
+ * Hide the WordPress admin toolbar on the front-end for non-admin users.
+ */
+function aiddata_auth_maybe_hide_frontend_admin_bar( $show ) {
+	if ( is_admin() ) {
+		return $show;
+	}
+
+	if ( ! is_user_logged_in() ) {
+		return $show;
+	}
+
+	if ( current_user_can( 'manage_options' ) ) {
+		return $show;
+	}
+
+	return false;
+}
+add_filter( 'show_admin_bar', 'aiddata_auth_maybe_hide_frontend_admin_bar' );
+
+/**
  * Temporary login debug logger.
  * Enable by setting env var AIDDATA_LOGIN_DEBUG=true.
  */
