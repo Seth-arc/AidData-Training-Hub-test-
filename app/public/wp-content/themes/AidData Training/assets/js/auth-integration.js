@@ -96,6 +96,18 @@ function initAuthenticationSystem() {
             .then(response => response.json())
             .then(response => {
                 if(response.success) {
+                    if (response.data && response.data.email_sent === false) {
+                        if (messageEl) {
+                            messageEl.textContent = response.data.message || 'Registration completed, but welcome email could not be sent yet.';
+                            messageEl.style.display = 'block';
+                            messageEl.classList.remove('error');
+                            messageEl.classList.add('success');
+                        } else {
+                            alert(response.data.message || 'Registration completed, but welcome email could not be sent yet.');
+                        }
+                        return;
+                    }
+
                     window.location.reload();
                 } else {
                     if (messageEl) {
