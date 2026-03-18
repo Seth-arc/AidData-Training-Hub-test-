@@ -165,6 +165,11 @@ class ModalManager {
     }
 
     setupEventListeners() {
+        const hasServerAuth =
+            typeof window.auth_object !== 'undefined' &&
+            typeof window.auth_object.ajaxurl === 'string' &&
+            window.auth_object.ajaxurl !== '';
+
         // Auth Modal Buttons
         this.bindButton('.guest-only .login-button', () => this.openModal(this.loginModal));
         this.bindButton('.guest-only .signup-button', () => this.openModal(this.signupModal));
@@ -221,7 +226,7 @@ class ModalManager {
         
         // Handle forgot password form submission
         const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-        if (forgotPasswordForm) {
+        if (forgotPasswordForm && !hasServerAuth) {
             forgotPasswordForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const email = forgotPasswordForm.querySelector('input[name="email"]').value;
@@ -315,31 +320,33 @@ class ModalManager {
         });
 
         // Start learning buttons - Authentication check
-        document.querySelectorAll('.start-learning').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const courseUrl = button.getAttribute('data-course');
-                
-                // Check if user is logged in (demo logic)
-                const isLoggedIn = document.querySelector('.auth-only').style.display !== 'none';
-                
-                if (isLoggedIn) {
-                    // If logged in, redirect to course
-                    if (courseUrl) {
-                        window.location.href = courseUrl;
+        if (!hasServerAuth) {
+            document.querySelectorAll('.start-learning').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const courseUrl = button.getAttribute('data-course');
+                    
+                    // Check if user is logged in (demo logic)
+                    const isLoggedIn = document.querySelector('.auth-only').style.display !== 'none';
+                    
+                    if (isLoggedIn) {
+                        // If logged in, redirect to course
+                        if (courseUrl) {
+                            window.location.href = courseUrl;
+                        }
+                    } else {
+                        // If not logged in, show auth modal
+                        this.openModal(this.authModal);
                     }
-                } else {
-                    // If not logged in, show auth modal
-                    this.openModal(this.authModal);
-                }
+                });
             });
-        });
+        }
 
         // Handle form submissions for login and signup
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
 
-        if (loginForm) {
+        if (loginForm && !hasServerAuth) {
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
@@ -366,7 +373,7 @@ class ModalManager {
             });
         }
 
-        if (signupForm) {
+        if (signupForm && !hasServerAuth) {
             signupForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
@@ -405,23 +412,25 @@ class ModalManager {
         }
 
         // Logout functionality
-        document.querySelectorAll('.logout-button').forEach(button => {
-            button.addEventListener('click', () => {
-                // Update UI state to show logged out state
-                this.updateAuthState(false);
-                
-                // Show toast
-                const toastManager = new ToastManager();
-                toastManager.show('Logged out successfully', 'info');
-                
-                // Close any open dropdown
-                document.querySelector('.profile-dropdown')?.classList.remove('active');
-                
-                // Update UI elements
-                document.querySelector('.guest-only').style.display = 'flex';
-                document.querySelector('.auth-only').style.display = 'none';
+        if (!hasServerAuth) {
+            document.querySelectorAll('.logout-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update UI state to show logged out state
+                    this.updateAuthState(false);
+                    
+                    // Show toast
+                    const toastManager = new ToastManager();
+                    toastManager.show('Logged out successfully', 'info');
+                    
+                    // Close any open dropdown
+                    document.querySelector('.profile-dropdown')?.classList.remove('active');
+                    
+                    // Update UI elements
+                    document.querySelector('.guest-only').style.display = 'flex';
+                    document.querySelector('.auth-only').style.display = 'none';
+                });
             });
-        });
+        }
 
         // Global event listeners
         this.setupGlobalEventListeners();

@@ -25,6 +25,10 @@ wp_enqueue_script('modals-script', get_template_directory_uri() . '/assets/js/mo
 
 <!-- Scrollbar Styling -->
 <style>
+    :root {
+        --blank-canvas-header-offset: 96px;
+    }
+
     /* Webkit browsers (Chrome, Safari, newer versions of Opera and Edge) */
     ::-webkit-scrollbar {
         width: 8px;
@@ -50,10 +54,24 @@ wp_enqueue_script('modals-script', get_template_directory_uri() . '/assets/js/mo
         scrollbar-color: #026447 #ffffff;
     }
 
-    /* Ensure content is not hidden under fixed header */
+    html {
+        scroll-padding-top: var(--blank-canvas-header-offset);
+    }
+
+    .admin-bar .lms-header {
+        top: 32px;
+    }
+
+    @media screen and (max-width: 782px) {
+        .admin-bar .lms-header {
+            top: 46px;
+        }
+    }
+
+    /* Ensure content is not hidden under the fixed header */
     .lms-main {
-        padding-top: 50px;
-        min-height: calc(100vh - 100px);
+        padding-top: var(--blank-canvas-header-offset);
+        min-height: calc(100vh - var(--blank-canvas-header-offset));
         background: #ffffff;
     }
 </style>
@@ -229,6 +247,44 @@ wp_enqueue_script('modals-script', get_template_directory_uri() . '/assets/js/mo
         </form>
     </div>
 </div>
+
+<script>
+    (function() {
+        function updateBlankCanvasHeaderOffset() {
+            const header = document.querySelector('.lms-header');
+
+            if (!header) {
+                return;
+            }
+
+            const headerTop = parseFloat(window.getComputedStyle(header).top) || 0;
+            const totalOffset = Math.ceil(header.offsetHeight + headerTop);
+
+            document.documentElement.style.setProperty('--blank-canvas-header-offset', totalOffset + 'px');
+        }
+
+        function initBlankCanvasHeaderOffset() {
+            updateBlankCanvasHeaderOffset();
+
+            window.addEventListener('resize', updateBlankCanvasHeaderOffset);
+
+            if (typeof ResizeObserver !== 'undefined') {
+                const header = document.querySelector('.lms-header');
+
+                if (header) {
+                    const resizeObserver = new ResizeObserver(updateBlankCanvasHeaderOffset);
+                    resizeObserver.observe(header);
+                }
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initBlankCanvasHeaderOffset);
+        } else {
+            initBlankCanvasHeaderOffset();
+        }
+    })();
+</script>
 
 <?php
 get_footer();

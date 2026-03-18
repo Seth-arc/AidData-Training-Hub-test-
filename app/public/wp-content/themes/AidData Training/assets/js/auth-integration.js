@@ -8,6 +8,92 @@ document.addEventListener('DOMContentLoaded', function() {
     updateAuthUI();
 });
 
+function resetFormMessage(form) {
+    const messageEl = form ? form.querySelector('.form-message') : null;
+
+    if (!messageEl) {
+        return null;
+    }
+
+    messageEl.textContent = '';
+    messageEl.style.display = 'none';
+    messageEl.classList.remove('error', 'success');
+
+    return messageEl;
+}
+
+function showFormMessage(messageEl, message, type) {
+    if (!messageEl) {
+        return;
+    }
+
+    messageEl.textContent = message;
+    messageEl.style.display = 'block';
+    messageEl.classList.remove('error', 'success');
+
+    if (type) {
+        messageEl.classList.add(type);
+    }
+}
+
+function setSubmitButtonState(form, isBusy, busyLabel) {
+    const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+
+    if (!submitButton) {
+        return;
+    }
+
+    if (!submitButton.dataset.defaultLabel) {
+        submitButton.dataset.defaultLabel = submitButton.textContent.trim();
+    }
+
+    submitButton.disabled = isBusy;
+    submitButton.setAttribute('aria-busy', isBusy ? 'true' : 'false');
+    submitButton.textContent = isBusy ? busyLabel : submitButton.dataset.defaultLabel;
+}
+
+function getAuthRedirectUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('redirect_to') || params.get('redirect');
+}
+
+function handleAuthSuccess(form, responseData, options = {}) {
+    const { messageType = 'success', closeModalId = null, reload = false, resetForm = false } = options;
+    const messageEl = resetFormMessage(form);
+    const successMessage = responseData.message || 'Success.';
+    const redirectUrl = responseData.redirectUrl || getAuthRedirectUrl();
+
+    showFormMessage(messageEl, successMessage, messageType);
+
+    if (window.toastManager && typeof window.toastManager.show === 'function') {
+        window.toastManager.show(successMessage, messageType);
+    }
+
+    if (resetForm && form) {
+        form.reset();
+    }
+
+    if (closeModalId && window.modalManager && typeof window.modalManager.closeModal === 'function') {
+        const modal = document.getElementById(closeModalId);
+        if (modal) {
+            setTimeout(() => window.modalManager.closeModal(modal), 500);
+        }
+    }
+
+    if (redirectUrl) {
+        setTimeout(() => {
+            window.location.href = redirectUrl;
+        }, 1200);
+        return;
+    }
+
+    if (reload) {
+        setTimeout(() => {
+            window.location.reload();
+        }, 1200);
+    }
+}
+
 /**
  * Initialize all authentication-related event handlers
  */
@@ -18,10 +104,8 @@ function initAuthenticationSystem() {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const messageEl = loginForm.querySelector('.form-message');
-            if (messageEl) {
-                messageEl.style.display = 'none';
-            }
+            const messageEl = resetFormMessage(loginForm);
+            setSubmitButtonState(loginForm, true, 'Logging In...');
             
             const data = new FormData();
             data.append('action', 'custom_ajax_login');
@@ -37,12 +121,13 @@ function initAuthenticationSystem() {
             .then(response => response.json())
             .then(response => {
                 if(response.success) {
-                    window.location.reload();
+                    handleAuthSuccess(loginForm, response.data || {}, {
+                        closeModalId: 'loginModal',
+                        reload: true
+                    });
                 } else {
                     if (messageEl) {
-                        messageEl.textContent = response.data.message;
-                        messageEl.style.display = 'block';
-                        messageEl.classList.add('error');
+                        showFormMessage(messageEl, response.data.message, 'error');
                     } else {
                         alert(response.data.message);
                     }
@@ -51,10 +136,11 @@ function initAuthenticationSystem() {
             .catch(error => {
                 console.error('Login error:', error);
                 if (messageEl) {
-                    messageEl.textContent = 'An error occurred. Please try again.';
-                    messageEl.style.display = 'block';
-                    messageEl.classList.add('error');
+                    showFormMessage(messageEl, 'An error occurred. Please try again.', 'error');
                 }
+            })
+            .finally(() => {
+                setSubmitButtonState(loginForm, false, 'Logging In...');
             });
         });
     }
@@ -65,10 +151,8 @@ function initAuthenticationSystem() {
         signupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const messageEl = signupForm.querySelector('.form-message');
-            if (messageEl) {
-                messageEl.style.display = 'none';
-            }
+            const messageEl = resetFormMessage(signupForm);
+            setSubmitButtonState(signupForm, true, 'Creating Account...');
             
             const data = new FormData();
             data.append('action', 'custom_ajax_register');
@@ -96,12 +180,14 @@ function initAuthenticationSystem() {
             .then(response => response.json())
             .then(response => {
                 if(response.success) {
-                    window.location.reload();
+                    handleAuthSuccess(signupForm, response.data || {}, {
+                        closeModalId: 'signupModal',
+                        reload: true,
+                        resetForm: true
+                    });
                 } else {
                     if (messageEl) {
-                        messageEl.textContent = response.data.message;
-                        messageEl.style.display = 'block';
-                        messageEl.classList.add('error');
+                        showFormMessage(messageEl, response.data.message, 'error');
                     } else {
                         alert(response.data.message);
                     }
@@ -110,10 +196,11 @@ function initAuthenticationSystem() {
             .catch(error => {
                 console.error('Registration error:', error);
                 if (messageEl) {
-                    messageEl.textContent = 'An error occurred. Please try again.';
-                    messageEl.style.display = 'block';
-                    messageEl.classList.add('error');
+                    showFormMessage(messageEl, 'An error occurred. Please try again.', 'error');
                 }
+            })
+            .finally(() => {
+                setSubmitButtonState(signupForm, false, 'Creating Account...');
             });
         });
     }
@@ -124,10 +211,8 @@ function initAuthenticationSystem() {
         forgotPasswordForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const messageEl = forgotPasswordForm.querySelector('.form-message');
-            if (messageEl) {
-                messageEl.style.display = 'none';
-            }
+            const messageEl = resetFormMessage(forgotPasswordForm);
+            setSubmitButtonState(forgotPasswordForm, true, 'Sending Reset Link...');
             
             const data = new FormData();
             data.append('action', 'custom_ajax_reset_password');
@@ -143,17 +228,13 @@ function initAuthenticationSystem() {
             .then(response => {
                 if(response.success) {
                     if (messageEl) {
-                        messageEl.textContent = response.data.message;
-                        messageEl.style.display = 'block';
-                        messageEl.classList.add('success');
+                        showFormMessage(messageEl, response.data.message, 'success');
                     } else {
                         alert(response.data.message);
                     }
                 } else {
                     if (messageEl) {
-                        messageEl.textContent = response.data.message;
-                        messageEl.style.display = 'block';
-                        messageEl.classList.add('error');
+                        showFormMessage(messageEl, response.data.message, 'error');
                     } else {
                         alert(response.data.message);
                     }
@@ -162,10 +243,11 @@ function initAuthenticationSystem() {
             .catch(error => {
                 console.error('Password reset error:', error);
                 if (messageEl) {
-                    messageEl.textContent = 'An error occurred. Please try again.';
-                    messageEl.style.display = 'block';
-                    messageEl.classList.add('error');
+                    showFormMessage(messageEl, 'An error occurred. Please try again.', 'error');
                 }
+            })
+            .finally(() => {
+                setSubmitButtonState(forgotPasswordForm, false, 'Sending Reset Link...');
             });
         });
     }

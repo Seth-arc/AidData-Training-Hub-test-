@@ -1211,56 +1211,162 @@ add_action('wp_ajax_nopriv_custom_ajax_login', 'aiddata_ajax_login');
 /**
  * AJAX registration handler
  */
+function aiddata_generate_unique_username( $user_email ) {
+    $email_parts = explode( '@', $user_email );
+    $base        = sanitize_user( $email_parts[0], true );
+
+    if ( '' === $base ) {
+        $base = 'aiddata_user';
+    }
+
+    $username = $base;
+    $attempts = 0;
+
+    while ( username_exists( $username ) ) {
+        $username = sprintf( '%s_%s', $base, wp_rand( 1000, 999999 ) );
+        $attempts++;
+
+        if ( $attempts >= 5 && username_exists( $username ) ) {
+            $username = sprintf( '%s_%s', $base, wp_generate_password( 8, false, false ) );
+            break;
+        }
+    }
+
+    return $username;
+}
+
+function aiddata_send_welcome_email( $user_id, $newsletter_opt_in = false ) {
+    $user = get_userdata( $user_id );
+
+    if ( ! $user instanceof WP_User ) {
+        return false;
+    }
+
+    $site_name   = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
+    $display_name = $user->display_name ? $user->display_name : $user->user_email;
+    $home_url    = home_url( '/' );
+    $profile_url = function_exists( 'learn_press_get_page_link' ) ? learn_press_get_page_link( 'profile' ) : $home_url;
+
+    $subject = sprintf( 'Welcome to %s', $site_name );
+
+    $message_lines = array(
+        sprintf( 'Hi %s,', $display_name ),
+        '',
+        'Thanks for creating your AidData Training Hub account.',
+        '',
+        'You can start exploring courses here:',
+        $home_url,
+    );
+
+    if ( $profile_url && $profile_url !== $home_url ) {
+        $message_lines[] = '';
+        $message_lines[] = 'Your profile and course progress are available here:';
+        $message_lines[] = $profile_url;
+    }
+
+    if ( $newsletter_opt_in ) {
+        $message_lines[] = '';
+        $message_lines[] = 'You are also subscribed to receive updates about new courses and AidData news.';
+    }
+
+    $message_lines[] = '';
+    $message_lines[] = sprintf( 'Account email: %s', $user->user_email );
+    $message_lines[] = '';
+    $message_lines[] = 'Thanks,';
+    $message_lines[] = 'AidData Training Hub Team';
+
+    return wp_mail(
+        $user->user_email,
+        $subject,
+        implode( "\n", $message_lines ),
+        array( 'Content-Type: text/plain; charset=UTF-8' )
+    );
+}
+
 function aiddata_ajax_register() {
-    check_ajax_referer('custom-auth-nonce', 'security');
-    
-    $user_email = sanitize_email($_POST['email']);
-    $user_name = sanitize_text_field($_POST['fullName']);
-    $password = $_POST['password'];
-    
-    if (email_exists($user_email)) {
-        wp_send_json_error(array('message' => 'This email address is already registered. Please log in instead.'));
+    check_ajax_referer( 'custom-auth-nonce', 'security' );
+
+    if ( is_user_logged_in() ) {
+        wp_send_json_error( array( 'message' => 'You are already logged in.' ) );
         wp_die();
     }
-    
-    // Create username from email
-    $username = explode('@', $user_email)[0] . '_' . wp_rand(100, 999);
-    
-    $user_id = wp_create_user($username, $password, $user_email);
-    
-    if(is_wp_error($user_id)) {
-        wp_send_json_error(array('message' => $user_id->get_error_message()));
+
+    $user_email        = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+    $user_name         = isset( $_POST['fullName'] ) ? sanitize_text_field( wp_unslash( $_POST['fullName'] ) ) : '';
+    $password          = isset( $_POST['password'] ) ? (string) wp_unslash( $_POST['password'] ) : '';
+    $organization      = isset( $_POST['organization'] ) ? sanitize_text_field( wp_unslash( $_POST['organization'] ) ) : '';
+    $newsletter_opt_in = isset( $_POST['newsletter'] ) && 'on' === wp_unslash( $_POST['newsletter'] );
+
+    if ( '' === $user_name ) {
+        wp_send_json_error( array( 'message' => 'Please enter your full name.' ) );
+        wp_die();
+    }
+
+    if ( '' === $user_email || ! is_email( $user_email ) ) {
+        wp_send_json_error( array( 'message' => 'Please enter a valid email address.' ) );
+        wp_die();
+    }
+
+    if ( strlen( $password ) < 8 || ! preg_match( '/\d/', $password ) || ! preg_match( '/[^A-Za-z0-9]/', $password ) ) {
+        wp_send_json_error( array( 'message' => 'Password must be at least 8 characters long and include a number and special character.' ) );
+        wp_die();
+    }
+
+    if ( email_exists( $user_email ) ) {
+        wp_send_json_error( array( 'message' => 'This email address is already registered. Please log in instead.' ) );
+        wp_die();
+    }
+
+    $username = aiddata_generate_unique_username( $user_email );
+    $user_id  = wp_create_user( $username, $password, $user_email );
+
+    if ( is_wp_error( $user_id ) ) {
+        wp_send_json_error( array( 'message' => $user_id->get_error_message() ) );
     } else {
-        wp_update_user(array(
-            'ID' => $user_id,
-            'display_name' => $user_name,
-            'first_name' => $user_name
-        ));
-        
-        // Add organization as user meta if provided
-        if(!empty($_POST['organization'])) {
-            update_user_meta($user_id, 'organization', sanitize_text_field($_POST['organization']));
+        wp_update_user(
+            array(
+                'ID'           => $user_id,
+                'display_name' => $user_name,
+                'first_name'   => $user_name,
+            )
+        );
+
+        if ( '' !== $organization ) {
+            update_user_meta( $user_id, 'organization', $organization );
         }
-        
-        // Newsletter subscription logic
-        if(isset($_POST['newsletter']) && $_POST['newsletter'] === 'on') {
-            update_user_meta($user_id, 'newsletter_subscription', 'yes');
+
+        if ( $newsletter_opt_in ) {
+            update_user_meta( $user_id, 'newsletter_subscription', 'yes' );
         }
-        
-        // Automatically log the user in
-        $user = wp_signon(array(
-            'user_login' => $username,
-            'user_password' => $password,
-            'remember' => true
-        ), false);
-        
-        if(is_wp_error($user)) {
-            wp_send_json_error(array('message' => 'Registration successful but there was an error logging you in. Please log in manually.'));
+
+        $welcome_email_sent = aiddata_send_welcome_email( $user_id, $newsletter_opt_in );
+
+        // Automatically log the user in.
+        $user = wp_signon(
+            array(
+                'user_login'    => $username,
+                'user_password' => $password,
+                'remember'      => true,
+            ),
+            is_ssl()
+        );
+
+        if ( is_wp_error( $user ) ) {
+            wp_send_json_error( array( 'message' => 'Registration successful but there was an error logging you in. Please log in manually.' ) );
         } else {
-            wp_send_json_success(array('message' => 'Registration successful!'));
+            $success_message = $welcome_email_sent
+                ? 'Registration successful. Check your inbox for a welcome email.'
+                : 'Registration successful. Your account is ready, but we could not send the welcome email right now.';
+
+            wp_send_json_success(
+                array(
+                    'message'   => $success_message,
+                    'emailSent' => $welcome_email_sent,
+                )
+            );
         }
     }
-    
+
     wp_die();
 }
 add_action('wp_ajax_nopriv_custom_ajax_register', 'aiddata_ajax_register');

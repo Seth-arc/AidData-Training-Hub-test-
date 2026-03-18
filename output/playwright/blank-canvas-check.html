@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blank Canvas Header Check</title>
+    <link rel="stylesheet" href="../../app/public/wp-content/themes/AidData%20Training/assets/css/lms.css">
+    <link rel="stylesheet" href="../../app/public/wp-content/themes/AidData%20Training/assets/css/modals.css">
+    <style>
+        :root {
+            --blank-canvas-header-offset: 96px;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f6f4;
+        }
+
+        html {
+            scroll-padding-top: var(--blank-canvas-header-offset);
+        }
+
+        .lms-main {
+            padding-top: var(--blank-canvas-header-offset);
+            min-height: calc(100vh - var(--blank-canvas-header-offset));
+            background: #ffffff;
+        }
+
+        .content-shell {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 5rem;
+        }
+
+        .hero-card {
+            margin-top: 0;
+            padding: 2rem;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #e7f3ee 0%, #ffffff 100%);
+            border: 2px solid #026447;
+            box-shadow: 0 20px 60px rgba(2, 100, 71, 0.12);
+        }
+
+        .hero-card h1 {
+            margin: 0 0 1rem;
+            font-size: 2rem;
+        }
+
+        .hero-card p {
+            margin: 0;
+            max-width: 60ch;
+            line-height: 1.6;
+        }
+
+        .content-block {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 14px;
+            background: #f8fbf9;
+            border: 1px solid rgba(2, 100, 71, 0.12);
+            min-height: 320px;
+        }
+    </style>
+</head>
+<body>
+    <header class="lms-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="/">
+                    <img src="../../app/public/wp-content/themes/AidData%20Training/assets/images/logodark.png" alt="AidData Logo" class="logo">
+                </a>
+            </div>
+
+            <div class="header-actions">
+                <div class="guest-only" style="display: flex;">
+                    <button class="header-button login-button">Log In</button>
+                    <button class="header-button signup-button">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="lms-main">
+        <div class="content-shell">
+            <section class="hero-card" id="firstContentBlock">
+                <h1>Blank Canvas Layout Check</h1>
+                <p>
+                    This fixture uses the same fixed header styles and the same dynamic offset logic
+                    as the WordPress blank canvas template. The first content card should start below
+                    the navbar, not underneath it.
+                </p>
+            </section>
+
+            <section class="content-block">
+                <h2>Scroll Check</h2>
+                <p>Extra content keeps the page scrollable so the fixed header behavior is realistic.</p>
+            </section>
+
+            <section class="content-block">
+                <h2>More Content</h2>
+                <p>The browser check measures the bottom of the header against the top of this first content block.</p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            function updateBlankCanvasHeaderOffset() {
+                const header = document.querySelector('.lms-header');
+
+                if (!header) {
+                    return;
+                }
+
+                const headerTop = parseFloat(window.getComputedStyle(header).top) || 0;
+                const totalOffset = Math.ceil(header.offsetHeight + headerTop);
+
+                document.documentElement.style.setProperty('--blank-canvas-header-offset', totalOffset + 'px');
+            }
+
+            function initBlankCanvasHeaderOffset() {
+                updateBlankCanvasHeaderOffset();
+
+                window.addEventListener('resize', updateBlankCanvasHeaderOffset);
+
+                if (typeof ResizeObserver !== 'undefined') {
+                    const header = document.querySelector('.lms-header');
+
+                    if (header) {
+                        const resizeObserver = new ResizeObserver(updateBlankCanvasHeaderOffset);
+                        resizeObserver.observe(header);
+                    }
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initBlankCanvasHeaderOffset);
+            } else {
+                initBlankCanvasHeaderOffset();
+            }
+        })();
+    </script>
+</body>
+</html>
