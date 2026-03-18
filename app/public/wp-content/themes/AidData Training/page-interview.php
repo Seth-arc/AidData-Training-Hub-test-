@@ -30,8 +30,6 @@ wp_enqueue_script('lms-script', get_template_directory_uri() . '/assets/js/lms.j
 // Enqueue modals JavaScript
 wp_enqueue_script('modals-script', get_template_directory_uri() . '/assets/js/modals.js', [], '1.0.0', true);
 
-// Enqueue auth integration JavaScript
-wp_enqueue_script('auth-integration', get_template_directory_uri() . '/assets/js/auth-integration.js', [], '1.0.0', true);
 ?>
 
 <!-- Scrollbar Styling -->
