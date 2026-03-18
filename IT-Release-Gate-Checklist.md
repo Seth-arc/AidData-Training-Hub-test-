@@ -5,6 +5,8 @@ Date: 2026-03-18
 Owner: Release Engineering (handoff to IT Operations)
 Environment: Production
 Decision: NO-GO (pending operational drill evidence and final approvals)
+Execution view: docs/IT-Remaining-Actions-Punch-List.md
+Handoff note: docs/IT-Handoff-Email-and-Acceptance-Criteria.md
 
 ## 1. Security Gate (Mandatory)
 
@@ -69,7 +71,7 @@ Evidence links:
 
 - [x] Confirm healthcheck validates both runtime and DB connectivity.
 - [ ] Confirm restart policy is configured and validated.
-- [ ] Confirm synthetic smoke test passes after deploy:
+- [x] Confirm synthetic smoke test passes after deploy:
   - homepage
   - login page
   - key course page
@@ -80,7 +82,9 @@ Evidence links:
 - app/public/healthcheck.php
 - railway.toml
 - Smoke test workflow: .github/workflows/ci-smoke.yml
-- Smoke test report: docs/evidence/Operational-Evidence-2026-03-18.md (pending green default-branch run URL)
+- Smoke test report: docs/evidence/Operational-Evidence-2026-03-18.md
+- Green run URL: https://github.com/Seth-arc/AidData-Training-Hub-test-/actions/runs/23252871892
+- Green job URL: https://github.com/Seth-arc/AidData-Training-Hub-test-/actions/runs/23252871892/job/67599478700
 
 ## 6. Operations Gate (Mandatory)
 

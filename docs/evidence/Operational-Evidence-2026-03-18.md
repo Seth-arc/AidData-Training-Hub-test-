@@ -52,7 +52,12 @@ Artifact:
 
 Current status:
 - Workflow exists and checks build plus hardened endpoints.
-- Local emulation attempt failed due Docker engine not running.
+- GitHub Actions CI Smoke run is green on release commit.
+
+Green run evidence:
+- Run URL: https://github.com/Seth-arc/AidData-Training-Hub-test-/actions/runs/23252871892
+- Job URL: https://github.com/Seth-arc/AidData-Training-Hub-test-/actions/runs/23252871892/job/67599478700
+- Result: passed
 
 Local attempt details:
 - Date: 2026-03-18
@@ -63,3 +68,4 @@ Local attempt details:
 Required completion for gate:
 - Green CI smoke run on default branch release commit.
 - Link to workflow run URL.
+- Status: completed.

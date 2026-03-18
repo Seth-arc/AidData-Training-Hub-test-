@@ -18,6 +18,7 @@ Security and configuration hardening implemented:
 
 Release governance assets added:
 - IT release gate checklist added: IT-Release-Gate-Checklist.md.
+- CI smoke workflow passing evidence captured: https://github.com/Seth-arc/AidData-Training-Hub-test-/actions/runs/23252871892.
 
 Current Open Blockers (Must Close Before GO)
 
@@ -26,11 +27,6 @@ High: Operational evidence still pending
 - Missing backup/restore drill evidence and owner sign-off.
 - Missing rollback drill evidence and on-call assignment.
 Required before go-live: Complete all mandatory sections in IT-Release-Gate-Checklist.md with links, artifacts, and approver names.
-
-High: CI smoke coverage was previously missing
-- CI smoke workflow is now implemented in .github/workflows/ci-smoke.yml.
-- Remaining gate item: obtain and attach a green default-branch run URL in release evidence.
-Required before go-live: Ensure CI smoke workflow is passing on the release commit and linked in IT-Release-Gate-Checklist.md.
 
 Medium: Production plugin surface still broad
 - Migration/debug plugins are now removed from the production image build and enforced in CI runtime assertions.
@@ -42,8 +38,7 @@ NO-GO for final production cutover until all mandatory checklist items in IT-Rel
 
 Gate can move to GO when:
 1. Mandatory release checklist items are complete with evidence.
-2. CI smoke workflow is green on the release commit.
-3. Backup/restore and rollback readiness are demonstrated and approved.
+2. Backup/restore and rollback readiness are demonstrated and approved.
 
 Scope of This Review
 Static repository and configuration audit focused on deployment hardening and release readiness documentation.
