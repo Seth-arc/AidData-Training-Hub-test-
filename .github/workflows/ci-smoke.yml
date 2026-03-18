@@ -5,34 +5,44 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      COMPOSE_FILE_PATH: ${{ github.workspace }}/docker-compose.yml
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Validate Docker tooling
         run: |
           docker --version
           docker compose version
 
-      - name: Verify workspace and compose file
+      - name: Locate compose file
+        id: locate_compose
         run: |
+          echo "Workspace: $GITHUB_WORKSPACE"
           pwd
           ls -la
-          test -f "$COMPOSE_FILE_PATH"
+          COMPOSE_FILE_PATH="$(find "$GITHUB_WORKSPACE" -maxdepth 4 -type f \( -name 'docker-compose.yml' -o -name 'compose.yml' -o -name 'compose.yaml' \) | head -n 1)"
+          if [ -z "$COMPOSE_FILE_PATH" ]; then
+            echo "compose_found=false" >> "$GITHUB_OUTPUT"
+            echo "No compose file found under workspace."
+            exit 1
+          fi
+          echo "compose_found=true" >> "$GITHUB_OUTPUT"
+          echo "compose_file=$COMPOSE_FILE_PATH" >> "$GITHUB_OUTPUT"
           echo "Using compose file: $COMPOSE_FILE_PATH"
 
       - name: Build stack
-        run: docker compose -f "$COMPOSE_FILE_PATH" build --no-cache
+        run: docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" build --no-cache
 
       - name: Start stack
-        run: docker compose -f "$COMPOSE_FILE_PATH" up -d
+        run: docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" up -d
 
       - name: Wait for app readiness
         run: |
@@ -45,7 +55,7 @@ jobs:
             sleep 2
           done
           echo "Health endpoint did not become ready in time"
-          docker compose -f "$COMPOSE_FILE_PATH" logs --no-color
+          docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" logs --no-color
           exit 1
 
       - name: Smoke endpoint checks
@@ -58,14 +68,14 @@ jobs:
 
       - name: Assert banned plugins absent in runtime image
         run: |
-          docker compose -f "$COMPOSE_FILE_PATH" exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/all-in-one-wp-migration"
-          docker compose -f "$COMPOSE_FILE_PATH" exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/duplicator"
-          docker compose -f "$COMPOSE_FILE_PATH" exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/string-locator"
+          docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/all-in-one-wp-migration"
+          docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/duplicator"
+          docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/string-locator"
 
       - name: Collect logs on failure
-        if: failure()
-        run: docker compose -f "$COMPOSE_FILE_PATH" logs --no-color
+        if: failure() && steps.locate_compose.outputs.compose_found == 'true'
+        run: docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" logs --no-color || true
 
       - name: Tear down stack
-        if: always()
-        run: docker compose -f "$COMPOSE_FILE_PATH" down -v
+        if: always() && steps.locate_compose.outputs.compose_found == 'true'
+        run: docker compose -f "${{ steps.locate_compose.outputs.compose_file }}" down -v || true
