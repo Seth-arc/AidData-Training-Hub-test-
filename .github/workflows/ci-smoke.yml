@@ -3,9 +3,6 @@ name: CI Smoke
 on:
   pull_request:
   push:
-    branches:
-      - main
-      - master
   workflow_dispatch:
 
 jobs:
@@ -49,6 +46,12 @@ jobs:
           curl -fsS http://127.0.0.1:8080/wp-login.php | grep -qi 'log in\|login'
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/xmlrpc.php)" = "403"
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/check-active-plugins.php)" = "404"
+
+      - name: Assert banned plugins absent in runtime image
+        run: |
+          docker compose exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/all-in-one-wp-migration"
+          docker compose exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/duplicator"
+          docker compose exec -T wordpress sh -lc "test ! -d /var/www/html/wp-content/plugins/string-locator"
 
       - name: Collect logs on failure
         if: failure()

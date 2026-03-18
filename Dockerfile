@@ -67,6 +67,12 @@ RUN find /var/www/html -maxdepth 1 -type f \( \
     -name 'catch-wp-error.php' \
 \) -delete
 
+# Remove migration/debug plugins from production image to reduce attack surface.
+RUN rm -rf \
+    /var/www/html/wp-content/plugins/all-in-one-wp-migration \
+    /var/www/html/wp-content/plugins/duplicator \
+    /var/www/html/wp-content/plugins/string-locator
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && find /var/www/html -type d -exec chmod 755 {} \; \

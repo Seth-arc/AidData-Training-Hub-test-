@@ -28,12 +28,14 @@ High: Operational evidence still pending
 Required before go-live: Complete all mandatory sections in IT-Release-Gate-Checklist.md with links, artifacts, and approver names.
 
 High: CI smoke coverage was previously missing
-- A CI smoke workflow is required for repeatable deployment confidence.
-Required before go-live: Ensure CI smoke workflow is present and passing on default branch.
+- CI smoke workflow is now implemented in .github/workflows/ci-smoke.yml.
+- Remaining gate item: obtain and attach a green default-branch run URL in release evidence.
+Required before go-live: Ensure CI smoke workflow is passing on the release commit and linked in IT-Release-Gate-Checklist.md.
 
 Medium: Production plugin surface still broad
-- Migration/debug oriented plugins remain present and may be unnecessary in production.
-Required before go-live: Validate plugin allowlist and disable/remove nonessential plugins in production runtime.
+- Migration/debug plugins are now removed from the production image build and enforced in CI runtime assertions.
+- Remaining gate item: verify production deployment path uses the hardened container image only.
+Required before go-live: Keep plugin allowlist evidence up to date and confirm runtime plugin inventory during deployment verification.
 
 Deployment Gate Recommendation
 NO-GO for final production cutover until all mandatory checklist items in IT-Release-Gate-Checklist.md are complete and signed.
