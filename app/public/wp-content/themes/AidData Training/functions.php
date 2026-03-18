@@ -1129,6 +1129,7 @@ function aiddata_login_debug_log($event, $context = array()) {
 /**
  * AJAX login handler
  */
+if ( ! function_exists( 'aiddata_ajax_login' ) ) {
 function aiddata_ajax_login() {
     aiddata_login_debug_log('request_received', array(
         'is_ssl' => is_ssl(),
@@ -1207,6 +1208,7 @@ function aiddata_ajax_login() {
     wp_die();
 }
 add_action('wp_ajax_nopriv_custom_ajax_login', 'aiddata_ajax_login');
+}
 
 /**
  * AJAX registration handler
@@ -1283,6 +1285,7 @@ function aiddata_send_welcome_email( $user_id, $newsletter_opt_in = false ) {
     );
 }
 
+if ( ! function_exists( 'aiddata_ajax_register' ) ) {
 function aiddata_ajax_register() {
     check_ajax_referer( 'custom-auth-nonce', 'security' );
 
@@ -1370,10 +1373,12 @@ function aiddata_ajax_register() {
     wp_die();
 }
 add_action('wp_ajax_nopriv_custom_ajax_register', 'aiddata_ajax_register');
+}
 
 /**
  * AJAX password reset handler
  */
+if ( ! function_exists( 'aiddata_ajax_reset_password' ) ) {
 function aiddata_ajax_reset_password() {
     check_ajax_referer('custom-auth-nonce', 'security');
     
@@ -1410,10 +1415,12 @@ function aiddata_ajax_reset_password() {
     wp_die();
 }
 add_action('wp_ajax_nopriv_custom_ajax_reset_password', 'aiddata_ajax_reset_password');
+}
 
 /**
  * AJAX logout handler
  */
+if ( ! function_exists( 'aiddata_ajax_logout' ) ) {
 function aiddata_ajax_logout() {
     check_ajax_referer('custom-auth-nonce', 'security');
     wp_logout();
@@ -1421,10 +1428,12 @@ function aiddata_ajax_logout() {
     wp_die();
 }
 add_action('wp_ajax_custom_ajax_logout', 'aiddata_ajax_logout');
+}
 
 /**
  * AJAX authentication status handler
  */
+if ( ! function_exists( 'aiddata_get_auth_status' ) ) {
 function aiddata_get_auth_status() {
     $response = array(
         'loggedIn' => is_user_logged_in(),
@@ -1445,6 +1454,7 @@ function aiddata_get_auth_status() {
 }
 add_action('wp_ajax_get_auth_status', 'aiddata_get_auth_status');
 add_action('wp_ajax_nopriv_get_auth_status', 'aiddata_get_auth_status');
+}
 
 /**
  * Secure course pages for logged-in users only
