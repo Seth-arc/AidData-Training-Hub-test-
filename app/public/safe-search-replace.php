@@ -6,10 +6,10 @@
 
 header('Content-Type: text/html; charset=utf-8');
 
-$db_host = 'mysql.railway.internal';
-$db_name = 'railway';
-$db_user = 'root';
-$db_pass = 'mopzmAdFBAdfFWjwhNcznxdyZzNuoFNx';
+$db_host = getenv('DB_HOST') ?: 'mysql:3306';
+$db_name = getenv('DB_NAME') ?: 'wordpress';
+$db_user = getenv('DB_USER') ?: 'wordpress';
+$db_pass = getenv('DB_PASSWORD') ?: '';
 $old_url = 'http://localhost:10004';
 $new_url = 'https://aiddata-training-hub-test-production.up.railway.app';
 

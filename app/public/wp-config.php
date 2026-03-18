@@ -27,16 +27,16 @@ $env = static function ($key, $default = null) {
 
 
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'railway' );
+define( 'DB_NAME', $env( 'DB_NAME', 'wordpress' ) );
 
 /** Database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', $env( 'DB_USER', 'wordpress' ) );
 
 /** Database password */
-define( 'DB_PASSWORD', 'mopzmAdFBAdfFWjwhNcznxdyZzNuoFNx' );
+define( 'DB_PASSWORD', $env( 'DB_PASSWORD', '' ) );
 
 /** Database hostname */
-define( 'DB_HOST', 'mysql.railway.internal' );
+define( 'DB_HOST', $env( 'DB_HOST', 'mysql:3306' ) );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
@@ -51,9 +51,11 @@ ini_set('memory_limit', '512M');
 ini_set('default_socket_timeout', 300);
 ini_set('max_execution_time', 300);
 
-// HTTP API timeout settings - Block external requests to prevent admin timeouts
-define('WP_HTTP_BLOCK_EXTERNAL', true);
-define('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org');
+// HTTP API restrictions are environment-controlled for deployment flexibility.
+define('WP_HTTP_BLOCK_EXTERNAL', filter_var($env('WP_HTTP_BLOCK_EXTERNAL', 'false'), FILTER_VALIDATE_BOOLEAN));
+if ( WP_HTTP_BLOCK_EXTERNAL ) {
+    define('WP_ACCESSIBLE_HOSTS', $env('WP_ACCESSIBLE_HOSTS', 'api.wordpress.org'));
+}
 
 // Handle HTTPS and host behind reverse proxy before URL/cookie constants are set.
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
@@ -103,7 +105,7 @@ define( 'COOKIEPATH', '/' );
 define( 'SITECOOKIEPATH', '/' );
 define( 'ADMIN_COOKIE_PATH', '/' );
 
-define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
+define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'production' ) );
 
 // Disable SSL verification for local development
 // add_filter('https_ssl_verify', '__return_false');
@@ -129,14 +131,15 @@ define( 'WP_ENVIRONMENT_TYPE', $env( 'WP_ENVIRONMENT_TYPE', 'local' ) );
 //     curl_setopt($handle, CURLOPT_MAXREDIRS, 5);
 // }, 10);
 
-// Disable automatic updates to prevent admin timeouts
-define('AUTOMATIC_UPDATER_DISABLED', true);
-define('WP_AUTO_UPDATE_CORE', false);
+// Keep updates configurable via environment variables.
+define('AUTOMATIC_UPDATER_DISABLED', filter_var($env('AUTOMATIC_UPDATER_DISABLED', 'false'), FILTER_VALIDATE_BOOLEAN));
+define('WP_AUTO_UPDATE_CORE', $env('WP_AUTO_UPDATE_CORE', 'minor'));
+define('DISALLOW_FILE_EDIT', true);
 
-// Enable WordPress debugging for memory issues
-$debug_enabled = filter_var( $env( 'WP_DEBUG', 'true' ), FILTER_VALIDATE_BOOLEAN );
+// Production-safe debug defaults; enable explicitly per environment.
+$debug_enabled = filter_var( $env( 'WP_DEBUG', 'false' ), FILTER_VALIDATE_BOOLEAN );
 define( 'WP_DEBUG', $debug_enabled );
-define( 'WP_DEBUG_LOG', filter_var( $env( 'WP_DEBUG_LOG', 'true' ), FILTER_VALIDATE_BOOLEAN ) );
+define( 'WP_DEBUG_LOG', filter_var( $env( 'WP_DEBUG_LOG', 'false' ), FILTER_VALIDATE_BOOLEAN ) );
 define( 'WP_DEBUG_DISPLAY', filter_var( $env( 'WP_DEBUG_DISPLAY', 'false' ), FILTER_VALIDATE_BOOLEAN ) );
 define( 'SCRIPT_DEBUG', $debug_enabled );
 
@@ -163,15 +166,43 @@ define('WP_MAX_MEMORY_LIMIT', '512M');
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',          '-|YPrWJ:${SSzHjUk3Ma+cUXLDG<cX_;r<^EP-46VxCK!).]ABOGGCdfiaHGf1{P' );
-define( 'SECURE_AUTH_KEY',   'S~|EHhRg03YX=lO;i|ZD?<SiSH5k>@:WiN}|t|FB*T%${/QNySzl5HGiWZ(}c~op' );
-define( 'LOGGED_IN_KEY',     'lD]v;Ps]Dw#reuPMt#7-}5w4yz[!eG0}5gQux$[%gg`+<zwS<L(|Kk4)^-qe=L86' );
-define( 'NONCE_KEY',         'nc4&1n}h.)ROMEm&X peIb^}/@lf:A|@J**i;:B-v[y9 ?z!=tv-!4IF{`v7zT5W' );
-define( 'AUTH_SALT',         'q_T,DQy!.XHe-6l!/S>S0*.I-=n^][lZ!A- cr`Y-`5.Z{kbmE[ctg?zJ)%,HC44' );
-define( 'SECURE_AUTH_SALT',  '6o#$*oC_1Mpo$x9o.J|N)EM2!_k7EwY3BLH]P5^l=+2.CI6|Zs|yWGLq&:OO60IV' );
-define( 'LOGGED_IN_SALT',    'jy|_Re+s/CK)F0PzP&L>)&Gii6E=J{5ykW%t<(?d|^fssrxK+]VT@lH-(m?qWh[|' );
-define( 'NONCE_SALT',        'b^^1*|c2H|2#}@|fM+@mGVJGfZPh>1V|!L6]:]cnWiTQu6>N-WCMOheyJv%5LS$(' );
-define( 'WP_CACHE_KEY_SALT', '/X5|LbgC`$z~cn)x8Z0/PokYQ_ Y-3<I&EaY@<t}E_C/X#kq=DI:7>_32<!`M{ed' );
+define( 'AUTH_KEY',          $env( 'AUTH_KEY', 'change-me-auth-key' ) );
+define( 'SECURE_AUTH_KEY',   $env( 'SECURE_AUTH_KEY', 'change-me-secure-auth-key' ) );
+define( 'LOGGED_IN_KEY',     $env( 'LOGGED_IN_KEY', 'change-me-logged-in-key' ) );
+define( 'NONCE_KEY',         $env( 'NONCE_KEY', 'change-me-nonce-key' ) );
+define( 'AUTH_SALT',         $env( 'AUTH_SALT', 'change-me-auth-salt' ) );
+define( 'SECURE_AUTH_SALT',  $env( 'SECURE_AUTH_SALT', 'change-me-secure-auth-salt' ) );
+define( 'LOGGED_IN_SALT',    $env( 'LOGGED_IN_SALT', 'change-me-logged-in-salt' ) );
+define( 'NONCE_SALT',        $env( 'NONCE_SALT', 'change-me-nonce-salt' ) );
+define( 'WP_CACHE_KEY_SALT', $env( 'WP_CACHE_KEY_SALT', 'change-me-cache-key-salt' ) );
+
+if ( 'production' === WP_ENVIRONMENT_TYPE ) {
+    $required_secret_constants = array(
+        'DB_PASSWORD',
+        'AUTH_KEY',
+        'SECURE_AUTH_KEY',
+        'LOGGED_IN_KEY',
+        'NONCE_KEY',
+        'AUTH_SALT',
+        'SECURE_AUTH_SALT',
+        'LOGGED_IN_SALT',
+        'NONCE_SALT',
+        'WP_CACHE_KEY_SALT',
+    );
+
+    foreach ( $required_secret_constants as $constant_name ) {
+        $constant_value = defined( $constant_name ) ? (string) constant( $constant_name ) : '';
+
+        if ( '' === $constant_value || 0 === strpos( $constant_value, 'change-me-' ) ) {
+            error_log( 'Critical configuration error: missing required secret ' . $constant_name );
+            if ( ! headers_sent() ) {
+                header( 'HTTP/1.1 500 Internal Server Error' );
+                header( 'Content-Type: text/plain; charset=utf-8' );
+            }
+            exit( 'Configuration error: missing required secrets.' );
+        }
+    }
+}
 
 
 /**#@-*/
@@ -183,8 +214,8 @@ $table_prefix = 'wp_';
 
 
 /* Add any custom values between this line and the "stop editing" line. */
-// Debug output for Railway path issues
-if ( defined('WP_DEBUG') && WP_DEBUG ) {
+// Optional request debug logging, disabled by default.
+if ( defined('WP_DEBUG') && WP_DEBUG && filter_var($env('AIDDATA_RUNTIME_DIAGNOSTICS', 'false'), FILTER_VALIDATE_BOOLEAN) ) {
     error_log('REQUEST_URI: ' . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'unset'));
     error_log('HTTP_HOST: ' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'unset'));
 }

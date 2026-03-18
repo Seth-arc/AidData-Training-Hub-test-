@@ -29,10 +29,10 @@ header('Content-Type: text/html; charset=utf-8');
 // Extract database credentials from wp-config.php without loading WordPress
 echo "<h2>Test 1: Reading Database Credentials</h2>";
 
-$db_name = 'railway';
-$db_user = 'root';
-$db_password = 'mopzmAdFBAdfFWjwhNcznxdyZzNuoFNx';
-$db_host = 'mysql.railway.internal';
+$db_name = getenv('DB_NAME') ?: 'wordpress';
+$db_user = getenv('DB_USER') ?: 'wordpress';
+$db_password = getenv('DB_PASSWORD') ?: '';
+$db_host = getenv('DB_HOST') ?: 'mysql:3306';
 $db_charset = 'utf8';
 
 echo "<div class='test success'>✓ Using hardcoded credentials to avoid wp-config loading</div>";

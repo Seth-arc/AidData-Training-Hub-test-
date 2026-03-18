@@ -3,6 +3,8 @@ set -e
 
 : "${PORT:=80}"
 echo "Nginx will listen on port: $PORT"
+: "${PHP_DISPLAY_ERRORS:=Off}"
+: "${PHP_DISPLAY_STARTUP_ERRORS:=Off}"
 
 # Ensure required directories exist
 mkdir -p /var/log/nginx /var/run
@@ -10,10 +12,6 @@ mkdir -p /var/log/nginx /var/run
 # Substitute PORT in Nginx config (using sed to avoid envsubst issues)
 sed "s/\${PORT}/${PORT}/g" /etc/nginx/conf.d/wordpress.conf > /etc/nginx/conf.d/wordpress.conf.tmp
 mv /etc/nginx/conf.d/wordpress.conf.tmp /etc/nginx/conf.d/wordpress.conf
-
-# Debug: Show nginx config
-echo "=== Nginx configuration ==="
-cat /etc/nginx/conf.d/wordpress.conf
 
 # Verify WordPress files exist
 echo "=== Checking WordPress installation ==="
@@ -24,8 +22,8 @@ test -f /var/www/html/wp-config.php && echo "✓ wp-config.php exists" || echo "
 # Enable PHP error logging BEFORE starting PHP-FPM
 echo "=== Configuring PHP error logging ==="
 cat >> /usr/local/etc/php/conf.d/error-logging.ini <<EOF
-display_errors = On
-display_startup_errors = On
+display_errors = ${PHP_DISPLAY_ERRORS}
+display_startup_errors = ${PHP_DISPLAY_STARTUP_ERRORS}
 log_errors = On
 error_log = /var/log/php-error.log
 error_reporting = E_ALL
@@ -51,13 +49,8 @@ echo "✓ PHP-FPM is running (PID: $PHP_FPM_PID)"
 echo "=== Testing nginx configuration ==="
 nginx -t || exit 1
 
-# Create WordPress debug.log if it doesn't exist
-mkdir -p /var/www/html/wp-content
-touch /var/www/html/wp-content/debug.log
-chown www-data:www-data /var/www/html/wp-content/debug.log
-
-# Tail nginx, PHP, and WordPress debug logs
-tail -f /var/log/nginx/error.log /var/log/php-error.log /var/www/html/wp-content/debug.log 2>/dev/null &
+# Tail nginx and PHP logs
+tail -f /var/log/nginx/error.log /var/log/php-error.log 2>/dev/null &
 
 # Start Nginx in foreground
 echo "=== Starting Nginx ==="

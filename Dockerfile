@@ -45,6 +45,28 @@ RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/memory-limit.ini \
 # Copy WordPress files
 COPY app/public/ /var/www/html/
 
+# Remove maintenance/diagnostic scripts from the deploy image.
+RUN find /var/www/html -maxdepth 1 -type f \( \
+    -name 'phpinfo.php' -o \
+    -name 'local-phpinfo.php' -o \
+    -name 'local-xdebuginfo.php' -o \
+    -name 'diagnostic.php' -o \
+    -name 'diagnose-*.php' -o \
+    -name 'check-*.php' -o \
+    -name 'fix-*.php' -o \
+    -name 'reset-*.php' -o \
+    -name 'safe-search-replace.php' -o \
+    -name 'search-replace-urls.php' -o \
+    -name 'test-*.php' -o \
+    -name 'trace-wp-init.php' -o \
+    -name 'direct-wp-load.php' -o \
+    -name 'deactivate-cassify.php' -o \
+    -name 'find-local-url.php' -o \
+    -name 'setup-*.php' -o \
+    -name 'simple-*.php' -o \
+    -name 'catch-wp-error.php' \
+\) -delete
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && find /var/www/html -type d -exec chmod 755 {} \; \
