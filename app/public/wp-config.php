@@ -76,7 +76,7 @@ $request_public_url = $request_host ? ($request_scheme . '://' . $request_host) 
 
 // Fix Railway env vars that are missing https:// protocol
 $railway_public_domain = $env('RAILWAY_PUBLIC_DOMAIN', '');
-$default_public_url = 'https://aiddata-training-hub-test-production.up.railway.app';
+$default_public_url = '';
 
 if ($request_public_url) {
     $default_public_url = $request_public_url;
@@ -84,10 +84,12 @@ if ($request_public_url) {
     $default_public_url = (strpos($railway_public_domain, 'http') === 0)
         ? $railway_public_domain
         : 'https://' . $railway_public_domain;
+} else {
+    $default_public_url = 'http://localhost:8080';
 }
 
-$wp_home = $env('WP_HOME', $default_public_url);
-$wp_siteurl = $env('WP_SITEURL', $default_public_url);
+$wp_home = trim((string) $env('WP_HOME', $default_public_url));
+$wp_siteurl = trim((string) $env('WP_SITEURL', $default_public_url));
 
 // Add https:// if the env vars are missing the protocol
 if (strpos($wp_home, 'http') !== 0) {
@@ -179,6 +181,8 @@ define( 'WP_CACHE_KEY_SALT', $env( 'WP_CACHE_KEY_SALT', 'change-me-cache-key-sal
 if ( 'production' === WP_ENVIRONMENT_TYPE ) {
     $required_secret_constants = array(
         'DB_PASSWORD',
+        'WP_HOME',
+        'WP_SITEURL',
         'AUTH_KEY',
         'SECURE_AUTH_KEY',
         'LOGGED_IN_KEY',
@@ -201,6 +205,27 @@ if ( 'production' === WP_ENVIRONMENT_TYPE ) {
             }
             exit( 'Configuration error: missing required secrets.' );
         }
+    }
+
+    $validated_wp_home = filter_var( WP_HOME, FILTER_VALIDATE_URL );
+    $validated_wp_siteurl = filter_var( WP_SITEURL, FILTER_VALIDATE_URL );
+
+    if ( ! $validated_wp_home || ! $validated_wp_siteurl ) {
+        error_log( 'Critical configuration error: invalid WP_HOME or WP_SITEURL URL format' );
+        if ( ! headers_sent() ) {
+            header( 'HTTP/1.1 500 Internal Server Error' );
+            header( 'Content-Type: text/plain; charset=utf-8' );
+        }
+        exit( 'Configuration error: invalid site URL configuration.' );
+    }
+
+    if ( 'https' !== parse_url( WP_HOME, PHP_URL_SCHEME ) || 'https' !== parse_url( WP_SITEURL, PHP_URL_SCHEME ) ) {
+        error_log( 'Critical configuration error: production requires https URLs for WP_HOME and WP_SITEURL' );
+        if ( ! headers_sent() ) {
+            header( 'HTTP/1.1 500 Internal Server Error' );
+            header( 'Content-Type: text/plain; charset=utf-8' );
+        }
+        exit( 'Configuration error: production requires https site URLs.' );
     }
 }
 

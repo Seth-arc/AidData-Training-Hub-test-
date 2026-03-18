@@ -1,0 +1,59 @@
+name: CI Smoke
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Docker tooling
+        run: |
+          docker --version
+          docker compose version
+
+      - name: Build stack
+        run: docker compose build --no-cache
+
+      - name: Start stack
+        run: docker compose up -d
+
+      - name: Wait for app readiness
+        run: |
+          for i in {1..60}; do
+            if curl -fsS http://127.0.0.1:8080/healthcheck.php > /tmp/health.txt; then
+              echo "Health endpoint is ready"
+              cat /tmp/health.txt
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Health endpoint did not become ready in time"
+          docker compose logs --no-color
+          exit 1
+
+      - name: Smoke endpoint checks
+        run: |
+          set -e
+          curl -fsS http://127.0.0.1:8080/healthcheck.php | grep -q '^OK$'
+          curl -fsS http://127.0.0.1:8080/wp-login.php | grep -qi 'log in\|login'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/xmlrpc.php)" = "403"
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/check-active-plugins.php)" = "404"
+
+      - name: Collect logs on failure
+        if: failure()
+        run: docker compose logs --no-color
+
+      - name: Tear down stack
+        if: always()
+        run: docker compose down -v

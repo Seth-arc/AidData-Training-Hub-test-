@@ -1,5 +1,5 @@
 # Use official PHP-FPM image with Nginx
-FROM php:8.1-fpm
+FROM php:8.3-fpm
 
 # Set working directory
 WORKDIR /var/www/html
@@ -91,7 +91,7 @@ EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD curl -f http://localhost/ || exit 1
+    CMD curl -f http://localhost/healthcheck.php || exit 1
 
 # Start Nginx + PHP-FPM
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
