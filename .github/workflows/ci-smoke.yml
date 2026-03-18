@@ -24,16 +24,33 @@ jobs:
 
       - name: Locate compose file
         id: locate_compose
+        shell: bash
         run: |
+          set -euo pipefail
           echo "Workspace: $GITHUB_WORKSPACE"
           pwd
           ls -la
-          COMPOSE_FILE_PATH="$(find "$GITHUB_WORKSPACE" -maxdepth 4 -type f \( -name 'docker-compose.yml' -o -name 'compose.yml' -o -name 'compose.yaml' \) | head -n 1)"
+
+          REPO_ROOT="$(git rev-parse --show-toplevel)"
+          echo "Repo root: $REPO_ROOT"
+
+          # Prefer git-tracked files to avoid edge cases in runner filesystem discovery.
+          COMPOSE_REL_PATH="$(git ls-files | grep -E '(^|/)(docker-compose\.ya?ml|compose\.ya?ml)$' | head -n 1 || true)"
+
+          if [ -n "$COMPOSE_REL_PATH" ]; then
+            COMPOSE_FILE_PATH="$REPO_ROOT/$COMPOSE_REL_PATH"
+          else
+            COMPOSE_FILE_PATH="$(find "$REPO_ROOT" -type f \( -name 'docker-compose.yml' -o -name 'docker-compose.yaml' -o -name 'compose.yml' -o -name 'compose.yaml' \) | head -n 1 || true)"
+          fi
+
           if [ -z "$COMPOSE_FILE_PATH" ]; then
             echo "compose_found=false" >> "$GITHUB_OUTPUT"
-            echo "No compose file found under workspace."
+            echo "No compose file found under repository."
+            echo "Top-level repo files:"
+            ls -la "$REPO_ROOT"
             exit 1
           fi
+
           echo "compose_found=true" >> "$GITHUB_OUTPUT"
           echo "compose_file=$COMPOSE_FILE_PATH" >> "$GITHUB_OUTPUT"
           echo "Using compose file: $COMPOSE_FILE_PATH"
