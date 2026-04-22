@@ -13,7 +13,35 @@
  * This allows the theme to use custom templates in /learnpress/ folder.
  * Required since LearnPress 4.0.0 which disabled theme overrides by default.
  */
+require_once get_template_directory() . '/includes/responsive-images.php';
+
+/**
+ * Load the home catalog plugin when its files exist but it has not been
+ * activated in the current database yet.
+ *
+ * The bundled local SQL snapshot does not list `aiddata-home-catalog` among
+ * active plugins, which means front-page updates can appear to do nothing even
+ * though the plugin folder is present in the repo.
+ */
+if ( ! function_exists( 'aiddata_home_catalog_render_front_page' ) ) {
+	$aiddata_home_catalog_bootstrap = WP_PLUGIN_DIR . '/aiddata-home-catalog/aiddata-home-catalog.php';
+
+	if ( file_exists( $aiddata_home_catalog_bootstrap ) ) {
+		require_once $aiddata_home_catalog_bootstrap;
+	}
+}
+
 add_filter( 'learn-press/override-templates', '__return_true' );
+
+/**
+ * Let WordPress generate the document title from Site Identity settings.
+ */
+add_action(
+	'after_setup_theme',
+	function () {
+		add_theme_support( 'title-tag' );
+	}
+);
 
 /**
  * Force custom single-course template for block themes.
@@ -511,35 +539,43 @@ add_action('save_post', 'aiddata_save_course_meta');
  * Enqueue AidData Training Hub styles and scripts
  */
 function aiddata_enqueue_assets() {
-    // Only enqueue on front page or when using the AidData template
+    if ( is_admin() ) {
+        return;
+    }
+
+    wp_enqueue_style('aiddata-modals-style', get_template_directory_uri() . '/assets/css/modals.css', array(), '1.0.0');
+    wp_enqueue_script('aiddata-modals-script', get_template_directory_uri() . '/assets/js/modals.js', array('jquery'), '1.0.0', true);
+
+    // Only enqueue the heavier front-page assets where they are needed.
     if (is_front_page() || is_page_template('front-page.php')) {
-        // Styles
         wp_enqueue_style('aiddata-lms-style', get_template_directory_uri() . '/assets/css/lms.css', array(), '1.0.0');
         wp_enqueue_style('aiddata-auth-style', get_template_directory_uri() . '/assets/css/auth.css', array(), '1.0.0');
-        wp_enqueue_style('aiddata-modals-style', get_template_directory_uri() . '/assets/css/modals.css', array(), '1.0.0');
-        
-        // Scripts
-        wp_enqueue_script('aiddata-lms-script', get_template_directory_uri() . '/assets/js/lms.js', array('jquery'), '1.0.0', true);
-        wp_enqueue_script('aiddata-modals-script', get_template_directory_uri() . '/assets/js/modals.js', array('jquery'), '1.0.0', true);
+        wp_enqueue_script(
+            'aiddata-lms-script',
+            get_template_directory_uri() . '/assets/js/lms.js',
+            array('jquery'),
+            filemtime( get_template_directory() . '/assets/js/lms.js' ),
+            true
+        );
     }
 }
 add_action('wp_enqueue_scripts', 'aiddata_enqueue_assets');
 /**
- * Enforce Inter typography across front-end templates.
+ * Enforce the shared primary font stack across front-end templates.
  */
-function aiddata_enqueue_global_inter_font() {
+function aiddata_enqueue_global_primary_font() {
     if ( is_admin() ) {
         return;
     }
 
     wp_enqueue_style(
-        'aiddata-inter-global',
+        'aiddata-primary-font-global',
         get_template_directory_uri() . '/assets/css/inter-global.css',
         array(),
-        '1.0.0'
+        '1.1.0'
     );
 }
-add_action('wp_enqueue_scripts', 'aiddata_enqueue_global_inter_font', 0);
+add_action('wp_enqueue_scripts', 'aiddata_enqueue_global_primary_font', 0);
 
 /**
  * Enqueue shared loading and transition assets.
@@ -560,7 +596,7 @@ function aiddata_enqueue_page_transitions() {
         'page-transitions',
         get_template_directory_uri() . '/assets/js/page-transitions.js',
         array(),
-        '1.0.0',
+        filemtime( get_template_directory() . '/assets/js/page-transitions.js' ),
         true
     );
 
@@ -863,6 +899,174 @@ function aiddata_normalize_course_item_id( $item ) {
 }
 
 /**
+ * Resolve a field or post meta value for course CTA decisions.
+ */
+function aiddata_get_post_setting( $post_id, $key, $default = '' ) {
+    $post_id = absint( $post_id );
+    $key     = trim( (string) $key );
+
+    if ( ! $post_id || '' === $key ) {
+        return $default;
+    }
+
+    if ( function_exists( 'get_field' ) ) {
+        $field_value = get_field( $key, $post_id );
+
+        if ( null !== $field_value && false !== $field_value && '' !== $field_value ) {
+            return $field_value;
+        }
+    }
+
+    $meta_value = get_post_meta( $post_id, $key, true );
+    if ( null !== $meta_value && '' !== $meta_value ) {
+        return $meta_value;
+    }
+
+    return $default;
+}
+
+/**
+ * Return the single external checkout URL allowed for NGDF.
+ */
+function aiddata_get_ngdf_checkout_url() {
+    return 'https://academy.wm.edu/product?catalog=NavigatingGlobalDevelopmentFinance_AID';
+}
+
+/**
+ * Detect whether a URL points at the NGDF academy checkout.
+ */
+function aiddata_is_ngdf_checkout_url( $url ) {
+    $url = trim( (string) $url );
+    if ( '' === $url ) {
+        return false;
+    }
+
+    $parts = wp_parse_url( $url );
+    if ( ! is_array( $parts ) ) {
+        return false;
+    }
+
+    $host = strtolower( (string) ( $parts['host'] ?? '' ) );
+    if ( 'academy.wm.edu' !== $host ) {
+        return false;
+    }
+
+    $query = array();
+    parse_str( (string) ( $parts['query'] ?? '' ), $query );
+
+    return isset( $query['catalog'] ) && 'NavigatingGlobalDevelopmentFinance_AID' === $query['catalog'];
+}
+
+/**
+ * Check whether a URL leaves the current site.
+ */
+function aiddata_is_external_url( $url ) {
+    $url = trim( (string) $url );
+    if ( '' === $url || '#' === $url[0] ) {
+        return false;
+    }
+
+    $link_host = wp_parse_url( $url, PHP_URL_HOST );
+    if ( ! is_string( $link_host ) || '' === $link_host ) {
+        return false;
+    }
+
+    $site_host = wp_parse_url( home_url( '/' ), PHP_URL_HOST );
+    if ( ! is_string( $site_host ) || '' === $site_host ) {
+        return true;
+    }
+
+    return 0 !== strcasecmp( $link_host, $site_host );
+}
+
+/**
+ * Resolve the course CTA in one place so NGDF remains the only academy exception.
+ */
+function aiddata_get_course_cta_config( $post_id = 0, $args = array() ) {
+    $post_id = $post_id ? absint( $post_id ) : get_the_ID();
+    $args    = wp_parse_args(
+        $args,
+        array(
+            'label'         => 'Start Learning',
+            'url'           => '',
+            'requires_auth' => true,
+        )
+    );
+
+    $label = trim( (string) aiddata_get_post_setting( $post_id, 'enroll_button_text', '' ) );
+    if ( '' === $label ) {
+        $label = trim( (string) $args['label'] );
+    }
+
+    $configured_url = '';
+    foreach ( array( 'enroll_button_url', 'course_link' ) as $field_name ) {
+        $candidate = trim( (string) aiddata_get_post_setting( $post_id, $field_name, '' ) );
+        if ( '' !== $candidate ) {
+            $configured_url = $candidate;
+            break;
+        }
+    }
+
+    if ( '' === $configured_url && 'lp_course' === get_post_type( $post_id ) ) {
+        $configured_url = get_permalink( $post_id );
+    }
+
+    if ( '' === $configured_url ) {
+        $configured_url = trim( (string) $args['url'] );
+    }
+
+    $delivery_mode = trim( (string) aiddata_get_post_setting( $post_id, 'course_delivery_mode', '' ) );
+    if ( 'academy_external' === $delivery_mode || ( '' === $delivery_mode && aiddata_is_ngdf_checkout_url( $configured_url ) ) ) {
+        $delivery_mode = 'academy_external';
+        $configured_url = aiddata_get_ngdf_checkout_url();
+    } elseif ( '' === $delivery_mode ) {
+        $delivery_mode = aiddata_is_external_url( $configured_url ) ? 'external_link' : 'learnpress';
+    }
+
+    $attributes = array();
+    if ( ! empty( $args['requires_auth'] ) ) {
+        $attributes['data-requires-auth'] = 'true';
+    }
+
+    if ( 'academy_external' === $delivery_mode || 'external_link' === $delivery_mode ) {
+        $attributes['target'] = '_blank';
+        $attributes['rel']    = 'noopener noreferrer';
+    }
+
+    return array(
+        'url'           => $configured_url,
+        'label'         => $label,
+        'delivery_mode' => $delivery_mode,
+        'is_external'   => isset( $attributes['target'] ),
+        'attributes'    => $attributes,
+    );
+}
+
+/**
+ * Convert an associative array into escaped HTML attributes.
+ */
+function aiddata_render_html_attributes( $attributes ) {
+    if ( ! is_array( $attributes ) || empty( $attributes ) ) {
+        return '';
+    }
+
+    $pairs = array();
+
+    foreach ( $attributes as $name => $value ) {
+        $name  = trim( (string) $name );
+        $value = trim( (string) $value );
+
+        if ( '' === $name || '' === $value ) {
+            continue;
+        }
+
+        $pairs[] = sprintf( '%s="%s"', esc_attr( $name ), esc_attr( $value ) );
+    }
+
+    return empty( $pairs ) ? '' : ' ' . implode( ' ', $pairs );
+}
+
+/**
  * Register custom widget areas for AidData
  */
 function aiddata_register_widget_areas() {
@@ -1080,381 +1284,6 @@ function remove_footer_credit() {
     <?php
 }
 add_action('wp_footer', 'remove_footer_credit', 100);
-
-/**
- * Authentication Integration Functions
- * Integrates custom frontend with WordPress authentication
- */
-
-/**
- * Enqueue authentication scripts
- */
-function aiddata_enqueue_auth_scripts() {
-    wp_enqueue_script('aiddata-auth', get_template_directory_uri() . '/assets/js/auth-integration.js', array('jquery'), '1.0.0', true);
-    
-    // Pass Ajax URL and security nonce to script
-    wp_localize_script('aiddata-auth', 'auth_object', array(
-        'ajaxurl' => admin_url('admin-ajax.php'),
-        'security' => wp_create_nonce('custom-auth-nonce'),
-        'home_url' => home_url()
-    ));
-}
-add_action('wp_enqueue_scripts', 'aiddata_enqueue_auth_scripts');
-
-/**
- * Temporary login debug logger.
- * Enable by setting env var AIDDATA_LOGIN_DEBUG=true on Railway.
- */
-function aiddata_login_debug_log($event, $context = array()) {
-    static $enabled = null;
-
-    if ($enabled === null) {
-        $raw_value = getenv('AIDDATA_LOGIN_DEBUG');
-        $enabled = in_array(strtolower((string) $raw_value), array('1', 'true', 'yes', 'on'), true);
-    }
-
-    if (!$enabled) {
-        return;
-    }
-
-    if (!is_array($context)) {
-        $context = array('value' => $context);
-    }
-
-    unset($context['password'], $context['user_password'], $context['security']);
-
-    error_log('[aiddata-login-debug] ' . $event . ' ' . wp_json_encode($context));
-}
-
-/**
- * AJAX login handler
- */
-if ( ! function_exists( 'aiddata_ajax_login' ) ) {
-function aiddata_ajax_login() {
-    aiddata_login_debug_log('request_received', array(
-        'is_ssl' => is_ssl(),
-        'host' => isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '',
-        'forwarded_proto' => isset($_SERVER['HTTP_X_FORWARDED_PROTO']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_X_FORWARDED_PROTO'])) : '',
-        'has_username' => isset($_POST['username']),
-        'has_password' => isset($_POST['password']),
-        'has_nonce' => isset($_POST['security']),
-    ));
-
-    $nonce_ok = check_ajax_referer('custom-auth-nonce', 'security', false);
-    if ($nonce_ok === false) {
-        aiddata_login_debug_log('nonce_failed');
-        wp_send_json_error(array('message' => 'Security check failed. Please refresh and try again.'));
-        wp_die();
-    }
-
-    $login_input = isset($_POST['username']) ? sanitize_text_field(wp_unslash($_POST['username'])) : '';
-    $password = isset($_POST['password']) ? wp_unslash($_POST['password']) : '';
-
-    if ($login_input === '' || $password === '') {
-        aiddata_login_debug_log('validation_failed', array(
-            'reason' => 'missing_credentials',
-            'has_login_input' => $login_input !== '',
-            'has_password' => $password !== '',
-        ));
-        wp_send_json_error(array('message' => 'Username/email and password are required.'));
-        wp_die();
-    }
-
-    $login_type = is_email($login_input) ? 'email' : 'username';
-    $login_hint = substr($login_input, 0, 3) . '***';
-
-    // Support both username and email.
-    if (is_email($login_input)) {
-        $user_by_email = get_user_by('email', $login_input);
-        if ($user_by_email instanceof WP_User) {
-            $login_input = $user_by_email->user_login;
-            aiddata_login_debug_log('email_mapped_to_username', array(
-                'login_hint' => $login_hint,
-                'user_id' => (int) $user_by_email->ID,
-            ));
-        } else {
-            aiddata_login_debug_log('email_not_found', array(
-                'login_hint' => $login_hint,
-            ));
-        }
-    }
-
-    $user_data = array(
-        'user_login' => $login_input,
-        'user_password' => $password,
-        'remember' => true
-    );
-
-    $user = wp_signon($user_data, is_ssl());
-    
-    if(is_wp_error($user)) {
-        aiddata_login_debug_log('login_failed', array(
-            'login_type' => $login_type,
-            'login_hint' => $login_hint,
-            'error_codes' => $user->get_error_codes(),
-            'error_messages' => $user->get_error_messages(),
-        ));
-        wp_send_json_error(array('message' => $user->get_error_message()));
-    } else {
-        aiddata_login_debug_log('login_success', array(
-            'login_type' => $login_type,
-            'login_hint' => $login_hint,
-            'user_id' => (int) $user->ID,
-            'roles' => (array) $user->roles,
-        ));
-        wp_send_json_success(array('message' => 'Login successful!'));
-    }
-    
-    wp_die();
-}
-add_action('wp_ajax_nopriv_custom_ajax_login', 'aiddata_ajax_login');
-}
-
-/**
- * AJAX registration handler
- */
-function aiddata_generate_unique_username( $user_email ) {
-    $email_parts = explode( '@', $user_email );
-    $base        = sanitize_user( $email_parts[0], true );
-
-    if ( '' === $base ) {
-        $base = 'aiddata_user';
-    }
-
-    $username = $base;
-    $attempts = 0;
-
-    while ( username_exists( $username ) ) {
-        $username = sprintf( '%s_%s', $base, wp_rand( 1000, 999999 ) );
-        $attempts++;
-
-        if ( $attempts >= 5 && username_exists( $username ) ) {
-            $username = sprintf( '%s_%s', $base, wp_generate_password( 8, false, false ) );
-            break;
-        }
-    }
-
-    return $username;
-}
-
-function aiddata_send_welcome_email( $user_id, $newsletter_opt_in = false ) {
-    $user = get_userdata( $user_id );
-
-    if ( ! $user instanceof WP_User ) {
-        return false;
-    }
-
-    $site_name   = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
-    $display_name = $user->display_name ? $user->display_name : $user->user_email;
-    $home_url    = home_url( '/' );
-    $profile_url = function_exists( 'learn_press_get_page_link' ) ? learn_press_get_page_link( 'profile' ) : $home_url;
-
-    $subject = sprintf( 'Welcome to %s', $site_name );
-
-    $message_lines = array(
-        sprintf( 'Hi %s,', $display_name ),
-        '',
-        'Thanks for creating your AidData Training Hub account.',
-        '',
-        'You can start exploring courses here:',
-        $home_url,
-    );
-
-    if ( $profile_url && $profile_url !== $home_url ) {
-        $message_lines[] = '';
-        $message_lines[] = 'Your profile and course progress are available here:';
-        $message_lines[] = $profile_url;
-    }
-
-    if ( $newsletter_opt_in ) {
-        $message_lines[] = '';
-        $message_lines[] = 'You are also subscribed to receive updates about new courses and AidData news.';
-    }
-
-    $message_lines[] = '';
-    $message_lines[] = sprintf( 'Account email: %s', $user->user_email );
-    $message_lines[] = '';
-    $message_lines[] = 'Thanks,';
-    $message_lines[] = 'AidData Training Hub Team';
-
-    return wp_mail(
-        $user->user_email,
-        $subject,
-        implode( "\n", $message_lines ),
-        array( 'Content-Type: text/plain; charset=UTF-8' )
-    );
-}
-
-if ( ! function_exists( 'aiddata_ajax_register' ) ) {
-function aiddata_ajax_register() {
-    check_ajax_referer( 'custom-auth-nonce', 'security' );
-
-    if ( is_user_logged_in() ) {
-        wp_send_json_error( array( 'message' => 'You are already logged in.' ) );
-        wp_die();
-    }
-
-    $user_email        = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-    $user_name         = isset( $_POST['fullName'] ) ? sanitize_text_field( wp_unslash( $_POST['fullName'] ) ) : '';
-    $password          = isset( $_POST['password'] ) ? (string) wp_unslash( $_POST['password'] ) : '';
-    $organization      = isset( $_POST['organization'] ) ? sanitize_text_field( wp_unslash( $_POST['organization'] ) ) : '';
-    $newsletter_opt_in = isset( $_POST['newsletter'] ) && 'on' === wp_unslash( $_POST['newsletter'] );
-
-    if ( '' === $user_name ) {
-        wp_send_json_error( array( 'message' => 'Please enter your full name.' ) );
-        wp_die();
-    }
-
-    if ( '' === $user_email || ! is_email( $user_email ) ) {
-        wp_send_json_error( array( 'message' => 'Please enter a valid email address.' ) );
-        wp_die();
-    }
-
-    if ( strlen( $password ) < 8 || ! preg_match( '/\d/', $password ) || ! preg_match( '/[^A-Za-z0-9]/', $password ) ) {
-        wp_send_json_error( array( 'message' => 'Password must be at least 8 characters long and include a number and special character.' ) );
-        wp_die();
-    }
-
-    if ( email_exists( $user_email ) ) {
-        wp_send_json_error( array( 'message' => 'This email address is already registered. Please log in instead.' ) );
-        wp_die();
-    }
-
-    $username = aiddata_generate_unique_username( $user_email );
-    $user_id  = wp_create_user( $username, $password, $user_email );
-
-    if ( is_wp_error( $user_id ) ) {
-        wp_send_json_error( array( 'message' => $user_id->get_error_message() ) );
-    } else {
-        wp_update_user(
-            array(
-                'ID'           => $user_id,
-                'display_name' => $user_name,
-                'first_name'   => $user_name,
-            )
-        );
-
-        if ( '' !== $organization ) {
-            update_user_meta( $user_id, 'organization', $organization );
-        }
-
-        if ( $newsletter_opt_in ) {
-            update_user_meta( $user_id, 'newsletter_subscription', 'yes' );
-        }
-
-        $welcome_email_sent = aiddata_send_welcome_email( $user_id, $newsletter_opt_in );
-
-        // Automatically log the user in.
-        $user = wp_signon(
-            array(
-                'user_login'    => $username,
-                'user_password' => $password,
-                'remember'      => true,
-            ),
-            is_ssl()
-        );
-
-        if ( is_wp_error( $user ) ) {
-            wp_send_json_error( array( 'message' => 'Registration successful but there was an error logging you in. Please log in manually.' ) );
-        } else {
-            $success_message = $welcome_email_sent
-                ? 'Registration successful. Check your inbox for a welcome email.'
-                : 'Registration successful. Your account is ready, but we could not send the welcome email right now.';
-
-            wp_send_json_success(
-                array(
-                    'message'   => $success_message,
-                    'emailSent' => $welcome_email_sent,
-                )
-            );
-        }
-    }
-
-    wp_die();
-}
-add_action('wp_ajax_nopriv_custom_ajax_register', 'aiddata_ajax_register');
-}
-
-/**
- * AJAX password reset handler
- */
-if ( ! function_exists( 'aiddata_ajax_reset_password' ) ) {
-function aiddata_ajax_reset_password() {
-    check_ajax_referer('custom-auth-nonce', 'security');
-    
-    $email = sanitize_email($_POST['email']);
-    $user = get_user_by('email', $email);
-    
-    if(!$user) {
-        wp_send_json_error(array('message' => 'No user found with that email address.'));
-    } else {
-        $key = get_password_reset_key($user);
-        if(is_wp_error($key)) {
-            wp_send_json_error(array('message' => 'Error generating password reset link.'));
-        }
-        
-        $reset_link = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user->user_login), 'login');
-        
-        // Send email with password reset link
-        $subject = 'Password Reset Request for AidData Training Hub';
-        $message = "Hello " . $user->display_name . ",\n\n";
-        $message .= "You requested a password reset for your AidData Training Hub account. Click the link below to set a new password:\n\n";
-        $message .= $reset_link . "\n\n";
-        $message .= "If you didn't request this, please ignore this email.\n\n";
-        $message .= "Thanks,\nAidData Training Hub Team";
-        
-        $sent = wp_mail($email, $subject, $message);
-        
-        if($sent) {
-            wp_send_json_success(array('message' => 'Password reset link has been sent to your email address.'));
-        } else {
-            wp_send_json_error(array('message' => 'There was an error sending the email. Please try again later.'));
-        }
-    }
-    
-    wp_die();
-}
-add_action('wp_ajax_nopriv_custom_ajax_reset_password', 'aiddata_ajax_reset_password');
-}
-
-/**
- * AJAX logout handler
- */
-if ( ! function_exists( 'aiddata_ajax_logout' ) ) {
-function aiddata_ajax_logout() {
-    check_ajax_referer('custom-auth-nonce', 'security');
-    wp_logout();
-    wp_send_json_success(array('message' => 'Logged out successfully'));
-    wp_die();
-}
-add_action('wp_ajax_custom_ajax_logout', 'aiddata_ajax_logout');
-}
-
-/**
- * AJAX authentication status handler
- */
-if ( ! function_exists( 'aiddata_get_auth_status' ) ) {
-function aiddata_get_auth_status() {
-    $response = array(
-        'loggedIn' => is_user_logged_in(),
-        'userName' => '',
-        'userEmail' => '',
-        'isAdmin' => false
-    );
-    
-    if (is_user_logged_in()) {
-        $current_user = wp_get_current_user();
-        $response['userName'] = $current_user->display_name;
-        $response['userEmail'] = $current_user->user_email;
-        $response['isAdmin'] = current_user_can('manage_options');
-    }
-    
-    wp_send_json($response);
-    wp_die();
-}
-add_action('wp_ajax_get_auth_status', 'aiddata_get_auth_status');
-add_action('wp_ajax_nopriv_get_auth_status', 'aiddata_get_auth_status');
-}
 
 /**
  * Secure course pages for logged-in users only
@@ -2037,3 +1866,32 @@ function aiddata_add_favicon() {
 add_action('wp_head', 'aiddata_add_favicon');
 add_action('admin_head', 'aiddata_add_favicon');
 add_action('login_head', 'aiddata_add_favicon');
+
+/**
+ * Brand the native WordPress login and password-reset screens.
+ */
+function aiddata_enqueue_login_branding_styles() {
+    $relative_path = '/assets/css/login-branding.css';
+    $stylesheet    = get_template_directory() . $relative_path;
+    $version       = file_exists($stylesheet)
+        ? (string) filemtime($stylesheet)
+        : wp_get_theme()->get('Version');
+
+    wp_enqueue_style(
+        'aiddata-login-branding',
+        get_template_directory_uri() . $relative_path,
+        array(),
+        $version
+    );
+}
+add_action('login_enqueue_scripts', 'aiddata_enqueue_login_branding_styles');
+
+function aiddata_login_header_url() {
+    return home_url('/');
+}
+add_filter('login_headerurl', 'aiddata_login_header_url');
+
+function aiddata_login_header_text() {
+    return 'AidData Training Hub home';
+}
+add_filter('login_headertext', 'aiddata_login_header_text');
