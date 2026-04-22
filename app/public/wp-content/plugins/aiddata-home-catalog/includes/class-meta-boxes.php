@@ -328,7 +328,9 @@ final class AidData_Home_Catalog_Meta_Boxes {
 			$lines = preg_split( '/\r\n|\r|\n/', $value ) ?: array();
 			$lines = array_filter(
 				array_map(
-					static fn( string $line ): string => sanitize_text_field( $line ),
+					static function ( string $line ): string {
+						return sanitize_text_field( $line );
+					},
 					$lines
 				)
 			);

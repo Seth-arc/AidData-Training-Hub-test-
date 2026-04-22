@@ -22,6 +22,7 @@ if ( ! defined( 'AIDDATA_HOME_CATALOG_PATH' ) ) {
 	define( 'AIDDATA_HOME_CATALOG_PATH', __DIR__ );
 }
 
+require_once AIDDATA_HOME_CATALOG_PATH . '/includes/class-compat.php';
 require_once AIDDATA_HOME_CATALOG_PATH . '/includes/class-plugin.php';
 require_once AIDDATA_HOME_CATALOG_PATH . '/includes/class-post-type.php';
 require_once AIDDATA_HOME_CATALOG_PATH . '/includes/class-meta-boxes.php';

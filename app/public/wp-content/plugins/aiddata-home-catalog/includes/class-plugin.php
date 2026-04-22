@@ -7,14 +7,18 @@ defined( 'ABSPATH' ) || exit;
 final class AidData_Home_Catalog_Plugin {
 	/**
 	 * Prevent duplicate bootstrap work.
+	 *
+	 * @var bool
 	 */
-	private static bool $bootstrapped = false;
+	private static $bootstrapped = false;
 
 	/**
 	 * Cache the front-page catalog markup so the output-buffer callback never
 	 * needs to invoke rendering functions while PHP is flushing buffers.
+	 *
+	 * @var string
 	 */
-	private static string $front_page_catalog_markup = '';
+	private static $front_page_catalog_markup = '';
 
 	/**
 	 * Register hooks.
@@ -91,8 +95,8 @@ final class AidData_Home_Catalog_Plugin {
 
 		$normalized_template = wp_normalize_path( $template );
 		if (
-			str_ends_with( $normalized_template, '/front-page.php' )
-			|| str_ends_with( $normalized_template, '/new-front-page/template-new-front-page.php' )
+			AidData_Home_Catalog_Compat::ends_with( $normalized_template, '/front-page.php' )
+			|| AidData_Home_Catalog_Compat::ends_with( $normalized_template, '/new-front-page/template-new-front-page.php' )
 		) {
 			return $template;
 		}

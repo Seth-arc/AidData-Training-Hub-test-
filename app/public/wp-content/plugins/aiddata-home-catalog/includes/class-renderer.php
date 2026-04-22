@@ -119,7 +119,9 @@ final class AidData_Home_Catalog_Renderer {
 		$category_slugs = array_values(
 			array_filter(
 				array_map(
-					static fn( WP_Term $term ): string => $term->slug,
+					static function ( WP_Term $term ): string {
+						return $term->slug;
+					},
 					$terms
 				)
 			)
@@ -467,7 +469,9 @@ final class AidData_Home_Catalog_Renderer {
 			$lines = array_values(
 				array_filter(
 					array_map(
-						static fn( string $line ): string => trim( $line ),
+						static function ( string $line ): string {
+							return trim( $line );
+						},
 						$lines
 					)
 				)
@@ -481,7 +485,9 @@ final class AidData_Home_Catalog_Renderer {
 		return array_values(
 			array_filter(
 				array_map(
-					static fn( WP_Term $term ): string => $term->name,
+					static function ( WP_Term $term ): string {
+						return $term->name;
+					},
 					$terms
 				)
 			)
@@ -535,7 +541,7 @@ final class AidData_Home_Catalog_Renderer {
 			return $value;
 		}
 
-		if ( str_starts_with( $value, '//' ) ) {
+		if ( AidData_Home_Catalog_Compat::starts_with( $value, '//' ) ) {
 			return ( is_ssl() ? 'https:' : 'http:' ) . $value;
 		}
 
@@ -543,7 +549,7 @@ final class AidData_Home_Catalog_Renderer {
 			return trailingslashit( get_stylesheet_directory_uri() ) . ltrim( $value, '/' );
 		}
 
-		if ( str_starts_with( $value, '/' ) ) {
+		if ( AidData_Home_Catalog_Compat::starts_with( $value, '/' ) ) {
 			return home_url( $value );
 		}
 
@@ -556,7 +562,8 @@ final class AidData_Home_Catalog_Renderer {
 	private static function is_theme_asset_path( string $value ): bool {
 		$value = ltrim( $value, '/' );
 
-		return str_starts_with( $value, 'assets/' ) || str_starts_with( $value, 'new-front-page/' );
+		return AidData_Home_Catalog_Compat::starts_with( $value, 'assets/' )
+			|| AidData_Home_Catalog_Compat::starts_with( $value, 'new-front-page/' );
 	}
 
 	/**
