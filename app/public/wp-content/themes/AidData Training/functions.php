@@ -9,11 +9,48 @@
  */
 
 /**
- * Enable LearnPress template overrides in theme.
- * This allows the theme to use custom templates in /learnpress/ folder.
- * Required since LearnPress 4.0.0 which disabled theme overrides by default.
+ * Load optional responsive-image helpers without taking down WordPress if the
+ * helper file is absent from a deployment artifact.
  */
-require_once get_template_directory() . '/includes/responsive-images.php';
+$aiddata_responsive_images = get_template_directory() . '/includes/responsive-images.php';
+if ( file_exists( $aiddata_responsive_images ) ) {
+	require_once $aiddata_responsive_images;
+}
+
+if ( ! function_exists( 'aiddata_get_responsive_theme_image_markup' ) ) {
+	/**
+	 * Fallback renderer used when the optional responsive-image helper is absent.
+	 *
+	 * @param string $path       Theme-relative image path.
+	 * @param string $alt        Image alt text.
+	 * @param array  $attributes Additional image attributes.
+	 * @param array  $options    Reserved for the responsive helper.
+	 * @return string
+	 */
+	function aiddata_get_responsive_theme_image_markup( $path, $alt = '', $attributes = array(), $options = array() ) {
+		unset( $options );
+
+		$path = ltrim( (string) $path, '/' );
+		if ( '' === $path ) {
+			return '';
+		}
+
+		$attributes = is_array( $attributes ) ? $attributes : array();
+		$attributes['src'] = trailingslashit( get_template_directory_uri() ) . $path;
+		$attributes['alt'] = (string) $alt;
+
+		$markup = '';
+		foreach ( $attributes as $name => $value ) {
+			if ( '' === (string) $name || null === $value || false === $value ) {
+				continue;
+			}
+
+			$markup .= sprintf( ' %s="%s"', esc_attr( $name ), esc_attr( (string) $value ) );
+		}
+
+		return '<img' . $markup . '>';
+	}
+}
 
 /**
  * Load the home catalog plugin when its files exist but it has not been
